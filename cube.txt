@@ -1,0 +1,21 @@
+
+iterate forever
+
+	register _IN with id stat x y
+
+	sound pip
+	delay for 100
+	sound pip
+	hook _IN with key space down
+
+	button left click at 670 500
+
+	delay for 200
+
+	key enter for 100
+
+	delay for 200
+
+	key enter for 100
+end
+

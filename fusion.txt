@@ -1,0 +1,203 @@
+#######################################
+# Initialization
+#######################################
+
+import fusion_settings.txt INITIALIZE
+
+alias [ITEM_TYPE] among "USER_INPUT" "WOODEN_STAFF" "WOOD_WAND" "CROSSBOW" "BROWN_APPRENTICE_HAT" "BLUE_TRAINING_SHIRT" "LEMONA" "BROWN_BASIC_BOOTS" "BLUE_REVENGER"
+import fusion_settings.txt [ITEM_TYPE]
+
+register LEFT_SLOT with x y
+register RIGHT_SLOT with x y
+
+register LEFT_ITEM with x y
+register RIGHT_ITEM with x y
+
+
+snapshot
+sprite _SPR for 1 over 0 0 1366 768
+when _SPR.x is greater than 0
+
+	#######################################
+	# Item Purchase
+	#######################################
+
+	iterate forever
+
+		when ITEM_ID is equal to 0
+		
+			import fusion_settings.txt WAIT_BUTTON
+			button left double
+			delay for 200
+		
+		otherwise
+			
+			button none at 10 10
+			iterate 10 times	
+				snapshot
+				sprite _SPR for ITEM_ID by 80 over 0 0 700 768
+				when _SPR.x is greater than 0
+					finish iterate
+				end
+				delay for 200
+			end			
+			when _SPR.x is less than 0
+				finish iterate
+			end
+			
+			assign LEFT_ITEM.x computing _SPR.x add 16
+			assign LEFT_ITEM.y computing _SPR.y add 16
+
+			button left double at LEFT_ITEM.x LEFT_ITEM.y
+			delay for 200
+			
+		end
+		
+		snapshot
+		read _READ for "사시겠습니까?" of 255 255 255 over 0 0 1366 768
+		when _READ.x is greater than 0
+			assign BUTTON_ID 2
+			import fusion_settings.txt CLICK_BUTTON
+		end
+
+		read _READ for "슬롯" of 255 255 255 over 0 0 1366 768
+		when _READ.x is greater than 0
+			finish iterate
+		end	
+		read _READ for "재고" of 255 255 255 over 0 0 1366 768
+		when _READ.x is greater than 0
+			finish iterate
+		end
+		read _READ for "물품" of 255 255 255 over 0 0 1366 768
+		when _READ.x is greater than 0
+			finish iterate
+		end
+
+	end
+
+otherwise
+	
+	#######################################
+	# Item Fusion
+	#######################################
+
+	iterate forever
+
+		#
+		# Read the coordiates of the fusion slots
+		#
+		button none at 10 10
+		iterate 10 times		
+			snapshot
+			sprite _SPR for 0 over 0 0 1366 768
+			when _SPR.x is greater than 0
+				finish iterate
+			end
+			delay for 200
+		end
+		when _SPR.x is less than 0
+			finish iterate
+		end
+		delay for 200
+
+		assign LEFT_SLOT.x computing _SPR.x add 16
+		assign LEFT_SLOT.y computing _SPR.y add 16
+			
+		assign RIGHT_SLOT.x computing _SPR.x add 80
+		assign RIGHT_SLOT.y computing _SPR.y add 16
+
+
+		#
+		# Place items into the fusion slots
+		#
+		when ITEM_ID is equal to 0
+		
+			import fusion_settings.txt WAIT_BUTTON
+			button left click
+			delay for 200
+			
+			button left click at LEFT_SLOT.x LEFT_SLOT.y		
+			delay for 200
+			
+			snapshot
+			read _READ for "피로도" of 255 255 255 over 0 0 1366 768
+			when _READ.x is greater than 0
+				finish iterate
+			end	
+			
+			import fusion_settings.txt WAIT_BUTTON
+			button left click
+			delay for 200
+				
+			button left click at RIGHT_SLOT.x RIGHT_SLOT.y
+			delay for 200
+		
+			snapshot
+			read _READ for "부족" of 255 255 255 over 0 0 1366 768
+			when _READ.x is greater than 0
+				finish iterate
+			end
+		
+		otherwise
+		
+			sprite _SPR for ITEM_ID by 50 over 0 0 1366 768
+			when _SPR.x is less than 0
+				finish iterate
+			end
+			assign LEFT_ITEM.x computing _SPR.x add 16
+			assign LEFT_ITEM.y computing _SPR.y add 16
+
+			button left click at LEFT_ITEM.x LEFT_ITEM.y
+			delay for 200
+
+			snapshot
+			
+			sprite _SPR for ITEM_ID by 50 over 0 0 1366 768
+			when _SPR.x is less than 0
+				finish iterate
+			end
+			assign RIGHT_ITEM.x computing _SPR.x add 16
+			assign RIGHT_ITEM.y computing _SPR.y add 16
+
+			button left click at LEFT_SLOT.x LEFT_SLOT.y
+			delay for 200
+			
+			snapshot
+			read _READ for "피로도" of 255 255 255 over 0 0 1366 768
+			when _READ.x is greater than 0
+				finish iterate
+			end
+			
+			button left click at RIGHT_ITEM.x RIGHT_ITEM.y
+			delay for 200
+			
+			button left click at RIGHT_SLOT.x RIGHT_SLOT.y
+			delay for 200
+			
+			snapshot
+			read _READ for "부족" of 255 255 255 over 0 0 1366 768
+			when _READ.x is greater than 0
+				finish iterate
+			end
+
+		end
+		
+		
+		#
+		# Click fusion buttons	
+		#
+		assign BUTTON_ID 2
+		import fusion_settings.txt CLICK_BUTTON
+
+		button none at 10 10
+		key enter
+		delay for 200	
+
+		import fusion_settings.txt CLICK_BUTTON
+
+	end
+
+end
+
+# Notify finish
+sound dingdong

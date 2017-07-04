@@ -1,0 +1,140 @@
+import maple_story.txt 초기화
+
+assign HP_PORTION 55
+assign MP_PORTION 20
+
+
+sync
+	iterate forever
+	
+		snapshot
+	
+		delay for MONITOR_DELAY
+	end
+
+with 
+	iterate forever
+
+		assign SKILL_INDEX.col 4
+		assign SKILL_INDEX.row 0	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key 5 for 50
+		end
+
+		assign SKILL_INDEX.col 5
+		assign SKILL_INDEX.row 0	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key 6 for 50
+		end
+
+		assign SKILL_INDEX.col 6
+		assign SKILL_INDEX.row 0
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key 7 for 50
+		end
+
+		assign SKILL_INDEX.col 8
+		assign SKILL_INDEX.row 0
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key 9 for 50
+		end
+
+		assign SKILL_INDEX.col 3
+		assign SKILL_INDEX.row 1	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key f for 50
+		end
+
+		assign SKILL_INDEX.col 4
+		assign SKILL_INDEX.row 1	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key g for 50
+		end
+
+		assign SKILL_INDEX.col 2
+		assign SKILL_INDEX.row 1	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key d for 50
+		end
+
+		assign SKILL_INDEX.col 6
+		assign SKILL_INDEX.row 1	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			key w for 50
+		end
+
+	end
+	
+with
+	iterate forever
+
+		register _SPR with x y
+		sprite _SPR for 7 over 150 0 1150 70
+		when _SPR.x is greater than 0
+			assign _SPR.y computing _SPR.y add 8
+			button left click at _SPR.x _SPR.y
+			delay for 200
+			button none at 650 380
+		end
+
+		import maple_story.txt 거짓말탐지기_체크
+		when TRUTH_TEST is true
+			finish sync
+		end
+		
+		import maple_story.txt 석화_체크
+		when STONE_TEST is true
+			iterate 5 times
+				key left for 50
+				delay for 50
+				key right for 50
+				delay for 50
+			end
+		
+		otherwise		
+			
+			delay for 1 sec
+		end
+		
+	end
+	
+with
+	iterate forever
+		import maple_story.txt HP_체크
+		when HP_TEST is true
+			key f1 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+	
+with
+	iterate forever
+		import maple_story.txt MP_체크
+		when MP_TEST is true
+			key f2 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+	
+with	
+	iterate forever
+	
+		delay for 6 min
+		key = for 500		
+	end
+
+end
+
+sound alert

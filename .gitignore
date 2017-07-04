@@ -1,0 +1,6 @@
+*.cfg
+
+*.bmp
+*.png
+
+_test*.*

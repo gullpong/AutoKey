@@ -1,0 +1,108 @@
+#########################################################
+> INITIALIZE
+
+exclusive
+
+gawi fusion.gwi
+
+font dotum8.fnt
+
+
+snapshot
+snapshot
+
+register _SPR with x y
+register _READ with x y
+register _IN with id stat x y
+
+register BUTTON_ID
+register BUTTON_POS with x y
+
+register ITEM_ID
+
+break
+
+
+#########################################################
+> CLICK_BUTTON
+
+iterate forever
+	snapshot
+	sprite _SPR for BUTTON_ID over 0 0 1366 768
+	when _SPR.x is greater than 0
+		assign BUTTON_POS.x computing _SPR.x add 12
+		assign BUTTON_POS.y computing _SPR.y add 8
+		finish iterate
+	end
+	delay for 200
+end	
+button left click at BUTTON_POS.x BUTTON_POS.y
+delay for 200
+break
+
+
+#########################################################
+> WAIT_BUTTON
+
+sound pip
+delay for 100
+sound pip
+#hook _IN with button right down
+hook _IN with button right up
+break
+
+
+#########################################################
+> USER_INPUT
+
+assign ITEM_ID 0
+break
+
+#########################################################
+> WOODEN_STAFF
+
+assign ITEM_ID 3
+break
+
+#########################################################
+> WOOD_WAND
+
+assign ITEM_ID 4
+break
+
+#########################################################
+> CROSSBOW
+
+assign ITEM_ID 5
+break
+
+#########################################################
+> BROWN_APPRENTICE_HAT
+
+assign ITEM_ID 6
+break
+
+#########################################################
+> BLUE_TRAINING_SHIRT
+
+assign ITEM_ID 7
+break
+
+#########################################################
+> LEMONA
+
+assign ITEM_ID 8
+break
+
+#########################################################
+> BROWN_BASIC_BOOTS
+
+assign ITEM_ID 9
+break
+
+#########################################################
+> BLUE_REVENGER
+
+assign ITEM_ID 10
+break
+

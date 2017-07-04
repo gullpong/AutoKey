@@ -1,0 +1,105 @@
+
+exclusive
+
+gawi m2space.gwi
+
+snapshot
+snapshot
+
+register _BLOB with x y width height num lt tp rt bm
+register _SPR with x y
+register _TEST
+
+iterate forever
+
+	snapshot
+	
+	sprite _SPR for 3 by 10 over 1135 657 1215 677
+	when _SPR.x is greater than 0
+		finish iterate
+	end
+
+	sprite _SPR for 4 over 0 0 1366 768
+	when _SPR.x is greater than 0
+		assign _Y computing _SPR.y add 140
+		button left click at _SPR.x _Y
+		delay for 1000
+		button left click at 615 399
+		delay for 1000
+		button left click at 840 463
+		delay for 1000
+		
+		assign _TEST false
+		iterate 10 times		
+			snapshot
+			sprite _SPR for 0 over 0 0 1366 768
+			when _SPR.x is greater than 0
+				assign _TEST true			
+				finish iterate
+			end
+			delay for 500
+		end		
+		when _TEST is true
+			import self PLAY
+		end
+	end
+
+	delay for 1000
+	button left click at 94 715
+	
+end
+
+sound dingdong
+
+
+#######################################
+> PLAY
+
+iterate forever
+	snapshot
+	sprite _SPR for 1 over 0 0 1366 768
+	when _SPR.x is greater than 0
+		finish iterate
+	end				
+	delay for 100
+end
+
+iterate forever
+
+	snapshot
+	
+	sprite _SPR for 2 over 482 153 514 180
+	when _SPR.x is greater than 0
+		finish iterate
+	end	
+
+	blob _BLOB for 255 255 255 over 320 660 480 720
+	when _BLOB.num is greater than 2000
+		key space for 20
+	otherwise
+		blob _BLOB about 255 51 102 by 20 over 430 430 580 560
+		when _BLOB.num is greater than 100
+			key up for 20
+		otherwise
+
+			blob _BLOB about 50 185 255 by 20 over 430 430 580 560
+			when _BLOB.num is greater than 100
+				key right for 20
+			otherwise
+
+				#blob _BLOB about 119 220 15 by 20 over 430 430 580 560
+				blob _BLOB about 119 221 0 by 20 over 430 430 580 560
+				when _BLOB.num is greater than 100
+					key left for 20
+				end
+
+			end
+		end
+		
+	end
+
+	delay for 20
+	
+end
+
+break

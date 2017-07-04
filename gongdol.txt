@@ -1,0 +1,323 @@
+import maple_story.txt 초기화
+
+
+assign HP_PORTION 45
+assign MP_PORTION 10
+
+
+register TOP_FLOOR_HEIGHT
+assign TOP_FLOOR_HEIGHT 0
+
+register BOTTOM_FLOOR_HEIGHT
+assign BOTTOM_FLOOR_HEIGHT 0
+
+register TURN_AROUND_PERCENTAGE
+assign TURN_AROUND_PERCENTAGE 10
+
+register JUMP_PERCENTAGE
+assign JUMP_PERCENTAGE 30
+
+register JUMP_DISABLE_COUNT
+assign JUMP_DISABLE_COUNT 3
+
+register UP_JUMP_DELAY
+assign UP_JUMP_DELAY 1000
+
+register DOWN_JUMP_DELAY
+assign DOWN_JUMP_DELAY 600
+
+register SLIDE_ATTACK_PERCENTAGE
+assign SLIDE_ATTACK_PERCENTAGE 50
+
+
+alias [PLAY_SETTINGS] among "USER_INPUT" "OBLIVION_ROAD_3" "OBLIVION_ROAD_4"
+import gongdol_settings.txt [PLAY_SETTINGS]
+
+
+register MOVE_TO_RIGHT
+assign MOVE_TO_RIGHT true
+
+register JUMP_TO_UP
+assign JUMP_TO_UP true
+
+register ON_TOP_FLOOR
+assign ON_TOP_FLOOR false
+
+register ON_BOTTOM_FLOOR
+assign ON_BOTTOM_FLOOR false
+
+
+register BUFF_CHARGE
+assign BUFF_CHARGE false
+
+register SUPPORT_WAVER
+assign SUPPORT_WAVER false
+
+register BOMBER_TIME
+assign BOMBER_TIME false
+
+register WAR_TITAN
+assign WAR_TITAN false
+
+
+sync
+	register PL_POS with x y width height num lt tp rt bm
+	
+	register _WAR_TITAN_ABLE
+	register _BOMBER_TIME_ABLE
+	
+	iterate forever
+	
+		snapshot
+		
+		sub
+			alias [MM_POS] PL_POS
+			import maple_story.txt 플레이어위치_미니맵
+		end
+		when PL_POS.x is not below 0
+			when PL_POS.x is less than MOVE_DEST_RANGE.left
+				assign MOVE_TO_RIGHT true
+			end
+			when PL_POS.x is greater than MOVE_DEST_RANGE.right
+				assign MOVE_TO_RIGHT false
+			end
+		end
+		
+		when PL_POS.y is not below 0
+			when PL_POS.y is less than TOP_FLOOR_HEIGHT
+				assign JUMP_TO_UP false
+			end
+			when PL_POS.y is greater than BOTTOM_FLOOR_HEIGHT
+				assign JUMP_TO_UP true
+			end
+		end
+		
+
+		assign SKILL_INDEX.col 3
+		assign SKILL_INDEX.row 1	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			when _WAR_TITAN_ABLE is greater than 5
+				assign WAR_TITAN true
+				assign _WAR_TITAN_ABLE 0
+			end
+			assign _WAR_TITAN_ABLE computing _WAR_TITAN_ABLE add 1
+		otherwise
+			assign _WAR_TITAN_ABLE 0
+		end
+
+		
+		assign SKILL_INDEX.col 7
+		assign SKILL_INDEX.row 0	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			when _BOMBER_TIME_ABLE is greater than 5
+				assign BOMBER_TIME true
+				assign _BOMBER_TIME_ABLE 0
+			end
+			assign _BOMBER_TIME_ABLE computing _BOMBER_TIME_ABLE add 1
+		otherwise
+			assign _BOMBER_TIME_ABLE 0
+		end
+		
+		delay for MONITOR_DELAY
+	end
+	
+with
+	
+	register _RANDOM
+	register _ACTION
+	register _JUMP_DISABLE
+
+	iterate forever
+	
+		##########################################
+		# BUFF
+		##########################################
+		when BUFF_CHARGE is true
+			delay for 500
+			
+			key 7 for 500
+			delay for 500
+			
+			key 8 for 500
+			delay for 500
+			
+			key 9 for 500
+			assign BUFF_CHARGE false
+		end
+
+		when SUPPORT_WAVER is true
+		    delay for 500
+
+			key e for 500
+			delay for 500
+			
+			assign SUPPORT_WAVER false
+		end
+
+		when BOMBER_TIME is true
+		    delay for 500
+
+			key 0 for 500
+			delay for 500
+			
+			assign BOMBER_TIME false
+		end
+		
+		##########################################
+		# SPECIAL ATTACK
+		##########################################			
+		when WAR_TITAN is true
+			delay for 1000
+			sync
+				key h for 500
+				delay for 3000
+			with
+				iterate 10 times
+					key z for 100
+					delay for 100				
+				end
+			end
+			assign WAR_TITAN false
+		end
+
+		##########################################
+		# MOVEMENT CONTROL
+		##########################################	
+		assign _RANDOM random over 100
+		when _RANDOM is less than TURN_AROUND_PERCENTAGE		
+			when MOVE_TO_RIGHT is true
+				assign MOVE_TO_RIGHT false
+			otherwise
+				assign MOVE_TO_RIGHT true
+			end
+		end
+
+		assign _ACTION 1
+		when _JUMP_DISABLE is greater than JUMP_DISABLE_COUNT
+			assign _RANDOM random over 100
+			when _RANDOM is less than JUMP_PERCENTAGE
+				assign _JUMP_DISABLE 0
+				assign _ACTION 2				
+			end
+		end
+		assign _JUMP_DISABLE computing _JUMP_DISABLE add 1
+		
+		##########################################
+		# ATTACK
+		##########################################		
+		when _ACTION is equal to 1
+			assign _RANDOM random over 100
+			when _RANDOM is less than SLIDE_ATTACK_PERCENTAGE
+				sync
+					when MOVE_TO_RIGHT is true
+						key right for 500
+					otherwise 
+						key left for 500
+					end
+				with
+					delay for 50
+					key s for 100
+					delay for 850
+				end
+			otherwise
+				sync
+					iterate 3 times
+						when MOVE_TO_RIGHT is true
+							key right for 1000
+						otherwise 
+							key left for 1000
+						end
+					end
+				with
+					key a for 3000
+				with
+					iterate 15 times
+						key d for 100
+						delay for 100
+					end
+				end
+			end
+		end
+
+		##########################################
+		# JUMP
+		##########################################		
+		when _ACTION is equal to 2
+		
+			when JUMP_TO_UP is true
+				delay for 500
+				key v for 500
+				delay for UP_JUMP_DELAY
+			
+			otherwise
+				sync
+					key down for 800
+				with
+					delay for 300
+					key x for 100
+					delay for 400
+				end
+				delay for DOWN_JUMP_DELAY
+			end
+		end
+		
+	end
+	
+with
+	iterate forever
+		assign BUFF_CHARGE true
+		delay for 150000	# 2.5 mins
+	end
+
+with
+	iterate forever
+		assign SUPPORT_WAVER true
+		delay for 1 min
+	end
+	
+with
+	iterate forever
+		
+		import maple_story.txt 거짓말탐지기_체크
+		when TRUTH_TEST is true
+			finish sync
+		end
+		
+		delay for 1000
+		
+	end
+	
+with
+	iterate forever
+		import maple_story.txt HP_체크
+		when HP_TEST is true
+			key f1 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+	
+with
+	iterate forever
+		import maple_story.txt MP_체크
+		when MP_TEST is true
+			key f2 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+	
+#with
+#	iterate forever
+#		delay for 6 min	
+#		key = for 500
+#	end
+
+end
+
+sound alert
+

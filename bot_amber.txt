@@ -1,0 +1,176 @@
+##################################################
+> SETUP
+
+assign POTION_HUD_TYPE 1
+assign POTION_HP_THOLD 50
+assign POTION_MP_THOLD 30
+
+assign TIMER_1.dur 240
+assign TIMER_1.on true
+#assign TIMER_2.dur 300
+
+assign SKILL_1.row 2
+assign SKILL_1.col 3
+
+assign SKILL_2.row 2
+assign SKILL_2.col 6
+
+assign SKILL_3.row 2
+assign SKILL_3.col 10
+
+assign TURN_AROUND_PERCENTAGE 0
+
+assign JUMP_STYLE 0
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+
+alias [PLAY_MAP] among "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
+import bot_map.txt [PLAY_MAP]
+
+break
+
+
+##################################################
+> TIMER_1
+
+delay for 1000
+
+key w for 500
+delay for 700
+
+key 6 for 500
+delay for 700
+
+key 7 for 500
+delay for 700
+
+key 8 for 500
+delay for 700
+
+key h for 500
+delay for 700
+
+key 9 for 500
+
+break
+
+##################################################
+> TIMER_2
+
+key = for 500
+
+break
+
+##################################################
+> TIMER_3
+
+break
+
+##################################################
+> ATTACK
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 900
+	otherwise 
+		key left for 900
+	end
+with
+	key x for 100
+	delay for 200	
+	key v for 300
+	key s for 300
+end
+delay for 200
+
+break
+
+
+##################################################
+> SOAR
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 300
+	otherwise 
+		key left for 300
+	end
+with
+	key x for 100
+	key v for 300
+	#delay for 250
+	sync
+		key up for 300
+	with
+		key s for 300
+	end
+end
+delay for 200
+
+break
+
+
+##################################################
+> FALL
+
+sync
+	key down for 1200
+with
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+	key x for 100
+	key v for 300
+end
+
+break
+
+
+##################################################
+> SKILL_1
+
+key e for 500
+delay for 500
+
+break
+
+##################################################
+> SKILL_2
+
+key g for 500
+delay for 1000
+
+break
+
+##################################################
+> SKILL_3
+
+key 0 for 500
+delay for 1000
+
+break
+
+##################################################
+> SKILL_4
+
+break
+
+##################################################
+> SKILL_5
+
+break
+
+
+##################################################
+> SPECIAL_CHECK
+
+break
+
+##################################################
+> SPECIAL_ACTION
+
+break

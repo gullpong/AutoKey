@@ -1,0 +1,44 @@
+import maple_story.txt 초기화
+
+register IN with id stat x y
+
+
+sync
+	# 차지드라이브-스피어
+	iterate forever
+		hook IN with key e down
+		sync
+			key 1 for 100
+			delay for 400
+			key 2 for 100
+			delay for 400
+			key f for 100
+			delay for 2000
+			finish sync
+		with
+			hook IN with key e up
+			finish sync			
+		end
+	end
+
+with
+	# 차지롤링-스피어
+	iterate forever
+		hook IN with key r down
+		sync
+			key 1 for 100
+			delay for 400
+			key 2 for 100
+			delay for 400
+			key 3 for 100
+			delay for 400
+			key f for 100
+			delay for 2000
+			finish sync
+		with
+			hook IN with key r up
+			finish sync			
+		end
+	end
+
+end

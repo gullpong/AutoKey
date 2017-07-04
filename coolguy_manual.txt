@@ -1,0 +1,36 @@
+
+register ATTACK_ON
+assign ATTACK_ON false
+
+sync	
+	register IN with id stat x y	
+	iterate forever	
+		hook IN with key ctrl down
+		assign ATTACK_ON true
+		hook IN with key ctrl up
+		assign ATTACK_ON false
+	end
+with
+	iterate forever	
+		when ATTACK_ON is true
+			key x for 100
+			delay for 100
+			key x for 100
+			#delay for 100
+		
+			sync
+				key w for 200
+				delay for 300
+				key d for 200
+				delay for 300
+				key d for 200
+				delay for 300
+			
+			with
+				key up for 1100
+			end			
+		end		
+		delay for 100
+	end	
+end
+

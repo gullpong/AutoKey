@@ -1,0 +1,186 @@
+import maple_story.txt 초기화
+
+
+assign HP_PORTION 40
+assign MP_PORTION 10
+
+
+register BUFF_CHARGE
+assign BUFF_CHARGE false
+
+
+register BOMBER_TIME
+assign BOMBER_TIME false
+
+register WAR_TITAN
+assign WAR_TITAN false
+
+register DISTORT_FIELD
+assign DISTORT_FIELD false
+
+
+sync
+	register _WAR_TITAN_ABLE
+	register _BOMBER_TIME_ABLE
+	register _DISTORT_FIELD_ABLE
+	
+	iterate forever
+	
+		snapshot
+
+		assign SKILL_INDEX.col 5
+		assign SKILL_INDEX.row 1	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			when _DISTORT_FIELD_ABLE is greater than 5
+				assign DISTORT_FIELD true
+				assign _DISTORT_FIELD_ABLE 0
+			end
+			assign _DISTORT_FIELD_ABLE computing _DISTORT_FIELD_ABLE add 1
+		otherwise
+			assign _DISTORT_FIELD_ABLE 0
+		end
+		
+		assign SKILL_INDEX.col 6
+		assign SKILL_INDEX.row 1	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			when _WAR_TITAN_ABLE is greater than 5
+				assign WAR_TITAN true
+				assign _WAR_TITAN_ABLE 0
+			end
+			assign _WAR_TITAN_ABLE computing _WAR_TITAN_ABLE add 1
+		otherwise
+			assign _WAR_TITAN_ABLE 0
+		end
+
+		
+		assign SKILL_INDEX.col 7
+		assign SKILL_INDEX.row 0	
+		import maple_story.txt 스킬활성화_체크	
+		when SKILL_TEST is true
+			when _BOMBER_TIME_ABLE is greater than 5
+				assign BOMBER_TIME true
+				assign _BOMBER_TIME_ABLE 0
+			end
+			assign _BOMBER_TIME_ABLE computing _BOMBER_TIME_ABLE add 1
+		otherwise
+			assign _BOMBER_TIME_ABLE 0
+		end
+		
+		delay for MONITOR_DELAY
+	end
+	
+with
+
+	register IN with id stat x y
+	
+	iterate forever
+		hook IN with key ctrl down
+		sync
+			hook IN with key ctrl up
+			finish sync
+		with
+			iterate forever			
+		
+				when BUFF_CHARGE is true
+					assign BUFF_CHARGE false
+					key a up
+					
+					key 7 for 500
+					delay for 500
+					
+					key 8 for 500
+					delay for 500
+					
+					key 9 for 500
+					delay for 500
+				end
+
+				when BOMBER_TIME is true
+					assign BOMBER_TIME false
+					key a up
+
+					key 0 for 500
+					delay for 1000
+				end		
+
+				when DISTORT_FIELD is true
+					assign DISTORT_FIELD false
+					key a up
+					
+					key g for 500
+					delay for 500
+				end
+				
+				when WAR_TITAN is true
+					assign WAR_TITAN false
+					key a up
+					
+					sync
+						iterate 10 times
+							key h for 100
+							delay for 100
+						end
+					with
+						iterate 10 times
+							key z for 100
+							delay for 100				
+						end
+					end
+				end
+				
+				sync
+					iterate 10 times
+						key a down
+						delay for 50
+					end				
+				with				
+					iterate 5 times
+						key d
+						delay for 100
+					end						
+				end				
+				
+			end
+		end
+		
+		key a up
+	end
+	
+with
+	iterate forever
+		assign BUFF_CHARGE true
+		delay for 150000	# 2.5 mins
+	end
+	
+with
+	iterate forever
+		import maple_story.txt HP_체크
+		when HP_TEST is true
+			key f1 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+	
+with
+	iterate forever
+		import maple_story.txt MP_체크
+		when MP_TEST is true
+			key f2 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+	
+#with
+#	iterate forever
+#		delay for 6 min	
+#		key = for 500
+#	end
+
+end
+

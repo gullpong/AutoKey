@@ -1,0 +1,273 @@
+import maple_story.txt 초기화
+
+
+assign HP_PORTION 55
+assign MP_PORTION 20
+
+register TOP_FLOOR_HEIGHT
+assign TOP_FLOOR_HEIGHT 0
+
+register BOTTOM_FLOOR_HEIGHT
+assign BOTTOM_FLOOR_HEIGHT 0
+
+register UP_JUMP_PERCENTAGE
+assign UP_JUMP_PERCENTAGE 30
+
+register DOWN_JUMP_PERCENTAGE
+assign DOWN_JUMP_PERCENTAGE 30
+
+alias [PLAY_SETTINGS] among "USER_INPUT" "CHRONO_TEMPLE_LANDSCAPE" "CHRITIAS_BASIC" "CHRITIAS_FLAT" "CHRITIAS_MULTI"
+import coolguy_settings.txt [PLAY_SETTINGS]
+
+
+register MOVE_TO_RIGHT
+assign MOVE_TO_RIGHT true
+
+register ON_TOP_FLOOR
+assign ON_TOP_FLOOR false
+
+register ON_BOTTOM_FLOOR
+assign ON_BOTTOM_FLOOR false
+
+
+register BUFF_CHARGE
+assign BUFF_CHARGE false
+
+register FINAL_CUT
+assign FINAL_CUT false
+
+register SUDDEN_RAID
+assign SUDDEN_RAID false
+
+
+sync
+	register PL_POS with x y width height num lt tp rt bm
+
+	iterate forever
+
+		snapshot
+
+		sub
+			alias [MM_POS] PL_POS
+			import maple_story.txt 플레이어위치_미니맵
+		end
+		when PL_POS.x is not below 0
+			when PL_POS.x is less than MOVE_DEST_RANGE.left
+				assign MOVE_TO_RIGHT true
+			end
+			when PL_POS.x is greater than MOVE_DEST_RANGE.right
+				assign MOVE_TO_RIGHT false
+			end
+		end
+
+		when PL_POS.y is less than TOP_FLOOR_HEIGHT
+			assign ON_TOP_FLOOR true
+		otherwise
+			assign ON_TOP_FLOOR false
+		end
+
+		when PL_POS.y is greater than BOTTOM_FLOOR_HEIGHT
+			assign ON_BOTTOM_FLOOR true
+		otherwise
+			assign ON_BOTTOM_FLOOR false
+		end
+
+		delay for MONITOR_DELAY
+	end
+
+with
+
+	register _RANDOM
+	register _ACTION
+
+	iterate forever
+
+		##########################################
+
+		when BUFF_CHARGE is true
+			delay for 1000
+
+			key 5 for 500
+			delay for 500
+
+			key 6 for 500
+			delay for 500
+
+			key 7 for 500
+			delay for 500
+
+			key 9 for 500
+			assign BUFF_CHARGE false
+		end
+
+		when FINAL_CUT is true
+		    delay for 1000
+
+			key 8 for 200
+			delay for 400
+
+			key r for 200
+			delay for 400
+			assign FINAL_CUT false
+		end
+
+		when SUDDEN_RAID is true
+			key h for 500
+			delay for 500
+			assign SUDDEN_RAID false
+		end
+
+		##########################################
+
+		assign _ACTION 3
+		when ON_BOTTOM_FLOOR is true
+			assign _RANDOM 999
+		otherwise
+			assign _RANDOM random over 100
+		end
+		when _RANDOM is less than DOWN_JUMP_PERCENTAGE
+			assign _ACTION 1
+		otherwise
+			when ON_TOP_FLOOR is true
+				assign _RANDOM 999
+			otherwise
+				assign _RANDOM random over 100
+			end
+			when _RANDOM is less than UP_JUMP_PERCENTAGE
+				assign _ACTION 2
+			end
+		end
+
+		##########################################
+		when _ACTION is equal to 1
+			sync
+				delay for 200
+				key x for 100
+			with
+				key down for 600
+			end
+		end
+
+		when _ACTION is equal to 2
+			sync
+				delay for 100
+				key x for 100
+				delay for 100
+				key x for 100
+				delay for 100
+				key x for 100
+				delay for 100
+			with
+				when MOVE_TO_RIGHT is true
+					key right for 500
+				otherwise
+					key left for 500
+				end
+			end
+			key w for 200
+			delay for 300
+			key d for 200
+			delay for 300
+			key d for 200
+			delay for 300
+		end
+
+		when _ACTION is equal to 3
+			sync
+				delay for 100
+				key x for 100
+				delay for 100
+				key x for 100
+				delay for 100
+			with
+				when MOVE_TO_RIGHT is true
+					key right for 500
+				otherwise
+					key left for 500
+				end
+			end
+			key d for 200
+			delay for 300
+			key d for 200
+			delay for 300
+		end
+
+		##########################################
+
+	end
+
+with
+	iterate forever
+		assign BUFF_CHARGE true
+		delay for 3 min
+	end
+
+with
+	iterate forever
+		delay for 93 sec
+		assign FINAL_CUT true
+	end
+
+with
+	iterate forever
+		delay for 33 sec
+		assign SUDDEN_RAID true
+	end
+
+with
+	iterate forever
+
+		import maple_story.txt 거짓말탐지기_체크
+		when TRUTH_TEST is true
+			finish sync
+		end
+
+		import maple_story.txt 석화_체크
+		when STONE_TEST is true
+			iterate 5 times
+				key left for 50
+				delay for 50
+				key right for 50
+				delay for 50
+			end
+
+		otherwise
+
+			delay for 1 sec
+		end
+
+	end
+
+with
+	iterate forever
+		import maple_story.txt HP_체크
+		when HP_TEST is true
+			key f1 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+
+with
+	iterate forever
+		import maple_story.txt MP_체크
+		when MP_TEST is true
+			key f2 for 100
+			delay for 700
+		otherwise
+			delay for MONITOR_DELAY
+		end
+	end
+
+with
+	iterate forever
+
+		delay for 6 min
+		key = for 500
+	end
+
+end
+
+sound alert
+

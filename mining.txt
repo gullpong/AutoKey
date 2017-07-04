@@ -1,0 +1,92 @@
+import maple_story.txt 초기화
+
+# 미니맵 범위 설정
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 172
+assign MM_WINDOW.bm 160
+
+
+register MINE_DIR
+assign MINE_DIR 0
+
+
+register WORD_READ with x y
+
+register WORD_TEST
+assign WORD_TEST false
+
+register WORD_POS with x y width height num lt tp rt bm
+
+register COUNT
+
+sync
+
+	iterate forever
+		
+		when MINE_DIR is equal to 0
+			# 왼쪽 무더기
+			assign MOVE_DEST_RANGE.left 93
+			assign MOVE_DEST_RANGE.right 95
+			assign MINE_DIR 1
+			
+		otherwise
+			# 오른쪽 무더기
+			assign MOVE_DEST_RANGE.left 102
+			assign MOVE_DEST_RANGE.right 104
+			assign MINE_DIR 0
+			
+		end
+			
+		import maple_story.txt 범위이동하기_미니맵
+		
+		when MINE_DIR is equal to 0
+			key right for 30
+		otherwise
+			key left for 30
+		end
+		
+		iterate 10 times
+			when WORD_TEST is true
+				finish iterate
+			end
+			delay for MONITOR_DELAY		
+		end
+		
+		assign COUNT 0
+		iterate 10 times
+			when COUNT is greater than 3
+				when WORD_TEST is false
+					finish iterate
+				end
+			end
+			key space	
+			delay for 1000
+			assign COUNT computing COUNT add 1
+		end
+
+	end
+
+with
+
+	iterate forever
+	
+		snapshot
+	
+		assign WORD_TEST false
+		
+		blob WORD_POS for 85 255 187 over 260 500 1170 620
+		when WORD_POS.height is greater than 5
+			assign WORD_TEST true
+		otherwise
+			blob WORD_POS for 255 255 85 over 260 500 1170 620
+			when WORD_POS.height is greater than 5
+				assign WORD_TEST true
+			end	
+		end
+		
+		delay for MONITOR_DELAY
+	
+	end
+
+end

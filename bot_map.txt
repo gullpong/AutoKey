@@ -1,0 +1,309 @@
+##################################################
+> MANUAL
+
+import maple_story.txt INPUT_STAGE
+	
+break
+
+
+##################################################
+> PATROL
+
+import maple_story.txt INPUT_STAGE_FLAT
+
+assign LAYOUT.tf 768
+assign LAYOUT.bc 0
+
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 0
+
+break
+
+
+##################################################
+> TIMETEMPLE_TWO_STORY
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 190
+assign MINIMAP.bm 120
+
+assign LAYOUT.lt 35
+assign LAYOUT.rt 165
+assign LAYOUT.tf 80
+assign LAYOUT.bc 80
+
+assign JUMP_UP_PERCENTAGE 50
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> TIMETEMPLE_FOUR_STORY
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 170
+assign MINIMAP.bm 170
+
+assign LAYOUT.lt 60
+assign LAYOUT.rt 140
+assign LAYOUT.tf 95
+assign LAYOUT.bc 135
+
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> DEFHQ_UFO_AISLE
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 135
+assign MINIMAP.bm 110
+
+assign LAYOUT.lt 25
+assign LAYOUT.rt 110
+assign LAYOUT.tf 75
+assign LAYOUT.bc 80
+
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 30
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> PERION_ABANDONED_SOUTH
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 180
+assign MINIMAP.bm 170
+
+assign LAYOUT.lt 75
+assign LAYOUT.rt 105
+assign LAYOUT.tf 70
+assign LAYOUT.bc 115
+
+assign JUMP_STYLE 1
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> PERION_LONELY_BOULDER
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 240
+assign MINIMAP.bm 140
+
+assign LAYOUT.lt 35
+assign LAYOUT.rt 180
+assign LAYOUT.tf 70
+assign LAYOUT.bc 85
+
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> PERION_ROUGH_WILDERNESS
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 190
+assign MINIMAP.bm 120
+
+assign LAYOUT.lt 45
+assign LAYOUT.rt 140
+assign LAYOUT.tf 67
+assign LAYOUT.bc 85
+
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 80
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> HAVEN_DUMPYARD_1
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 220
+assign MINIMAP.bm 140
+
+assign LAYOUT.lt 50
+assign LAYOUT.rt 205
+assign LAYOUT.tf 95
+assign LAYOUT.bc 95
+
+assign JUMP_UP_PERCENTAGE 50
+assign JUMP_DN_PERCENTAGE 80
+assign JUMP_DISABLE_COUNT 3
+
+break
+
+
+##################################################
+> HAVEN_DUMPYARD_3
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 220
+assign MINIMAP.bm 160
+
+assign LAYOUT.lt 65
+assign LAYOUT.rt 180
+assign LAYOUT.tf 85
+assign LAYOUT.bc 115
+
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> HAVEN_DUMPYARD_4
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 190
+assign MINIMAP.bm 130
+
+assign LAYOUT.lt 40
+assign LAYOUT.rt 150
+assign LAYOUT.tf 80
+assign LAYOUT.bc 90
+
+assign JUMP_UP_PERCENTAGE 60
+assign JUMP_DN_PERCENTAGE 60
+assign JUMP_DISABLE_COUNT 2
+
+break
+
+
+##################################################
+> LACHELN_CHICKEN_RUN_1
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 160
+assign MINIMAP.bm 120
+
+assign LAYOUT.lt 40
+assign LAYOUT.rt 100
+assign LAYOUT.tf 65
+assign LAYOUT.bc 90
+
+assign JUMP_UP_PERCENTAGE 60
+assign JUMP_DN_PERCENTAGE 60
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> LACHELN_CHICKEN_RUN_2
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 160
+assign MINIMAP.bm 120
+
+assign LAYOUT.lt 30
+assign LAYOUT.rt 135
+assign LAYOUT.tf 75
+assign LAYOUT.bc 75
+
+assign JUMP_UP_PERCENTAGE 50
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 2
+
+break
+
+
+##################################################
+> ARCANA_LOWER_CAVERN
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 135
+assign MINIMAP.bm 130
+
+assign LAYOUT.lt 55
+assign LAYOUT.rt 75
+assign LAYOUT.tf 85
+assign LAYOUT.bc 140
+
+#assign JUMP_STYLE 0
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 90
+assign JUMP_DISABLE_COUNT 1
+
+assign SOAR_DELAY 800
+assign FALL_DELAY 1000
+
+break
+
+
+##################################################
+> ARCANA_FORK_CAVERN
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 170
+assign MINIMAP.bm 130
+
+assign LAYOUT.lt 40
+assign LAYOUT.rt 130
+assign LAYOUT.tf 82
+assign LAYOUT.bc 82
+
+assign JUMP_UP_PERCENTAGE 40
+assign JUMP_DN_PERCENTAGE 25
+assign JUMP_DISABLE_COUNT 2
+
+assign SOAR_DELAY 1100
+
+break
+
+
+##################################################
+> ARCANA_LOWER_FORK_CAVERN
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 180
+assign MINIMAP.bm 120
+
+assign LAYOUT.lt 35
+assign LAYOUT.rt 155
+assign LAYOUT.tf 80
+assign LAYOUT.bc 180
+
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 1
+
+assign SOAR_DELAY 1000
+
+break
+

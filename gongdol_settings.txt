@@ -1,0 +1,90 @@
+
+##################################################
+> USER_INPUT
+
+import maple_story.txt 미니맵범위입력
+
+import maple_story.txt 이동범위입력
+
+sub
+	register _IN with id stat x y
+	
+	delay for 500	
+	sound beep	
+	hook _IN with button left up
+	sound pop
+	assign TOP_FLOOR_HEIGHT _IN.y
+	
+	delay for 500	
+	sound beep	
+	hook _IN with button left up
+	sound pop	
+	assign BOTTOM_FLOOR_HEIGHT _IN.y
+end
+
+import maple_story.txt 입력대기
+
+break
+
+
+##################################################
+> OBLIVION_ROAD_3
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 190
+assign MM_WINDOW.bm 120
+
+
+assign MOVE_DEST_RANGE.left 25
+assign MOVE_DEST_RANGE.right 170
+
+
+assign TOP_FLOOR_HEIGHT 90
+assign BOTTOM_FLOOR_HEIGHT 90
+
+
+assign TURN_AROUND_PERCENTAGE 10
+
+assign JUMP_PERCENTAGE 40
+
+assign JUMP_DISABLE_COUNT 3
+
+assign UP_JUMP_DELAY 600
+assign DOWN_JUMP_DELAY 0
+
+
+assign SLIDE_ATTACK_PERCENTAGE 30
+
+
+break
+
+
+##################################################
+> OBLIVION_ROAD_4
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 170
+assign MM_WINDOW.bm 170
+
+
+assign MOVE_DEST_RANGE.left 45
+assign MOVE_DEST_RANGE.right 140
+
+
+assign TOP_FLOOR_HEIGHT 95
+assign BOTTOM_FLOOR_HEIGHT 135
+
+
+assign TURN_AROUND_PERCENTAGE 0
+
+assign JUMP_PERCENTAGE 40
+
+assign JUMP_DISABLE_COUNT 3
+
+assign SLIDE_ATTACK_PERCENTAGE 50
+
+
+break
+

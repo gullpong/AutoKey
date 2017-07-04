@@ -1,0 +1,159 @@
+
+##################################################
+> USER_INPUT
+
+import maple_story.txt 미니맵범위입력
+
+import maple_story.txt 이동범위입력
+
+sub
+	register _IN with id stat x y
+	
+	delay for 500	
+	sound beep	
+	hook _IN with button left up
+	sound pop
+	assign TOP_FLOOR_HEIGHT _IN.y
+	
+	delay for 500	
+	sound beep	
+	hook _IN with button left up
+	sound pop	
+	assign BOTTOM_FLOOR_HEIGHT _IN.y
+end
+
+import maple_story.txt 입력대기
+
+break
+
+
+##################################################
+> DANGEROUS_NEST
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 160
+assign MM_WINDOW.bm 170
+
+
+assign MOVE_DEST_RANGE.left 40
+assign MOVE_DEST_RANGE.right 120
+
+
+assign TOP_FLOOR_HEIGHT 130
+assign BOTTOM_FLOOR_HEIGHT 135
+
+assign UP_JUMP_PERCENTAGE 40
+assign DOWN_JUMP_PERCENTAGE 30
+
+break
+
+
+##################################################
+> CHRONO_TEMPLE_PORTRAIT
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 140
+assign MM_WINDOW.bm 160
+
+
+assign MOVE_DEST_RANGE.left 25
+assign MOVE_DEST_RANGE.right 120
+
+
+assign TOP_FLOOR_HEIGHT 105
+assign BOTTOM_FLOOR_HEIGHT 135
+# assign TOP_FLOOR_HEIGHT 80
+# assign BOTTOM_FLOOR_HEIGHT 105
+
+assign UP_JUMP_PERCENTAGE 70
+assign DOWN_JUMP_PERCENTAGE 30
+
+break
+
+
+##################################################
+> CHRONO_TEMPLE_LANDSCAPE
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 190
+assign MM_WINDOW.bm 120
+
+
+assign MOVE_DEST_RANGE.left 25
+assign MOVE_DEST_RANGE.right 170
+
+
+assign TOP_FLOOR_HEIGHT 90
+assign BOTTOM_FLOOR_HEIGHT 90
+
+assign UP_JUMP_PERCENTAGE 30
+assign DOWN_JUMP_PERCENTAGE 20
+
+break
+
+
+##################################################
+> CHRITIAS_FLAT
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 160
+assign MM_WINDOW.bm 100
+
+
+assign MOVE_DEST_RANGE.left 60
+assign MOVE_DEST_RANGE.right 100
+
+assign TOP_FLOOR_HEIGHT 200
+assign BOTTOM_FLOOR_HEIGHT 0
+
+assign UP_JUMP_PERCENTAGE 0
+assign DOWN_JUMP_PERCENTAGE 0
+
+break
+
+
+##################################################
+> CHRITIAS_BASIC
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 160
+assign MM_WINDOW.bm 120
+
+
+assign MOVE_DEST_RANGE.left 45
+assign MOVE_DEST_RANGE.right 130
+
+assign TOP_FLOOR_HEIGHT 90
+assign BOTTOM_FLOOR_HEIGHT 95
+
+assign UP_JUMP_PERCENTAGE 40
+assign DOWN_JUMP_PERCENTAGE 10
+
+break
+
+
+##################################################
+> CHRITIAS_MULTI
+
+assign MM_WINDOW.lt 10
+assign MM_WINDOW.tp 60
+assign MM_WINDOW.rt 160
+assign MM_WINDOW.bm 140
+
+
+assign MOVE_DEST_RANGE.left 40
+assign MOVE_DEST_RANGE.right 60
+
+
+assign TOP_FLOOR_HEIGHT 0
+assign BOTTOM_FLOOR_HEIGHT 120
+
+assign UP_JUMP_PERCENTAGE 30
+assign DOWN_JUMP_PERCENTAGE 5
+
+break

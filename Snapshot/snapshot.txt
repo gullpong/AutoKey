@@ -1,0 +1,2 @@
+snapshot write
+sound pop

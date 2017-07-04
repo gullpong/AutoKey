@@ -1,0 +1,481 @@
+#########################################################
+> INITIALIZE
+
+exclusive
+
+font dotum8.fnt
+
+gawi maple_story.gwi
+
+
+snapshot
+snapshot
+
+register MONITOR_DELAY
+assign MONITOR_DELAY 200
+
+register MINIMAP with lt tp rt bm
+register LAYOUT with lt rt tf bc
+
+register PLAYER_POS with x y
+register RPORTAL_POS with x y
+
+register FADE_TEST
+register TRUTH_TEST
+register CURSE_TEST
+register STONE_TEST
+register MVPEXP_TEST
+
+register POTION_TEST
+register POTION_HP_THOLD
+register POTION_MP_THOLD
+register POTION_HUD_TYPE		# 0: none, 1: HP/MP, 2: HP only
+assign POTION_HUD_TYPE 1
+
+register SKILL_TEST
+register SKILL_INDEX with row col
+register SKILL_BAR
+assign SKILL_BAR 1019
+
+register BUTTON_ID
+register BUTTON_PRESSED
+register BUTTON_DELAY
+assign BUTTON_DELAY computing MONITOR_DELAY div 2
+
+
+break
+
+
+#########################################################
+> INPUT_STAGE
+
+sub
+	register _IN with id stat x y
+
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign MINIMAP.lt _IN.x
+	assign MINIMAP.tp _IN.y
+	
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign MINIMAP.rt _IN.x
+	assign MINIMAP.bm _IN.y
+	
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign LAYOUT.lt _IN.x
+
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign LAYOUT.rt _IN.x
+
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign LAYOUT.tf _IN.y
+
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign LAYOUT.bc _IN.y
+	
+	delay for 500
+	sound beep
+	delay for 200
+	sound beep
+	hook _IN with key space down
+	sound dingdong	
+end
+
+break
+
+
+#########################################################
+> INPUT_STAGE_FLAT
+
+sub
+	register _IN with id stat x y
+
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign MINIMAP.lt _IN.x
+	assign MINIMAP.tp _IN.y
+	
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign MINIMAP.rt _IN.x
+	assign MINIMAP.bm _IN.y
+	
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign LAYOUT.lt _IN.x
+
+	delay for 500
+	sound beep
+	hook _IN with button left up
+	sound pop
+	assign LAYOUT.rt _IN.x
+	
+	delay for 500
+	sound beep
+	delay for 200
+	sound beep
+	hook _IN with key space down
+	sound dingdong	
+end
+
+break
+
+
+#########################################################
+> LOCATE_PLAYER
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	blob _BLOB for 255 221 68 over MINIMAP.lt MINIMAP.tp MINIMAP.rt MINIMAP.bm
+	assign PLAYER_POS.x _BLOB.x
+	assign PLAYER_POS.y _BLOB.y
+end
+
+break
+
+
+#########################################################
+> LOCATE_RPORTAL
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	blob _BLOB for 255 136 102 over MINIMAP.lt MINIMAP.tp MINIMAP.rt MINIMAP.bm
+	assign RPORTAL_POS.x _BLOB.x
+	assign RPORTAL_POS.y _BLOB.y
+end
+
+break
+
+
+#########################################################
+> CHECK_FADE
+
+assign FADE_TEST false
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	blob _BLOB darker 20 20 20 by 0 over 400 0 900 100
+	when _BLOB.num is greater than 45000
+		assign FADE_TEST true
+	end
+end
+
+break
+
+
+#########################################################
+> CHECK_TRUTH
+
+assign TRUTH_TEST false
+
+sub
+	register _SPR with x y	
+	sprite _SPR for 0 by 5 over 200 100 1100 600
+	when _SPR.x is greater than 0
+		assign TRUTH_TEST true
+	end
+end
+
+break
+
+
+#########################################################
+> CHECK_CURSE
+
+assign CURSE_TEST false
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	blob _BLOB for 187 119 255 over 524 208 931 277
+	when _BLOB.num is greater than 500
+		assign CURSE_TEST true
+	end
+end
+
+break
+
+
+#########################################################
+> CHECK_MVPEXP
+
+assign MVPEXP_TEST false
+
+sub
+	register _READ with x y
+	iterate 1 times
+		read _READ for "°æ»Ñ" of 255 136 238 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¤¡¤³" of 255 136 238 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¸¶°æ" of 255 136 238 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+
+		read _READ for "°æ»Ñ" of 68 34 0 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¤¡¤³" of 68 34 0 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¸¶°æ" of 68 34 0 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+
+		read _READ for "°æ»Ñ" of 119 0 68 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¤¡¤³" of 119 0 68 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¸¶°æ" of 119 0 68 over 0 625 560 720
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+	end
+
+end
+
+break
+
+
+#########################################################
+> CHECK_STONE
+
+assign STONE_TEST false
+
+sub
+	register _SPR with x y	
+	sprite _SPR for 1 by 20 over 0 0 1360 600
+	when _SPR.x is greater than 0
+		assign STONE_TEST true
+	end
+end
+
+break
+
+
+#########################################################
+> CHECK_POTION
+
+assign POTION_TEST false
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	register _POR
+
+	when POTION_HUD_TYPE is equal to 1	
+		assign _POR computing POTION_HP_THOLD mul 165		
+		assign _POR computing _POR div 100
+		blob _BLOB lighter 240 60 150 by 0 over 613 717 778 717
+		when _BLOB.width is less than _POR
+			assign POTION_TEST true
+		otherwise		
+			assign _POR computing POTION_MP_THOLD mul 165
+			assign _POR computing _POR div 100
+			blob _BLOB lighter 0 210 230 by 0 over 613 733 778 733
+			when _BLOB.num is less than _POR
+				assign POTION_TEST true
+			end		
+		end
+	end
+	
+	when POTION_HUD_TYPE is equal to 2
+		assign _POR computing POTION_HP_THOLD mul 165
+		assign _POR computing _POR div 100
+		blob _BLOB lighter 240 60 150 by 0 over 613 733 778 733
+		when _BLOB.width is less than _POR
+			assign POTION_TEST true
+		end
+	end
+end
+
+break
+
+
+#########################################################
+> LOCATE_SKILLBAR
+
+sub
+	register _LOCATED
+	assign _LOCATED false
+	iterate 10 times
+		snapshot
+		register _SPR with x y	
+		sprite _SPR for 0 over 0 686 1360 768
+		when _SPR.x is greater than 0
+			assign SKILL_BAR computing _SPR.x add 4		
+			assign _LOCATED true
+			finish iterate
+		end
+		delay for 100
+	end
+	when _LOCATED is false
+		assign SKILL_BAR computing 0 sub 1
+	end
+end
+
+
+#########################################################
+> CHECK_SKILL
+
+assign SKILL_TEST true
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	register _POS with lt tp rt bm
+	assign _POS.lt computing SKILL_INDEX.col mul 35
+	assign _POS.lt computing _POS.lt add SKILL_BAR
+	assign _POS.rt computing _POS.lt add 25	
+	assign _POS.tp computing SKILL_INDEX.row mul 35
+	assign _POS.tp computing _POS.tp add 719
+	assign _POS.bm computing _POS.tp add 0
+	
+	blob _BLOB for 0 0 0 over _POS.lt _POS.tp _POS.rt _POS.bm
+	when _BLOB.num is greater than 10
+		assign SKILL_TEST false
+	end
+end
+
+break
+
+
+#########################################################
+> CLICK_BUTTON
+
+sub
+	register _SPR with x y	
+	sprite _SPR for BUTTON_ID over 0 0 1366 768
+	assign BUTTON_PRESSED false
+	when _SPR.x is greater than 0
+		assign _SPR.y computing _SPR.y add 8
+		button left click at _SPR.x _SPR.y
+		delay for BUTTON_DELAY
+		button none at 10 10
+		assign BUTTON_PRESSED true
+	end
+end
+
+break
+
+
+#########################################################
+> CLICK_OKAY
+
+assign BUTTON_ID 2
+import maple_story.txt CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_DONE
+
+assign BUTTON_ID 3
+import maple_story.txt CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_REWARD
+
+assign BUTTON_ID 4
+import maple_story.txt CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 5
+	import maple_story.txt CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_NEXT
+
+assign BUTTON_ID 6
+import maple_story.txt CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 7
+	import maple_story.txt CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLIKC_YES
+
+assign BUTTON_ID 8
+import maple_story.txt CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 9
+	import maple_story.txt CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_NO
+
+assign BUTTON_ID 10
+import maple_story.txt CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 11
+	import maple_story.txt CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_ACCEPT
+
+assign BUTTON_ID 12
+import maple_story.txt CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 13
+	import maple_story.txt CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_DECLINE
+
+assign BUTTON_ID 14
+import maple_story.txt CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 15
+	import maple_story.txt CLICK_BUTTON
+end
+break

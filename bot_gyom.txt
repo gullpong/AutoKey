@@ -1,0 +1,257 @@
+##################################################
+> SETUP
+
+assign POTION_HUD_TYPE 1
+assign POTION_HP_THOLD 0
+assign POTION_MP_THOLD 0
+
+assign TIMER_1.dur 420
+assign TIMER_1.on true
+#assign TIMER_2.dur 300
+assign TIMER_3.dur 220
+assign TIMER_3.on true
+
+register TIMER_1_COUNT
+register TIMER_3_COUNT
+
+assign SKILL_1.row 1
+assign SKILL_1.col 7
+
+assign SKILL_2.row 2
+assign SKILL_2.col 6
+
+assign SKILL_3.row 2
+assign SKILL_3.col 7
+
+assign SKILL_4.row 2
+assign SKILL_4.col 1
+
+assign TURN_AROUND_PERCENTAGE 0
+
+assign JUMP_STYLE 0
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+register SOAR_DELAY
+assign SOAR_DELAY 900
+register FALL_DELAY
+assign FALL_DELAY 1200
+
+
+alias [PLAY_MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_LOWER_FORK_CAVERN"
+import bot_map.txt [PLAY_MAP]
+
+break
+
+
+##################################################
+> TIMER_1
+
+delay for 500
+
+key 0 for 500
+
+key 6 for 500
+delay for 700
+
+key 7 for 500
+delay for 700
+
+key 8 for 500
+delay for 700
+
+key 9 for 500
+
+break
+
+##################################################
+> TIMER_2
+
+key = for 500
+
+break
+
+##################################################
+> TIMER_3
+
+key w for 500
+delay for 700
+
+break
+
+##################################################
+> ATTACK
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 100
+	otherwise 
+		key left for 100
+	end
+with
+	key x for 100
+	key x for 100
+end
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 700
+	otherwise 
+		key left for 700
+	end
+with
+	#delay for 50
+	#key d for 50
+	key d for 100
+	delay for 600
+end
+
+break
+
+
+##################################################
+> SOAR
+
+delay for 100
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+with
+	key x for 200
+	key up for 50
+	key up for 50				
+end
+when STATUS_MOVING_RIGHT is true
+	key right for SOAR_DELAY
+otherwise 
+	key left for SOAR_DELAY
+end
+
+break
+
+
+##################################################
+> FALL
+
+sync
+	key down for FALL_DELAY
+with
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+	key x for 100
+	delay for 100
+	key d for 100
+end
+
+break
+
+
+##################################################
+> SKILL_1
+
+delay for 1000
+
+key 3 for 500
+delay for 700
+
+key 4 for 500
+delay for 1000
+
+key 5 for 500
+delay for 700
+
+break
+
+
+##################################################
+> SKILL_2
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+with
+	key x for 100
+	key x for 100
+end
+sync	
+	when STATUS_MOVING_RIGHT is true
+		key right for 800
+	otherwise 
+		key left for 800
+	end
+with
+	delay for 100
+	key s for 100
+	delay for 600
+end
+
+break
+
+
+##################################################
+> SKILL_3
+
+key g for 500
+delay for 500
+
+break
+
+##################################################
+> SKILL_4
+
+key q for 500
+delay for 500
+
+break
+
+##################################################
+> SKILL_5
+
+break
+
+
+##################################################
+> SPECIAL_CHECK
+
+read _READ for "화살을" of 255 170 170 over 0 705 560 720
+when _READ.x is greater than 0
+	when TIMER_1_COUNT is less than 0
+		assign TIMER_1.on true
+		assign TIMER_1_COUNT 600
+	end
+end
+assign TIMER_1_COUNT computing TIMER_1_COUNT sub 1
+
+read _READ for "지속시간이" of 255 170 170 over 0 705 560 720
+when _READ.x is greater than 0
+	when TIMER_3_COUNT is less than 0
+		assign TIMER_3.on true
+		assign TIMER_3_COUNT 200
+	end
+end
+read _READ for "프리져가" of 255 170 170 over 0 705 560 720
+when _READ.x is greater than 0
+	when TIMER_3_COUNT is less than 0
+		assign TIMER_3.on true
+		assign TIMER_3_COUNT 600
+	end
+end
+assign TIMER_3_COUNT computing TIMER_3_COUNT sub 1
+
+
+break
+
+##################################################
+> SPECIAL_ACTION
+
+break
+
