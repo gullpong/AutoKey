@@ -32,6 +32,8 @@ assign LAYOUT.tf 700
 assign LAYOUT.bc 0
 
 assign POTION_HUD_TYPE 1
+assign POTION_HP_THOLD 40
+assign POTION_MP_THOLD 10
 
 assign TURN_AROUND_PERCENTAGE 10
 
@@ -43,8 +45,8 @@ assign JUMP_DISABLE_COUNT 2
 # Let's motor.
 assign MONITOR_DELAY 100
 
-alias [BOT_SCRIPT] among "bot_union.txt" "bot_gyom.txt" "bot_amber.txt"
-import [BOT_SCRIPT] SETUP
+alias [PLAYER] among "bot_union.txt" "bot_gyom.txt" "bot_amber.txt"
+import [PLAYER] SETUP
 
 
 ################################################################
@@ -178,7 +180,7 @@ sync
 			end
 		end
 		
-		import [BOT_SCRIPT] SPECIAL_CHECK
+		import [PLAYER] SPECIAL_CHECK
 		
 		delay for MONITOR_DELAY
 	end
@@ -191,17 +193,17 @@ with
 		# Perform timer action
 		# =========================================================
 		when TIMER_1.on is true
-			import [BOT_SCRIPT] TIMER_1
+			import [PLAYER] TIMER_1
 			assign TIMER_1.on false
 		end
 
 		when TIMER_2.on is true
-			import [BOT_SCRIPT] TIMER_2
+			import [PLAYER] TIMER_2
 			assign TIMER_2.on false
 		end
 
 		when TIMER_3.on is true
-			import [BOT_SCRIPT] TIMER_3
+			import [PLAYER] TIMER_3
 			assign TIMER_3.on false
 		end
 		
@@ -209,27 +211,27 @@ with
 		# Use active skill
 		# =========================================================
 		when SKILL_1.on is true
-			import [BOT_SCRIPT] SKILL_1
+			import [PLAYER] SKILL_1
 			assign SKILL_1.on false
 		end
 
 		when SKILL_2.on is true
-			import [BOT_SCRIPT] SKILL_2
+			import [PLAYER] SKILL_2
 			assign SKILL_2.on false
 		end
 
 		when SKILL_3.on is true
-			import [BOT_SCRIPT] SKILL_3
+			import [PLAYER] SKILL_3
 			assign SKILL_3.on false
 		end
 
 		when SKILL_4.on is true
-			import [BOT_SCRIPT] SKILL_4
+			import [PLAYER] SKILL_4
 			assign SKILL_4.on false
 		end
 
 		when SKILL_5.on is true
-			import [BOT_SCRIPT] SKILL_5
+			import [PLAYER] SKILL_5
 			assign SKILL_5.on false
 		end
 
@@ -281,18 +283,18 @@ with
 		end		
 		assign STATUS_JUMP_SKIPPED computing STATUS_JUMP_SKIPPED add 1
 	
-		import [BOT_SCRIPT] SPECIAL_ACTION
+		import [PLAYER] SPECIAL_ACTION
 		
 		when STATUS_ACTION is equal to 1
-			import [BOT_SCRIPT] ATTACK
+			import [PLAYER] ATTACK
 		end
 
 		when STATUS_ACTION is equal to 2
-			import [BOT_SCRIPT] SOAR
+			import [PLAYER] SOAR
 		end
 
 		when STATUS_ACTION is equal to 3
-			import [BOT_SCRIPT] FALL
+			import [PLAYER] FALL
 		end
 		
 	end

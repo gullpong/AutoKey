@@ -26,8 +26,8 @@ assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 1
 
 
-alias [PLAY_MAP] among "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
-import bot_map.txt [PLAY_MAP]
+alias [MAP] among "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
+import bot_maps.txt [MAP]
 
 break
 

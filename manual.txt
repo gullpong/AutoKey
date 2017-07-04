@@ -1,0 +1,258 @@
+import maple_story.txt INITIALIZE
+
+register TIMER_1 with dur on
+register TIMER_2 with dur on
+register TIMER_3 with dur on
+
+register SKILL_1 with row col thold on
+register SKILL_2 with row col thold on
+register SKILL_3 with row col thold on
+register SKILL_4 with row col thold on
+register SKILL_5 with row col thold on
+
+################################################################
+
+assign POTION_HUD_TYPE 1
+assign POTION_HP_THOLD 40
+assign POTION_MP_THOLD 10
+
+# Let's motor.
+assign MONITOR_DELAY 100
+
+alias [PLAYER] among "manual_gongdol.txt"
+import [PLAYER] SETUP
+
+
+################################################################
+
+register _BLOB with x y width height num lt tp rt bm
+register _SPR with x y
+register _READ with x y
+register _IN with id stat x y
+register _RANDOM
+
+sync
+	import maple_story.txt LOCATE_SKILLBAR
+	when SKILL_BAR is less than 0
+		finish sync
+	end
+
+	iterate forever
+	
+		snapshot
+		
+		# =========================================================
+		# Check skill activeness
+		# =========================================================
+		when SKILL_1.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_1.row sub 1
+			assign SKILL_INDEX.col computing SKILL_1.col sub 1
+			import maple_story.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_1.thold is greater than 5
+					assign SKILL_1.on true
+					assign SKILL_1.thold 0
+				end
+				assign SKILL_1.thold computing SKILL_1.thold add 1
+			otherwise
+				assign SKILL_1.thold 0
+			end
+		end
+		
+		when SKILL_2.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_2.row sub 1
+			assign SKILL_INDEX.col computing SKILL_2.col sub 1
+			import maple_story.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_2.thold is greater than 5
+					assign SKILL_2.on true
+					assign SKILL_2.thold 0
+				end
+				assign SKILL_2.thold computing SKILL_2.thold add 1
+			otherwise
+				assign SKILL_2.thold 0
+			end
+		end
+
+		when SKILL_3.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_3.row sub 1
+			assign SKILL_INDEX.col computing SKILL_3.col sub 1
+			import maple_story.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_3.thold is greater than 5
+					assign SKILL_3.on true
+					assign SKILL_3.thold 0
+				end
+				assign SKILL_3.thold computing SKILL_3.thold add 1
+			otherwise
+				assign SKILL_3.thold 0
+			end
+		end
+
+		when SKILL_4.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_4.row sub 1
+			assign SKILL_INDEX.col computing SKILL_4.col sub 1
+			import maple_story.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_4.thold is greater than 5
+					assign SKILL_4.on true
+					assign SKILL_4.thold 0
+				end
+				assign SKILL_4.thold computing SKILL_4.thold add 1
+			otherwise
+				assign SKILL_4.thold 0
+			end
+		end
+
+		when SKILL_5.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_5.row sub 1
+			assign SKILL_INDEX.col computing SKILL_5.col sub 1
+			import maple_story.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_5.thold is greater than 5
+					assign SKILL_5.on true
+					assign SKILL_5.thold 0
+				end
+				assign SKILL_5.thold computing SKILL_5.thold add 1
+			otherwise
+				assign SKILL_5.thold 0
+			end
+		end
+		
+		import [PLAYER] SPECIAL_CHECK
+		
+		delay for MONITOR_DELAY
+	end
+	
+with
+
+	iterate forever
+		hook _IN with key ctrl down
+		sync
+			hook _IN with key ctrl up
+			finish sync
+		with
+		
+			iterate forever
+				# =========================================================
+				# Perform timer action
+				# =========================================================
+				when TIMER_1.on is true
+					import [PLAYER] TIMER_1
+					assign TIMER_1.on false
+				end
+
+				when TIMER_2.on is true
+					import [PLAYER] TIMER_2
+					assign TIMER_2.on false
+				end
+
+				when TIMER_3.on is true
+					import [PLAYER] TIMER_3
+					assign TIMER_3.on false
+				end
+				
+				# =========================================================
+				# Use active skill
+				# =========================================================
+				when SKILL_1.on is true
+					import [PLAYER] SKILL_1
+					assign SKILL_1.on false
+				end
+
+				when SKILL_2.on is true
+					import [PLAYER] SKILL_2
+					assign SKILL_2.on false
+				end
+
+				when SKILL_3.on is true
+					import [PLAYER] SKILL_3
+					assign SKILL_3.on false
+				end
+
+				when SKILL_4.on is true
+					import [PLAYER] SKILL_4
+					assign SKILL_4.on false
+				end
+
+				when SKILL_5.on is true
+					import [PLAYER] SKILL_5
+					assign SKILL_5.on false
+				end
+			
+				import [PLAYER] ACTION_ON
+			end
+
+		end
+		
+		import [PLAYER] ACTION_OFF
+		
+	end
+
+with
+	# =========================================================
+	# Elapse timer
+	# =========================================================	
+	sub
+		register _DURATION
+		when TIMER_1.dur is greater than 0
+			assign _DURATION computing TIMER_1.dur mul 1000
+			iterate forever	
+				delay for _DURATION
+				assign TIMER_1.on true
+			end
+		end
+	end
+	
+with
+	sub
+		register _DURATION
+		when TIMER_2.dur is greater than 0
+			assign _DURATION computing TIMER_2.dur mul 1000
+			iterate forever	
+				delay for _DURATION
+				assign TIMER_2.on true
+			end
+		end
+	end
+
+with
+	sub
+		register _DURATION
+		when TIMER_3.dur is greater than 0
+			assign _DURATION computing TIMER_3.dur mul 1000
+			iterate forever	
+				delay for _DURATION
+				assign TIMER_3.on true
+			end
+		end
+	end
+	# =========================================================
+
+with
+	# =========================================================
+	# Drink potion
+	# =========================================================	
+	iterate forever
+		import maple_story.txt CHECK_POTION
+		when POTION_TEST is true
+			key f1 for 100
+			delay for 700
+		otherwise
+			delay for 500
+		end
+	end
+
+with
+	# =========================================================
+	# Click buttons
+	# =========================================================	
+	iterate forever
+		#import maple_story.txt CLICK_OKAY
+		import maple_story.txt CLICK_REWARD
+		delay for 1000
+	end
+
+end
+
+sound alert

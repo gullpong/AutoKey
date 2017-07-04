@@ -1,0 +1,132 @@
+##################################################
+> SETUP
+
+assign POTION_HUD_TYPE 1
+assign POTION_HP_THOLD 40
+assign POTION_MP_THOLD 10
+
+assign TIMER_1.dur 180
+assign TIMER_1.on true
+#assign TIMER_2.dur 300
+
+assign SKILL_1.row 2
+assign SKILL_1.col 5
+
+assign SKILL_2.row 2
+assign SKILL_2.col 6
+
+assign SKILL_3.row 1
+assign SKILL_3.col 7
+
+assign SKILL_4.row 2
+assign SKILL_4.col 7
+
+break
+
+
+##################################################
+> TIMER_1
+
+delay for 500
+
+key 0 for 500
+
+key 7 for 500
+delay for 700
+
+key 9 for 500
+
+break
+
+##################################################
+> TIMER_2
+
+key = for 500
+
+break
+
+##################################################
+> TIMER_3
+
+break
+
+##################################################
+> SKILL_1
+
+key a up
+key r for 500
+delay for 700
+
+break
+
+##################################################
+> SKILL_2
+
+key a up
+key g for 500
+delay for 300
+
+break
+
+##################################################
+> SKILL_3
+
+key a up
+key 8 for 500
+delay for 1000
+
+break
+
+##################################################
+> SKILL_4
+
+key a up
+sync
+	iterate 10 times
+		key h for 100
+		delay for 100
+	end
+with
+	iterate 10 times
+		key z for 100
+		delay for 100				
+	end
+end
+
+break
+
+##################################################
+> SKILL_5
+
+break
+
+
+##################################################
+> SPECIAL_CHECK
+
+break
+
+##################################################
+> ACTION_ON
+
+sync
+	iterate 10 times
+		key a down
+		delay for 50
+	end				
+with				
+	iterate 5 times
+		key d
+		delay for 100
+	end						
+end				
+
+break
+
+
+##################################################
+> ACTION_OFF
+
+key a up
+
+break
