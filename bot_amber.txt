@@ -27,7 +27,7 @@ assign JUMP_DISABLE_COUNT 1
 
 
 alias [MAP] among "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
-import bot_maps.txt [MAP]
+import self [MAP]
 
 break
 
@@ -172,5 +172,17 @@ break
 
 ##################################################
 > SPECIAL_ACTION
+
+break
+
+
+##################################################
+##################################################
+##################################################
+> PERION_ROUGH_WILDERNESS
+> HAVEN_DUMPYARD_3
+> HAVEN_DUMPYARD_4
+
+import bot_maps.txt [MAP]
 
 break

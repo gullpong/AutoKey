@@ -7,16 +7,16 @@ assign POTION_MP_THOLD 30
 
 assign TIMER_1.dur 240
 assign TIMER_1.on true
-#assign TIMER_2.dur 300
+assign TIMER_2.dur 300
 
 assign SKILL_1.row 2
-assign SKILL_1.col 3
+assign SKILL_1.col 4
 
 assign SKILL_2.row 2
-assign SKILL_2.col 6
+assign SKILL_2.col 1
 
-assign SKILL_3.row 2
-assign SKILL_3.col 10
+assign SKILL_3.row 1
+assign SKILL_3.col 5
 
 assign TURN_AROUND_PERCENTAGE 0
 
@@ -25,14 +25,12 @@ assign JUMP_UP_PERCENTAGE 80
 assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 1
 
-register SOAR_DELAY
-assign SOAR_DELAY 900
 register FALL_DELAY
 assign FALL_DELAY 1200
 
 
 alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN"
-import bot_maps.txt [MAP]
+import self [MAP]
 
 break
 
@@ -43,9 +41,6 @@ break
 delay for 1000
 
 key w for 500
-delay for 700
-
-key 6 for 500
 delay for 700
 
 key 7 for 500
@@ -78,17 +73,15 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 900
+		key right for 1200
 	otherwise 
-		key left for 900
+		key left for 1200
 	end
 with
-	key x for 100
-	delay for 200	
+	delay for 300
 	key v for 300
 	key s for 300
 end
-delay for 200
 
 break
 
@@ -138,15 +131,15 @@ break
 ##################################################
 > SKILL_1
 
-key e for 500
-delay for 500
+key g for 500
+delay for 1000
 
 break
 
 ##################################################
 > SKILL_2
 
-key g for 500
+key 0 for 500
 delay for 1000
 
 break
@@ -154,8 +147,16 @@ break
 ##################################################
 > SKILL_3
 
-key 0 for 500
 delay for 1000
+
+key 1 for 500
+delay for 700
+
+key 3 for 500
+delay for 1000
+
+key 4 for 500
+delay for 700
 
 break
 
@@ -179,3 +180,25 @@ break
 > SPECIAL_ACTION
 
 break
+
+
+
+##################################################
+##################################################
+##################################################
+> LACHELN_CHICKEN_RUN_2
+> ARCANA_FORK_CAVERN
+
+import bot_maps.txt [MAP]
+
+break
+
+##################################################
+> ARCANA_LOWER_CAVERN
+
+import bot_maps.txt [MAP]
+assign JUMP_DISABLE_COUNT 2
+assign FALL_DELAY 1000
+
+break
+

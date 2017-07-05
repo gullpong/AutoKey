@@ -40,7 +40,7 @@ assign FALL_DELAY 1200
 
 
 alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_LOWER_FORK_CAVERN"
-import bot_maps.txt [MAP]
+import self [MAP]
 
 break
 
@@ -252,6 +252,44 @@ break
 
 ##################################################
 > SPECIAL_ACTION
+
+break
+
+
+##################################################
+##################################################
+##################################################
+> LACHELN_CHICKEN_RUN_2
+
+import bot_maps.txt [MAP]
+
+break
+
+
+##################################################
+> ARCANA_LOWER_CAVERN
+
+import bot_maps.txt [MAP]
+assign SOAR_DELAY 800
+assign FALL_DELAY 1000
+
+break
+
+
+##################################################
+> ARCANA_FORK_CAVERN
+
+import bot_maps.txt [MAP]
+assign SOAR_DELAY 1100
+
+break
+
+
+##################################################
+> ARCANA_LOWER_FORK_CAVERN
+
+import bot_maps.txt [MAP]
+assign SOAR_DELAY 1000
 
 break
 

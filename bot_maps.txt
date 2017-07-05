@@ -259,9 +259,6 @@ assign JUMP_UP_PERCENTAGE 0
 assign JUMP_DN_PERCENTAGE 90
 assign JUMP_DISABLE_COUNT 1
 
-assign SOAR_DELAY 800
-assign FALL_DELAY 1000
-
 break
 
 
@@ -282,8 +279,6 @@ assign JUMP_UP_PERCENTAGE 40
 assign JUMP_DN_PERCENTAGE 25
 assign JUMP_DISABLE_COUNT 2
 
-assign SOAR_DELAY 1100
-
 break
 
 
@@ -302,8 +297,6 @@ assign LAYOUT.bc 180
 
 assign JUMP_STYLE 1
 assign JUMP_DISABLE_COUNT 1
-
-assign SOAR_DELAY 1000
 
 break
 
