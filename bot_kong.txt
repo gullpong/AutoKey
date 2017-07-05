@@ -73,9 +73,9 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 1200
+		key right for 1000
 	otherwise 
-		key left for 1200
+		key left for 1000
 	end
 with
 	delay for 300
@@ -91,21 +91,19 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 300
+		key right for 1100
 	otherwise 
-		key left for 300
+		key left for 1100
 	end
 with
 	key x for 100
 	key v for 300
-	#delay for 250
 	sync
 		key up for 300
 	with
 		key s for 300
 	end
 end
-delay for 200
 
 break
 
@@ -117,9 +115,9 @@ sync
 	key down for FALL_DELAY
 with
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
+		key right for 400
 	otherwise 
-		key left for 200
+		key left for 400
 	end
 	key x for 100
 	key v for 300
