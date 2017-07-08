@@ -10,6 +10,7 @@ register SKILL_3 with row col thold on
 register SKILL_4 with row col thold on
 register SKILL_5 with row col thold on
 
+
 ################################################################
 
 assign POTION_HUD_TYPE 1
@@ -127,9 +128,9 @@ sync
 with
 
 	iterate forever
-		hook _IN with key ctrl down
+		hook _IN with key f down
 		sync
-			hook _IN with key ctrl up
+			hook _IN with key f up
 			finish sync
 		with
 		

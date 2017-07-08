@@ -7,16 +7,16 @@ assign POTION_MP_THOLD 10
 
 assign TIMER_1.dur 180
 assign TIMER_1.on true
-#assign TIMER_2.dur 300
+assign TIMER_2.dur 300
 
 assign SKILL_1.row 2
-assign SKILL_1.col 5
+assign SKILL_1.col 4
 
-assign SKILL_2.row 2
-assign SKILL_2.col 6
+#assign SKILL_2.row 2
+#assign SKILL_2.col 6
 
 assign SKILL_3.row 1
-assign SKILL_3.col 7
+assign SKILL_3.col 8
 
 assign SKILL_4.row 2
 assign SKILL_4.col 7
@@ -27,9 +27,7 @@ break
 ##################################################
 > TIMER_1
 
-delay for 500
-
-key 0 for 500
+#key 0 for 500
 
 key 7 for 500
 delay for 700
