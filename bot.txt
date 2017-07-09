@@ -368,8 +368,8 @@ with
 	# Check screen
 	# =========================================================	
 	iterate forever
-		import maple_story.txt CHECK_FADE
-		when FADE_TEST is true
+		import maple_story.txt CHECK_MAPOUT
+		when MAPOUT_TEST is true
 			finish sync
 		end
 		delay for 250
@@ -407,6 +407,16 @@ with
 		delay for 1000
 	end
 
+with
+	iterate forever
+		import maple_story.txt CHECK_ELITEBOSS
+		when ELITEBOSS_TEST is true
+			sound dingdong
+			delay for 1000
+		end
+		delay for 500
+	end
+	
 with
 	register _CHECK_COUNT
 	iterate forever

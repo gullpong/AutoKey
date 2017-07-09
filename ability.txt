@@ -1,36 +1,40 @@
+exclusive
 
-import maple_story.txt INITIALIZE
+gawi ability.gwi
 
+snapshot
+snapshot
 
 iterate forever
 	
 	snapshot
 
 	register _SPR with x y
-	sprite _SPR for 17 over 0 0 1366 768	# unique
-	#sprite _SPR for 18 over 0 0 1366 768	# legendary
+	sprite _SPR for 2 over 0 0 1366 768		# unique
+	#sprite _SPR for 3 over 0 0 1366 768	# legendary
 	when _SPR.x is greater than 0
 		finish iterate
 	end
 	
 	iterate 10 times
 		snapshot
-		assign BUTTON_ID 16
+		assign BUTTON_ID 1
 		import maple_story.txt CLICK_BUTTON
 		when BUTTON_PRESSED is true
 			finish iterate
 		end
-		delay for MONITOR_DELAY
+		delay for 200
 	end
 
 	iterate 2 times
 		iterate 10 times
-			snapshot
-			import maple_story.txt CLICK_OKAY
+			snapshot		
+			assign BUTTON_ID 0
+			import maple_story.txt CLICK_BUTTON
 			when BUTTON_PRESSED is true
 				finish iterate
 			end
-			delay for MONITOR_DELAY
+			delay for 200
 		end
 	end
 	

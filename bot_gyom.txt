@@ -7,7 +7,7 @@ assign POTION_MP_THOLD 0
 
 assign TIMER_1.dur 420
 assign TIMER_1.on true
-#assign TIMER_2.dur 300
+assign TIMER_2.dur 300
 assign TIMER_3.dur 220
 assign TIMER_3.on true
 

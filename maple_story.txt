@@ -20,10 +20,11 @@ register LAYOUT with lt rt tf bc
 register PLAYER_POS with x y
 register RPORTAL_POS with x y
 
-register FADE_TEST
+register MAPOUT_TEST
 register TRUTH_TEST
-register CURSE_TEST
 register STONE_TEST
+register CURSE_TEST
+register ELITEBOSS_TEST
 register MVPEXP_TEST
 
 register POTION_TEST
@@ -37,11 +38,12 @@ register SKILL_INDEX with row col
 register SKILL_BAR
 assign SKILL_BAR 1019
 
+register BUTTON_OFFSET
+assign BUTTON_OFFSET 3			# button ID starting index
 register BUTTON_ID
 register BUTTON_PRESSED
 register BUTTON_DELAY
 assign BUTTON_DELAY computing MONITOR_DELAY div 2
-
 
 break
 
@@ -171,15 +173,15 @@ break
 
 
 #########################################################
-> CHECK_FADE
+> CHECK_MAPOUT
 
-assign FADE_TEST false
+assign MAPOUT_TEST false
 
 sub
 	register _BLOB with x y width height num lt tp rt bm
-	blob _BLOB darker 20 20 20 by 0 over 400 0 900 100
-	when _BLOB.num is greater than 45000
-		assign FADE_TEST true
+	blob _BLOB lighter 50 50 50 by 0 over 0 0 180 60
+	when _BLOB.num is less than 1
+		assign MAPOUT_TEST true
 	end
 end
 
@@ -203,6 +205,22 @@ break
 
 
 #########################################################
+> CHECK_STONE
+
+assign STONE_TEST false
+
+sub
+	register _SPR with x y	
+	sprite _SPR for 1 by 20 over 0 0 1360 600
+	when _SPR.x is greater than 0
+		assign STONE_TEST true
+	end
+end
+
+break
+
+
+#########################################################
 > CHECK_CURSE
 
 assign CURSE_TEST false
@@ -212,6 +230,22 @@ sub
 	blob _BLOB for 187 119 255 over 524 208 931 277
 	when _BLOB.num is greater than 500
 		assign CURSE_TEST true
+	end
+end
+
+break
+
+
+#########################################################
+> CHECK_ELITEBOSS
+
+assign ELITEBOSS_TEST false
+
+sub
+	register _SPR with x y	
+	sprite _SPR for 2 by 20 over 39 437 59 456
+	when _SPR.x is greater than 0
+		assign ELITEBOSS_TEST true
 	end
 end
 
@@ -275,22 +309,6 @@ sub
 		end
 	end
 
-end
-
-break
-
-
-#########################################################
-> CHECK_STONE
-
-assign STONE_TEST false
-
-sub
-	register _SPR with x y	
-	sprite _SPR for 1 by 20 over 0 0 1360 600
-	when _SPR.x is greater than 0
-		assign STONE_TEST true
-	end
 end
 
 break
@@ -403,24 +421,24 @@ break
 #########################################################
 > CLICK_OKAY
 
-assign BUTTON_ID 2
+assign BUTTON_ID computing BUTTON_OFFSET add 0
 import maple_story.txt CLICK_BUTTON
 break
 
 #########################################################
 > CLICK_DONE
 
-assign BUTTON_ID 3
+assign BUTTON_ID computing BUTTON_OFFSET add 1
 import maple_story.txt CLICK_BUTTON
 break
 
 #########################################################
 > CLICK_REWARD
 
-assign BUTTON_ID 4
+assign BUTTON_ID computing BUTTON_OFFSET add 2
 import maple_story.txt CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 5
+	assign BUTTON_ID computing BUTTON_OFFSET add 3
 	import maple_story.txt CLICK_BUTTON
 end
 break
@@ -428,10 +446,10 @@ break
 #########################################################
 > CLICK_NEXT
 
-assign BUTTON_ID 6
+assign BUTTON_ID computing BUTTON_OFFSET add 4
 import maple_story.txt CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 7
+	assign BUTTON_ID computing BUTTON_OFFSET add 5
 	import maple_story.txt CLICK_BUTTON
 end
 break
@@ -439,10 +457,10 @@ break
 #########################################################
 > CLIKC_YES
 
-assign BUTTON_ID 8
+assign BUTTON_ID computing BUTTON_OFFSET add 6
 import maple_story.txt CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 9
+	assign BUTTON_ID computing BUTTON_OFFSET add 7
 	import maple_story.txt CLICK_BUTTON
 end
 break
@@ -450,10 +468,10 @@ break
 #########################################################
 > CLICK_NO
 
-assign BUTTON_ID 10
+assign BUTTON_ID computing BUTTON_OFFSET add 8
 import maple_story.txt CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 11
+	assign BUTTON_ID computing BUTTON_OFFSET add 9
 	import maple_story.txt CLICK_BUTTON
 end
 break
@@ -461,10 +479,10 @@ break
 #########################################################
 > CLICK_ACCEPT
 
-assign BUTTON_ID 12
+assign BUTTON_ID computing BUTTON_OFFSET add 10
 import maple_story.txt CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 13
+	assign BUTTON_ID computing BUTTON_OFFSET add 11
 	import maple_story.txt CLICK_BUTTON
 end
 break
@@ -472,10 +490,10 @@ break
 #########################################################
 > CLICK_DECLINE
 
-assign BUTTON_ID 14
+assign BUTTON_ID computing BUTTON_OFFSET add 12
 import maple_story.txt CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 15
+	assign BUTTON_ID computing BUTTON_OFFSET add 13
 	import maple_story.txt CLICK_BUTTON
 end
 break
