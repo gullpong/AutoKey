@@ -28,6 +28,9 @@ assign JUMP_DISABLE_COUNT 1
 register FALL_DELAY
 assign FALL_DELAY 1200
 
+register FLAMEWOLF_CHECK
+assign FLAMEWOLF_CHECK false
+
 
 alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN"
 import self [MAP]
@@ -172,10 +175,35 @@ break
 ##################################################
 > SPECIAL_CHECK
 
+sprite _SPR for 3 over 200 0 1200 500
+when _SPR.x is greater than 0
+	assign FLAMEWOLF_CHECK true
+end
+
 break
 
 ##################################################
 > SPECIAL_ACTION
+
+when FLAMEWOLF_CHECK is true
+	iterate 10 times
+		sprite _SPR for 3 over 200 0 1200 500
+		when _SPR.x is greater than 0
+			finish iterate
+		end
+		delay for 100
+	end
+	when _SPR.x is greater than 0
+		assign _SPR.x computing _SPR.x sub 16
+		button left click at _SPR.x _SPR.y
+		delay for 500
+		iterate 10 times
+			key space for 100
+			delay for 300
+		end
+	end
+	assign FLAMEWOLF_CHECK false
+end
 
 break
 
