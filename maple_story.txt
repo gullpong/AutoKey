@@ -39,7 +39,7 @@ register SKILL_BAR
 assign SKILL_BAR 1019
 
 register BUTTON_OFFSET
-assign BUTTON_OFFSET 3			# button ID starting index
+assign BUTTON_OFFSET 4			# button ID starting index
 register BUTTON_ID
 register BUTTON_PRESSED
 register BUTTON_DELAY
