@@ -18,10 +18,13 @@ assign SKILL_2.row 2
 assign SKILL_2.col 8
 
 assign SKILL_3.row 2
-assign SKILL_3.col 9
+assign SKILL_3.col 3
 
 assign SKILL_4.row 2
 assign SKILL_4.col 4
+
+assign SKILL_5.row 2
+assign SKILL_5.col 9
 
 assign TURN_AROUND_PERCENTAGE 0
 
@@ -42,10 +45,10 @@ break
 
 delay for 1000
 
-key 7 for 500
+key 7 for 50
 delay for 700
 
-key 9 for 50
+key 9
 
 break
 
@@ -98,9 +101,12 @@ with
 	key x for 100
 	delay for 200
 	key x for 100
+	delay for 200
+	key x for 100
 end
-key up for 600
-key g for 100
+#key up for 600
+key a for 100
+delay for 600
 
 break
 
@@ -180,7 +186,7 @@ with
 	key x for 100
 	key x for 100
 	key a for 100
-	key g for 100
+	key e for 100
 	delay for 700
 end
 
@@ -189,25 +195,16 @@ break
 ##################################################
 > SKILL_4
 
-sync
-	when STATUS_MOVING_RIGHT is true
-		key right for 300
-	otherwise 
-		key left for 300
-	end
-with
-	key x for 100
-	key x for 100
-	key x for 100
-end
-key a for 100
-key r for 100
+key r for 50
 delay for 700
 
 break
 
 ##################################################
 > SKILL_5
+
+key g for 50
+delay for 700
 
 break
 
