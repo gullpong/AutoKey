@@ -30,6 +30,8 @@ register MVPEXP_TEST
 register POTION_TEST
 register POTION_HP_THOLD
 register POTION_MP_THOLD
+register POTION_BAR
+assign POTION_BAR 613
 register POTION_HUD_TYPE		# 0: none, 1: HP/MP, 2: HP only
 assign POTION_HUD_TYPE 1
 
@@ -39,7 +41,7 @@ register SKILL_BAR
 assign SKILL_BAR 1019
 
 register BUTTON_OFFSET
-assign BUTTON_OFFSET 4			# button ID starting index
+assign BUTTON_OFFSET 5			# button ID starting index
 register BUTTON_ID
 register BUTTON_PRESSED
 register BUTTON_DELAY
@@ -315,6 +317,31 @@ break
 
 
 #########################################################
+> LOCATE_POTIONBAR
+
+sub
+	register _LOCATED
+	assign _LOCATED false
+	iterate 10 times
+		snapshot
+		register _SPR with x y	
+		sprite _SPR for 4 by 20 over 0 686 1360 768
+		when _SPR.x is greater than 0
+			assign POTION_BAR computing _SPR.x add 1		
+			assign _LOCATED true
+			finish iterate
+		end
+		delay for 100
+	end
+	when _LOCATED is false
+		assign POTION_BAR computing 0 sub 1
+	end
+end
+
+break
+
+
+#########################################################
 > CHECK_POTION
 
 assign POTION_TEST false
@@ -322,17 +349,19 @@ assign POTION_TEST false
 sub
 	register _BLOB with x y width height num lt tp rt bm
 	register _POR
+	register _END
+	assign _END computing POTION_BAR add 164
 
 	when POTION_HUD_TYPE is equal to 1	
-		assign _POR computing POTION_HP_THOLD mul 165		
+		assign _POR computing POTION_HP_THOLD mul 164
 		assign _POR computing _POR div 100
-		blob _BLOB lighter 240 60 150 by 0 over 613 717 778 717
+		blob _BLOB lighter 240 60 150 by 0 over POTION_BAR 717 _END 717
 		when _BLOB.width is less than _POR
 			assign POTION_TEST true
 		otherwise		
-			assign _POR computing POTION_MP_THOLD mul 165
+			assign _POR computing POTION_MP_THOLD mul 164
 			assign _POR computing _POR div 100
-			blob _BLOB lighter 0 210 230 by 0 over 613 733 778 733
+			blob _BLOB lighter 0 210 230 by 0 over POTION_BAR 733 _END 733
 			when _BLOB.num is less than _POR
 				assign POTION_TEST true
 			end		
@@ -340,9 +369,9 @@ sub
 	end
 	
 	when POTION_HUD_TYPE is equal to 2
-		assign _POR computing POTION_HP_THOLD mul 165
+		assign _POR computing POTION_HP_THOLD mul 164
 		assign _POR computing _POR div 100
-		blob _BLOB lighter 240 60 150 by 0 over 613 733 778 733
+		blob _BLOB lighter 240 60 150 by 0 over POTION_BAR 733 _END 733
 		when _BLOB.width is less than _POR
 			assign POTION_TEST true
 		end
@@ -373,6 +402,8 @@ sub
 		assign SKILL_BAR computing 0 sub 1
 	end
 end
+
+break
 
 
 #########################################################

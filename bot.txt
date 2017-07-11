@@ -56,15 +56,23 @@ register _SPR with x y
 register _READ with x y
 register _IN with id stat x y
 register _RANDOM
+register _PREV with x y
+register _STP with h v
 
 register STATUS_MOVING_RIGHT
 register STATUS_JUMPING_UP
 register STATUS_TURNED_AROUND
 register STATUS_JUMP_SKIPPED
+register STATUS_HORZ_STOPPED
+register STATUS_VERT_STOPPED
 register STATUS_ACTION
 
 
 sync
+	import maple_story.txt LOCATE_POTIONBAR
+	when POTION_BAR is less than 0
+		finish sync
+	end
 	import maple_story.txt LOCATE_SKILLBAR
 	when SKILL_BAR is less than 0
 		finish sync
@@ -157,6 +165,12 @@ sync
 		# =========================================================
 		import maple_story.txt LOCATE_PLAYER
 		when PLAYER_POS.x is not below 0
+			when _PREV.x is equal to PLAYER_POS.x
+				assign STATUS_HORZ_STOPPED true
+			otherwise
+				assign STATUS_HORZ_STOPPED false
+			end			
+			assign _PREV.x PLAYER_POS.x
 			when PLAYER_POS.x is less than LAYOUT.lt
 				when STATUS_MOVING_RIGHT is false
 					assign STATUS_TURNED_AROUND true
@@ -172,6 +186,12 @@ sync
 		end
 		
 		when PLAYER_POS.y is not below 0
+			when _PREV.y is equal to PLAYER_POS.y
+				assign STATUS_VERT_STOPPED true
+			otherwise
+				assign STATUS_VERT_STOPPED false
+			end
+			assign _PREV.y PLAYER_POS.y
 			when PLAYER_POS.y is less than LAYOUT.tf
 				assign STATUS_JUMPING_UP false
 			end

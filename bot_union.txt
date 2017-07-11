@@ -33,9 +33,12 @@ assign JUMP_UP_PERCENTAGE 0
 assign JUMP_DN_PERCENTAGE 0
 assign JUMP_DISABLE_COUNT 1
 
-
 alias [MAP] among "MANUAL" "PATROL" "TIMETEMPLE_TWO_STORY" "TIMETEMPLE_FOUR_STORY" "DEFHQ_UFO_AISLE" "PERION_ABANDONED_SOUTH" "PERION_LONELY_BOULDER" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
 import bot_maps.txt [MAP]
+
+register CLIMBING
+
+#assign JUMP_UP_PERCENTAGE 0
 
 break
 
@@ -82,6 +85,7 @@ with
 	key x for 100
 	key x for 100
 end
+delay for 200
 key a for 100
 delay for 500
 
@@ -94,19 +98,43 @@ break
 sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 300
-	otherwise 
+	otherwise
 		key left for 300
+	end
+with
+	key x for 100
+	delay for 200
+end
+
+assign CLIMBING 0
+sync
+	key up for 6000
+with
+	iterate forever
+		delay for 100
+		when STATUS_HORZ_STOPPED is true
+			assign CLIMBING computing CLIMBING add 1
+		otherwise
+			assign CLIMBING 0
+		end
 	end
 with
 	key x for 100
 	delay for 200
 	key x for 100
 	delay for 200
-	key x for 100
+	key a for 100
+	delay for 600
+	finish sync
 end
-#key up for 600
-key a for 100
-delay for 600
+when CLIMBING is greater than 2
+	iterate 20 times
+		key up for 200
+		when STATUS_VERT_STOPPED is true
+			finish iterate
+		end
+	end
+end
 
 break
 
@@ -146,7 +174,7 @@ with
 end
 key a for 100
 key d for 100
-delay for 700
+delay for 900
 
 break
 
@@ -187,7 +215,7 @@ with
 	key x for 100
 	key a for 100
 	key e for 100
-	delay for 700
+	delay for 1000
 end
 
 break
@@ -204,7 +232,7 @@ break
 > SKILL_5
 
 key g for 50
-delay for 700
+delay for 1000
 
 break
 
