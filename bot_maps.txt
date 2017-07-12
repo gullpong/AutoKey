@@ -149,7 +149,7 @@ assign MINIMAP.tp 60
 assign MINIMAP.rt 220
 assign MINIMAP.bm 140
 
-assign LAYOUT.lt 50
+assign LAYOUT.lt 45
 assign LAYOUT.rt 205
 assign LAYOUT.tf 95
 assign LAYOUT.bc 95

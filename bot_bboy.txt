@@ -1,0 +1,301 @@
+##################################################
+> SETUP
+
+assign POTION_HUD_TYPE 1
+assign POTION_HP_THOLD 40
+assign POTION_MP_THOLD 10
+
+assign TIMER_1.dur 180
+assign TIMER_1.on true
+assign TIMER_2.dur 300
+assign TIMER_3.dur 150
+assign TIMER_3.on true
+
+assign SKILL_1.row 2
+assign SKILL_1.col 7
+
+assign SKILL_2.row 2
+assign SKILL_2.col 8
+
+assign SKILL_3.row 2
+assign SKILL_3.col 3
+
+assign SKILL_4.row 2
+assign SKILL_4.col 4
+
+assign SKILL_5.row 2
+assign SKILL_5.col 9
+
+assign TURN_AROUND_PERCENTAGE 0
+
+assign JUMP_STYLE 0
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 0
+assign JUMP_DISABLE_COUNT 1
+
+alias [MAP] among "PATROL" "TIMETEMPLE_TWO_STORY" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
+import self [MAP]
+
+register CLIMBING
+
+break
+
+
+##################################################
+> TIMER_1
+
+delay for 1000
+
+key 7 for 50
+delay for 700
+
+key 9
+
+break
+
+
+##################################################
+> TIMER_2
+
+key = for 500
+
+break
+
+##################################################
+> TIMER_3
+
+key b for 500
+delay for 1000
+
+break
+
+##################################################
+> ATTACK
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 300
+	otherwise 
+		key left for 300
+	end
+with
+	key x for 100
+	key x for 100
+	key x for 100
+end
+delay for 200
+key a for 100
+delay for 500
+
+break
+
+
+##################################################
+> SOAR
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 300
+	otherwise
+		key left for 300
+	end
+with
+	key x for 100
+	delay for 200
+end
+
+assign CLIMBING 0
+sync
+	key up for 6000
+with
+	iterate forever
+		delay for 100
+		when STATUS_HORZ_STOPPED is true
+			assign CLIMBING computing CLIMBING add 1
+		otherwise
+			assign CLIMBING 0
+		end
+	end
+with
+	key x for 100
+	delay for 200
+	key x for 100
+	delay for 200
+	key a for 100
+	delay for 600
+	finish sync
+end
+when CLIMBING is greater than 2
+	iterate 20 times
+		key up for 200
+		when STATUS_VERT_STOPPED is true
+			finish iterate
+		end
+	end
+end
+
+break
+
+
+##################################################
+> FALL
+
+sync
+	key down for 1200
+with
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+	key x for 100
+	key a for 100
+end
+#delay for 400
+
+break
+
+
+##################################################
+> SKILL_1
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+with
+	key x for 100
+	key x for 100
+	key x for 100
+end
+key a for 100
+key d for 100
+delay for 900
+
+break
+
+##################################################
+> SKILL_2
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 2000
+	otherwise 
+		key left for 2000
+	end
+with
+	key x for 100
+	key x for 100
+	key x for 100
+	key a for 100
+	iterate 10 times
+		key f for 100
+		delay for 100
+	end	
+end
+
+break
+
+##################################################
+> SKILL_3
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 500
+	otherwise 
+		key left for 500
+	end
+with
+	key x for 100
+	key x for 100
+	key x for 100
+	key a for 100
+	key e for 100
+	delay for 1000
+end
+
+break
+
+##################################################
+> SKILL_4
+
+key r for 50
+delay for 700
+
+break
+
+##################################################
+> SKILL_5
+
+key g for 50
+delay for 1000
+
+break
+
+
+##################################################
+> SPECIAL_CHECK
+
+break
+
+##################################################
+> SPECIAL_ACTION
+
+break
+
+
+##################################################
+##################################################
+##################################################
+> PATROL
+
+import bot_maps.txt [MAP]
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 0
+
+break
+
+
+##################################################
+> TIMETEMPLE_TWO_STORY
+
+import bot_maps.txt [MAP]
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 0
+
+break
+
+
+##################################################
+> HAVEN_DUMPYARD_1
+
+import bot_maps.txt [MAP]
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 80
+assign JUMP_DISABLE_COUNT 3
+
+break
+
+
+##################################################
+> PERION_ROUGH_WILDERNESS
+> HAVEN_DUMPYARD_3
+
+import bot_maps.txt [MAP]
+assign JUMP_UP_PERCENTAGE 100
+assign JUMP_DN_PERCENTAGE 40
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> HAVEN_DUMPYARD_4
+
+import bot_maps.txt [MAP]
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 0
+
+break
