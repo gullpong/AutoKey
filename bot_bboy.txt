@@ -29,11 +29,11 @@ assign SKILL_5.col 9
 assign TURN_AROUND_PERCENTAGE 0
 
 assign JUMP_STYLE 0
-assign JUMP_UP_PERCENTAGE 0
-assign JUMP_DN_PERCENTAGE 0
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 1
 
-alias [MAP] among "PATROL" "TIMETEMPLE_TWO_STORY" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
+alias [MAP] among "MANUAL" "PATROL" "TIMETEMPLE_TWO_STORY" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
 import self [MAP]
 
 register CLIMBING
@@ -249,11 +249,10 @@ break
 ##################################################
 ##################################################
 ##################################################
+> MANUAL
 > PATROL
 
 import bot_maps.txt [MAP]
-assign JUMP_UP_PERCENTAGE 0
-assign JUMP_DN_PERCENTAGE 0
 
 break
 
