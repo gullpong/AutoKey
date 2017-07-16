@@ -5,10 +5,10 @@ assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 0
 assign POTION_MP_THOLD 0
 
-assign TIMER_1.dur 420
+assign TIMER_1.dur 360
 assign TIMER_1.on true
 assign TIMER_2.dur 300
-assign TIMER_3.dur 220
+#assign TIMER_3.dur 200
 assign TIMER_3.on true
 
 register TIMER_1_COUNT
@@ -23,9 +23,6 @@ assign SKILL_2.col 6
 assign SKILL_3.row 2
 assign SKILL_3.col 7
 
-assign SKILL_4.row 2
-assign SKILL_4.col 1
-
 assign TURN_AROUND_PERCENTAGE 0
 
 assign JUMP_STYLE 0
@@ -37,6 +34,9 @@ register SOAR_DELAY
 assign SOAR_DELAY 900
 register FALL_DELAY
 assign FALL_DELAY 1200
+
+register SUMMON_EVOLVE
+assign SUMMON_EVOLVE false
 
 register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
@@ -80,6 +80,14 @@ break
 
 key w for 500
 delay for 700
+assign TIMER_3_COUNT 2000
+
+when SUMMON_EVOLVE is true
+	assign SUMMON_EVOLVE false
+	key q for 500
+	delay for 700	
+	assign TIMER_3_COUNT 370
+end
 
 break
 
@@ -206,13 +214,13 @@ break
 key g for 500
 delay for 500
 
+assign SUMMON_EVOLVE true
+assign TIMER_3_COUNT 500
+
 break
 
 ##################################################
 > SKILL_4
-
-key q for 500
-delay for 500
 
 break
 
@@ -239,24 +247,13 @@ when _READ.x is greater than 0
 end
 assign TIMER_1_COUNT computing TIMER_1_COUNT sub 1
 
-read _READ for "지속시간이" of 255 170 170 over 0 705 560 720
-when _READ.x is greater than 0
-	when TIMER_3_COUNT is less than 0
-		assign TIMER_3.on true
-		assign TIMER_3_COUNT 200
-	end
-end
-read _READ for "프리져가" of 255 170 170 over 0 705 560 720
-when _READ.x is greater than 0
-	when TIMER_3_COUNT is less than 0
-		assign TIMER_3.on true
-		assign TIMER_3_COUNT 600
-	end
+when TIMER_3_COUNT is equal to 0
+	assign TIMER_3.on true
 end
 assign TIMER_3_COUNT computing TIMER_3_COUNT sub 1
 
-
 break
+
 
 ##################################################
 > SPECIAL_ACTION
