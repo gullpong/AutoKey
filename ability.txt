@@ -1,17 +1,16 @@
-exclusive
 
-gawi ability.gwi
+import ability_settings.txt INITIALIZE
 
-snapshot
-snapshot
+alias [ABILITY_TYPE] among "UNIQUE" "LEGENDARY"
+import ability_settings.txt [ABILITY_TYPE]
+
 
 iterate forever
 	
 	snapshot
 
 	register _SPR with x y
-	sprite _SPR for 2 over 0 0 1366 768		# unique
-	#sprite _SPR for 3 over 0 0 1366 768	# legendary
+	sprite _SPR for LABEL_INDEX over 0 0 1366 768
 	when _SPR.x is greater than 0
 		finish iterate
 	end
