@@ -18,6 +18,10 @@ assign SKILL_2.col 1
 assign SKILL_3.row 1
 assign SKILL_3.col 5
 
+assign SKILL_4.row 2
+assign SKILL_4.col 3
+
+
 assign TURN_AROUND_PERCENTAGE 0
 
 assign JUMP_STYLE 0
@@ -163,6 +167,9 @@ break
 
 ##################################################
 > SKILL_4
+
+key ins for 500
+delay for 500
 
 break
 
