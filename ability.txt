@@ -1,24 +1,29 @@
+exclusive
+snapshot
+snapshot
 
-import ability_settings.txt INITIALIZE
+import button_settings.txt INITIALIZE
+
+gawi ability.gwi
+
+register LABEL_INDEX
 
 alias [ABILITY_TYPE] among "UNIQUE" "LEGENDARY"
-import ability_settings.txt [ABILITY_TYPE]
-
+import self [ABILITY_TYPE]
 
 iterate forever
 	
 	snapshot
 
-	register _SPR with x y
-	sprite _SPR for LABEL_INDEX over 0 0 1366 768
+	register _SPR with x y	
+	sprite find _SPR for LABEL_INDEX over 0 0 1366 768
 	when _SPR.x is greater than 0
 		finish iterate
 	end
 	
 	iterate 10 times
 		snapshot
-		assign BUTTON_ID 1
-		import maple_story.txt CLICK_BUTTON
+		import button_settings.txt CLICK_USE
 		when BUTTON_PRESSED is true
 			finish iterate
 		end
@@ -28,8 +33,7 @@ iterate forever
 	iterate 2 times
 		iterate 10 times
 			snapshot		
-			assign BUTTON_ID 0
-			import maple_story.txt CLICK_BUTTON
+			import button_settings.txt CLICK_OKAY
 			when BUTTON_PRESSED is true
 				finish iterate
 			end
@@ -42,3 +46,19 @@ iterate forever
 end
 
 sound dingdong
+
+break
+
+
+#########################################################
+> UNIQUE
+
+assign LABEL_INDEX 2
+break
+
+
+#########################################################
+> LEGENDARY
+
+assign LABEL_INDEX 3
+break

@@ -1,0 +1,126 @@
+#########################################################
+> INITIALIZE
+
+gawi button.gwi as GWI_BUTTON
+
+register BUTTON_ID
+register BUTTON_PRESSED
+register BUTTON_DELAY
+
+assign BUTTON_DELAY 100
+
+break
+
+
+#########################################################
+> CLICK_BUTTON
+
+sub
+	register _SPR with x y	
+	sprite find _SPR for BUTTON_ID using GWI_BUTTON over 0 0 1366 768
+	assign BUTTON_PRESSED false
+	when _SPR.x is greater than 0
+		assign _SPR.y computing _SPR.y add 8
+		button left click at _SPR.x _SPR.y
+		delay for BUTTON_DELAY
+		button none at 10 10
+		assign BUTTON_PRESSED true
+	end
+end
+
+break
+
+
+#########################################################
+> CLICK_OKAY
+
+assign BUTTON_ID 0
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_DONE
+
+assign BUTTON_ID 1
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_REWARD
+
+assign BUTTON_ID 2
+import self CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 3
+	import self CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_NEXT
+
+assign BUTTON_ID 4
+import self CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 5
+	import self CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLIKC_YES
+
+assign BUTTON_ID 6
+import self CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 7
+	import self CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_NO
+
+assign BUTTON_ID 8
+import self CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 9
+	import self CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_ACCEPT
+
+assign BUTTON_ID 10
+import self CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 11
+	import self CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_DECLINE
+
+assign BUTTON_ID 12
+import self CLICK_BUTTON
+when BUTTON_PRESSED is false
+	assign BUTTON_ID 13
+	import self CLICK_BUTTON
+end
+break
+
+#########################################################
+> CLICK_ITEMBUY
+
+assign BUTTON_ID 14
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_USE
+
+assign BUTTON_ID 15
+import self CLICK_BUTTON
+break

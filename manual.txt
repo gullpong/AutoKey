@@ -1,4 +1,9 @@
-import maple_story.txt INITIALIZE
+exclusive
+snapshot
+snapshot
+
+import bot_settings.txt INITIALIZE
+import button_settings.txt INITIALIZE
 
 register TIMER_1 with dur on
 register TIMER_2 with dur on
@@ -33,7 +38,7 @@ register _IN with id stat x y
 register _RANDOM
 
 sync
-	import maple_story.txt LOCATE_SKILLBAR
+	import bot_settings.txt LOCATE_SKILLBAR
 	when SKILL_BAR is less than 0
 		finish sync
 	end
@@ -48,7 +53,7 @@ sync
 		when SKILL_1.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_1.row sub 1
 			assign SKILL_INDEX.col computing SKILL_1.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_1.thold is greater than 5
 					assign SKILL_1.on true
@@ -63,7 +68,7 @@ sync
 		when SKILL_2.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_2.row sub 1
 			assign SKILL_INDEX.col computing SKILL_2.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_2.thold is greater than 5
 					assign SKILL_2.on true
@@ -78,7 +83,7 @@ sync
 		when SKILL_3.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_3.row sub 1
 			assign SKILL_INDEX.col computing SKILL_3.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_3.thold is greater than 5
 					assign SKILL_3.on true
@@ -93,7 +98,7 @@ sync
 		when SKILL_4.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_4.row sub 1
 			assign SKILL_INDEX.col computing SKILL_4.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_4.thold is greater than 5
 					assign SKILL_4.on true
@@ -108,7 +113,7 @@ sync
 		when SKILL_5.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_5.row sub 1
 			assign SKILL_INDEX.col computing SKILL_5.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_5.thold is greater than 5
 					assign SKILL_5.on true
@@ -235,7 +240,7 @@ with
 	# Drink potion
 	# =========================================================	
 	iterate forever
-		import maple_story.txt CHECK_POTION
+		import bot_settings.txt CHECK_POTION
 		when POTION_TEST is true
 			key f1 for 100
 			delay for 700
@@ -249,8 +254,8 @@ with
 	# Click buttons
 	# =========================================================	
 	iterate forever
-		#import maple_story.txt CLICK_OKAY
-		import maple_story.txt CLICK_REWARD
+		#import button_settings.txt CLICK_OKAY
+		import button_settings.txt CLICK_REWARD
 		delay for 1000
 	end
 

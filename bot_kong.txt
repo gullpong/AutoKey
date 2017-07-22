@@ -182,7 +182,7 @@ break
 ##################################################
 > SPECIAL_CHECK
 
-sprite _SPR for 3 over 200 0 1200 500
+sprite find _SPR for 3 using GWI_BOT over 200 0 1200 500
 when _SPR.x is greater than 0
 	assign FLAMEWOLF_CHECK true
 end
@@ -194,7 +194,7 @@ break
 
 when FLAMEWOLF_CHECK is true
 	iterate 10 times
-		sprite _SPR for 3 over 200 0 1200 500
+		sprite find _SPR for 3 using GWI_BOT over 200 0 1200 500
 		when _SPR.x is greater than 0
 			finish iterate
 		end

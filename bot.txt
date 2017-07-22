@@ -1,5 +1,9 @@
+exclusive
+snapshot
+snapshot
 
-import maple_story.txt INITIALIZE
+import bot_settings.txt INITIALIZE
+import button_settings.txt INITIALIZE
 
 register TIMER_1 with dur on
 register TIMER_2 with dur on
@@ -69,11 +73,11 @@ register STATUS_ACTION
 
 
 sync
-	import maple_story.txt LOCATE_POTIONBAR
+	import bot_settings.txt LOCATE_POTIONBAR
 	when POTION_BAR is less than 0
 		finish sync
 	end
-	import maple_story.txt LOCATE_SKILLBAR
+	import bot_settings.txt LOCATE_SKILLBAR
 	when SKILL_BAR is less than 0
 		finish sync
 	end
@@ -88,7 +92,7 @@ sync
 		when SKILL_1.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_1.row sub 1
 			assign SKILL_INDEX.col computing SKILL_1.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_1.thold is greater than 5
 					assign SKILL_1.on true
@@ -103,7 +107,7 @@ sync
 		when SKILL_2.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_2.row sub 1
 			assign SKILL_INDEX.col computing SKILL_2.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_2.thold is greater than 5
 					assign SKILL_2.on true
@@ -118,7 +122,7 @@ sync
 		when SKILL_3.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_3.row sub 1
 			assign SKILL_INDEX.col computing SKILL_3.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_3.thold is greater than 5
 					assign SKILL_3.on true
@@ -133,7 +137,7 @@ sync
 		when SKILL_4.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_4.row sub 1
 			assign SKILL_INDEX.col computing SKILL_4.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_4.thold is greater than 5
 					assign SKILL_4.on true
@@ -148,7 +152,7 @@ sync
 		when SKILL_5.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_5.row sub 1
 			assign SKILL_INDEX.col computing SKILL_5.col sub 1
-			import maple_story.txt CHECK_SKILL
+			import bot_settings.txt CHECK_SKILL
 			when SKILL_TEST is true
 				when SKILL_5.thold is greater than 5
 					assign SKILL_5.on true
@@ -163,7 +167,7 @@ sync
 		# =========================================================
 		# Check player position
 		# =========================================================
-		import maple_story.txt LOCATE_PLAYER
+		import bot_settings.txt LOCATE_PLAYER
 		when PLAYER_POS.x is not below 0
 			when _PREV.x is equal to PLAYER_POS.x
 				assign STATUS_HORZ_STOPPED true
@@ -364,7 +368,7 @@ with
 	# Drink potion
 	# =========================================================	
 	iterate forever
-		import maple_story.txt CHECK_POTION
+		import bot_settings.txt CHECK_POTION
 		when POTION_TEST is true
 			key f1 for 100
 			delay for 700
@@ -378,8 +382,8 @@ with
 	# Click buttons
 	# =========================================================	
 	iterate forever
-		#import maple_story.txt CLICK_OKAY
-		import maple_story.txt CLICK_REWARD
+		#import button_settings.txt CLICK_OKAY
+		import button_settings.txt CLICK_REWARD
 		delay for 1000
 	end
 
@@ -388,7 +392,7 @@ with
 	# Check screen
 	# =========================================================	
 	iterate forever
-		import maple_story.txt CHECK_MAPOUT
+		import bot_settings.txt CHECK_MAPOUT
 		when MAPOUT_TEST is true
 			finish sync
 		end
@@ -397,7 +401,7 @@ with
 
 #with
 #	iterate forever
-#		import maple_story.txt CHECK_TRUTH
+#		import bot_settings.txt CHECK_TRUTH
 #		when TRUTH_TEST is true
 #			finish sync			
 #		end		
@@ -406,7 +410,7 @@ with
 	
 with
 	iterate forever
-		import maple_story.txt CHECK_STONE
+		import bot_settings.txt CHECK_STONE
 		when STONE_TEST is true
 			sound alert
 			iterate 15 times
@@ -420,7 +424,7 @@ with
 
 with
 	iterate forever
-		import maple_story.txt CHECK_CURSE
+		import bot_settings.txt CHECK_CURSE
 		when CURSE_TEST is true
 			sound beep
 		end
@@ -429,7 +433,7 @@ with
 
 with
 	iterate forever
-		import maple_story.txt CHECK_ELITEBOSS
+		import bot_settings.txt CHECK_ELITEBOSS
 		when ELITEBOSS_TEST is true
 			sound dingdong
 			delay for 1000
@@ -440,7 +444,7 @@ with
 with
 	register _CHECK_COUNT
 	iterate forever
-		import maple_story.txt CHECK_MVPEXP
+		import bot_settings.txt CHECK_MVPEXP
 		when MVPEXP_TEST is true
 			when _CHECK_COUNT is less than 5
 				assign _CHECK_COUNT computing _CHECK_COUNT add 1

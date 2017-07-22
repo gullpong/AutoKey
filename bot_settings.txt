@@ -1,15 +1,9 @@
 #########################################################
 > INITIALIZE
 
-exclusive
-
 font dotum8.fnt
 
-gawi maple_story.gwi
-
-
-snapshot
-snapshot
+gawi bot.gwi as GWI_BOT
 
 register MONITOR_DELAY
 assign MONITOR_DELAY 200
@@ -39,13 +33,6 @@ register SKILL_TEST
 register SKILL_INDEX with row col
 register SKILL_BAR
 assign SKILL_BAR 1019
-
-register BUTTON_OFFSET
-assign BUTTON_OFFSET 5			# button ID starting index
-register BUTTON_ID
-register BUTTON_PRESSED
-register BUTTON_DELAY
-assign BUTTON_DELAY computing MONITOR_DELAY div 2
 
 break
 
@@ -193,15 +180,6 @@ break
 #########################################################
 > CHECK_TRUTH
 
-assign TRUTH_TEST false
-
-sub
-	register _SPR with x y	
-	sprite _SPR for 0 by 5 over 200 100 1100 600
-	when _SPR.x is greater than 0
-		assign TRUTH_TEST true
-	end
-end
 
 break
 
@@ -213,7 +191,7 @@ assign STONE_TEST false
 
 sub
 	register _SPR with x y	
-	sprite _SPR for 1 by 20 over 0 0 1360 600
+	sprite find _SPR for 1 using GWI_BOT by 20 over 0 0 1360 600
 	when _SPR.x is greater than 0
 		assign STONE_TEST true
 	end
@@ -245,7 +223,7 @@ assign ELITEBOSS_TEST false
 
 sub
 	register _SPR with x y	
-	sprite _SPR for 2 by 20 over 39 437 59 456
+	sprite find _SPR for 2 using GWI_BOT by 20 over 39 437 59 456
 	when _SPR.x is greater than 0
 		assign ELITEBOSS_TEST true
 	end
@@ -325,7 +303,7 @@ sub
 	iterate 10 times
 		snapshot
 		register _SPR with x y	
-		sprite _SPR for 4 by 20 over 0 686 1360 768
+		sprite find _SPR for 4 using GWI_BOT by 20 over 0 686 1360 768
 		when _SPR.x is greater than 0
 			assign POTION_BAR computing _SPR.x add 1		
 			assign _LOCATED true
@@ -390,7 +368,7 @@ sub
 	iterate 10 times
 		snapshot
 		register _SPR with x y	
-		sprite _SPR for 0 over 0 686 1360 768
+		sprite find _SPR for 0 using GWI_BOT over 0 686 1360 768
 		when _SPR.x is greater than 0
 			assign SKILL_BAR computing _SPR.x add 4		
 			assign _LOCATED true
@@ -427,104 +405,4 @@ sub
 	end
 end
 
-break
-
-
-#########################################################
-> CLICK_BUTTON
-
-sub
-	register _SPR with x y	
-	sprite _SPR for BUTTON_ID over 0 0 1366 768
-	assign BUTTON_PRESSED false
-	when _SPR.x is greater than 0
-		assign _SPR.y computing _SPR.y add 8
-		button left click at _SPR.x _SPR.y
-		delay for BUTTON_DELAY
-		button none at 10 10
-		assign BUTTON_PRESSED true
-	end
-end
-
-break
-
-
-#########################################################
-> CLICK_OKAY
-
-assign BUTTON_ID computing BUTTON_OFFSET add 0
-import maple_story.txt CLICK_BUTTON
-break
-
-#########################################################
-> CLICK_DONE
-
-assign BUTTON_ID computing BUTTON_OFFSET add 1
-import maple_story.txt CLICK_BUTTON
-break
-
-#########################################################
-> CLICK_REWARD
-
-assign BUTTON_ID computing BUTTON_OFFSET add 2
-import maple_story.txt CLICK_BUTTON
-when BUTTON_PRESSED is false
-	assign BUTTON_ID computing BUTTON_OFFSET add 3
-	import maple_story.txt CLICK_BUTTON
-end
-break
-
-#########################################################
-> CLICK_NEXT
-
-assign BUTTON_ID computing BUTTON_OFFSET add 4
-import maple_story.txt CLICK_BUTTON
-when BUTTON_PRESSED is false
-	assign BUTTON_ID computing BUTTON_OFFSET add 5
-	import maple_story.txt CLICK_BUTTON
-end
-break
-
-#########################################################
-> CLIKC_YES
-
-assign BUTTON_ID computing BUTTON_OFFSET add 6
-import maple_story.txt CLICK_BUTTON
-when BUTTON_PRESSED is false
-	assign BUTTON_ID computing BUTTON_OFFSET add 7
-	import maple_story.txt CLICK_BUTTON
-end
-break
-
-#########################################################
-> CLICK_NO
-
-assign BUTTON_ID computing BUTTON_OFFSET add 8
-import maple_story.txt CLICK_BUTTON
-when BUTTON_PRESSED is false
-	assign BUTTON_ID computing BUTTON_OFFSET add 9
-	import maple_story.txt CLICK_BUTTON
-end
-break
-
-#########################################################
-> CLICK_ACCEPT
-
-assign BUTTON_ID computing BUTTON_OFFSET add 10
-import maple_story.txt CLICK_BUTTON
-when BUTTON_PRESSED is false
-	assign BUTTON_ID computing BUTTON_OFFSET add 11
-	import maple_story.txt CLICK_BUTTON
-end
-break
-
-#########################################################
-> CLICK_DECLINE
-
-assign BUTTON_ID computing BUTTON_OFFSET add 12
-import maple_story.txt CLICK_BUTTON
-when BUTTON_PRESSED is false
-	assign BUTTON_ID computing BUTTON_OFFSET add 13
-	import maple_story.txt CLICK_BUTTON
-end
 break
