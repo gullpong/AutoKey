@@ -112,15 +112,8 @@ end
 break
 
 #########################################################
-> CLICK_ITEMBUY
-
-assign BUTTON_ID 14
-import self CLICK_BUTTON
-break
-
-#########################################################
 > CLICK_USE
 
-assign BUTTON_ID 15
+assign BUTTON_ID 14
 import self CLICK_BUTTON
 break
