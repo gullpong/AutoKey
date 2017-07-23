@@ -445,9 +445,9 @@ with
 		import bot_settings.txt CHECK_TRUTH
 		when TRUTH_TEST is true
 			increase _TRUTH_COUNT
-			when _TRUTH_COUNT is less than 5
+			when _TRUTH_COUNT is less than 6
 				sound beep
-				delay for 200
+				delay for 100
 				sound beep
 			otherwise
 				sound alert
