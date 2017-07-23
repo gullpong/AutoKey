@@ -423,7 +423,8 @@ with
 	iterate forever
 		import bot_settings.txt CHECK_CURSE
 		when CURSE_TEST is true
-			sound beep
+			sound alert
+			delay for 500
 		end
 		delay for 1000
 	end
@@ -433,34 +434,42 @@ with
 		import bot_settings.txt CHECK_ELITEBOSS
 		when ELITEBOSS_TEST is true
 			sound dingdong
-			delay for 1000
+			delay for 500
 		end
-		delay for 500
-	end
-	
-with
-	iterate forever
-		import bot_settings.txt CHECK_TRUTH
-		when TRUTH_TEST is true
-			sound alert
-			delay for 1000
-		end		
 		delay for 1000
 	end
 	
 with
-	register _CHECK_COUNT
+	register _TRUTH_COUNT
+	iterate forever
+		import bot_settings.txt CHECK_TRUTH
+		when TRUTH_TEST is true
+			increase _TRUTH_COUNT
+			when _TRUTH_COUNT is less than 5
+				sound beep
+			otherwise
+				sound alert
+				delay for 500
+			end			
+		otherwise
+			assign _TRUTH_COUNT 0
+		end
+		delay for 1000
+	end
+	
+with
+	register _MVPEXP_COUNT
 	iterate forever
 		import bot_settings.txt CHECK_MVPEXP
 		when MVPEXP_TEST is true
-			when _CHECK_COUNT is less than 5
-				assign _CHECK_COUNT computing _CHECK_COUNT add 1
+			when _MVPEXP_COUNT is less than 6
+				increase _MVPEXP_COUNT
 				sound pip
 				delay for 100
 				sound pip
 			end
 		otherwise
-			assign _CHECK_COUNT 0
+			assign _MVPEXP_COUNT 0
 		end
 		delay for 1000
 	end
