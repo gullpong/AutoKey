@@ -1,7 +1,7 @@
 ##################################################
 > MANUAL
 
-import maple_story.txt INPUT_STAGE
+import bot_settings.txt INPUT_STAGE
 	
 break
 
@@ -9,7 +9,7 @@ break
 ##################################################
 > PATROL
 
-import maple_story.txt INPUT_STAGE_FLAT
+import bot_settings.txt INPUT_STAGE_FLAT
 
 assign LAYOUT.tf 768
 assign LAYOUT.bc 0
