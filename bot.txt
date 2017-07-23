@@ -447,6 +447,8 @@ with
 			increase _TRUTH_COUNT
 			when _TRUTH_COUNT is less than 5
 				sound beep
+				delay for 200
+				sound beep
 			otherwise
 				sound alert
 				delay for 500
