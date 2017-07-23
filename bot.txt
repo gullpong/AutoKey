@@ -445,7 +445,7 @@ with
 		import bot_settings.txt CHECK_TRUTH
 		when TRUTH_TEST is true
 			increase _TRUTH_COUNT
-			when _TRUTH_COUNT is less than 6
+			when _TRUTH_COUNT is less than 7
 				sound beep
 				delay for 100
 				sound beep
@@ -464,7 +464,7 @@ with
 	iterate forever
 		import bot_settings.txt CHECK_MVPEXP
 		when MVPEXP_TEST is true
-			when _MVPEXP_COUNT is less than 6
+			when _MVPEXP_COUNT is less than 5
 				increase _MVPEXP_COUNT
 				sound pip
 				delay for 100
