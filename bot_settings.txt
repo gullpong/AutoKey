@@ -483,7 +483,7 @@ sub
 	register _BLOB with x y width height num lt tp rt bm
 	when TRUTH_ENABLED is true
 		sprite diff _BLOB for 0 using GWI_TRUTH at TRUTH_CHECK_N.lt TRUTH_CHECK_N.tp
-		when _BLOB.num is greater than 1500
+		when _BLOB.num is greater than 8000
 			assign TRUTH_TEST true
 		otherwise
 			sprite diff _BLOB for 1 using GWI_TRUTH at TRUTH_CHECK_W.lt TRUTH_CHECK_W.tp
