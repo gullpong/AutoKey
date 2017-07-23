@@ -15,7 +15,6 @@ register PLAYER_POS with x y
 register RPORTAL_POS with x y
 
 register MAPOUT_TEST
-register TRUTH_TEST
 register STONE_TEST
 register CURSE_TEST
 register ELITEBOSS_TEST
@@ -33,6 +32,13 @@ register SKILL_TEST
 register SKILL_INDEX with row col
 register SKILL_BAR
 assign SKILL_BAR 1019
+
+register TRUTH_TEST
+register TRUTH_ENABLED
+register TRUTH_CHECK_N with lt tp rt bm
+register TRUTH_CHECK_W with lt tp rt bm
+register TRUTH_CHECK_S with lt tp rt bm
+register TRUTH_CHECK_E with lt tp rt bm
 
 break
 
@@ -173,13 +179,6 @@ sub
 		assign MAPOUT_TEST true
 	end
 end
-
-break
-
-
-#########################################################
-> CHECK_TRUTH
-
 
 break
 
@@ -402,6 +401,106 @@ sub
 	blob _BLOB for 0 0 0 over _POS.lt _POS.tp _POS.rt _POS.bm
 	when _BLOB.num is greater than 10
 		assign SKILL_TEST false
+	end
+end
+
+break
+
+
+#########################################################
+> INIT_TRUTH
+
+assign TRUTH_ENABLED false
+
+sub
+	register _FOUND
+	register _SPR with x y
+	
+	iterate 2 times
+		snapshot
+		assign _FOUND 0
+		
+		sprite find _SPR for 5 using GWI_BOT over 0 0 1360 768
+		when _SPR.x is greater than 0
+			assign TRUTH_CHECK_N.lt computing _SPR.x sub 189
+			assign TRUTH_CHECK_N.tp computing _SPR.y add 16
+			assign TRUTH_CHECK_N.rt computing _SPR.x add 181
+			assign TRUTH_CHECK_N.bm computing _SPR.y add 165
+			increase _FOUND
+		end
+
+		sprite find _SPR for 6 using GWI_BOT over 0 0 1360 768
+		when _SPR.x is greater than 0
+			assign TRUTH_CHECK_W.lt computing _SPR.x sub 110
+			assign TRUTH_CHECK_W.tp computing _SPR.y add 14
+			assign TRUTH_CHECK_W.rt computing _SPR.x add 103
+			assign TRUTH_CHECK_W.bm computing _SPR.y add 313
+			increase _FOUND
+		end
+
+		sprite find _SPR for 7 using GWI_BOT over 0 0 1360 768
+		when _SPR.x is greater than 0
+			assign TRUTH_CHECK_S.lt computing _SPR.x sub 170
+			assign TRUTH_CHECK_S.tp computing _SPR.y add 14
+			assign TRUTH_CHECK_S.rt computing _SPR.x add 153
+			assign TRUTH_CHECK_S.bm computing _SPR.y add 279
+			increase _FOUND
+		end
+
+		sprite find _SPR for 8 using GWI_BOT over 0 0 1360 768
+		when _SPR.x is greater than 0
+			assign TRUTH_CHECK_E.lt computing _SPR.x sub 144
+			assign TRUTH_CHECK_E.tp computing _SPR.y add 16
+			assign TRUTH_CHECK_E.rt computing _SPR.x add 101
+			assign TRUTH_CHECK_E.bm computing _SPR.y add 362
+			increase _FOUND
+		end
+		
+		when _FOUND is equal to 4
+			assign TRUTH_ENABLED true
+			finish iterate
+		end
+		delay for 100
+	end
+	
+	when TRUTH_ENABLED is true
+		crop TRUTH_CHECK_N.lt TRUTH_CHECK_N.tp TRUTH_CHECK_N.rt TRUTH_CHECK_N.bm into GWI_TRUTH 
+		crop TRUTH_CHECK_W.lt TRUTH_CHECK_W.tp TRUTH_CHECK_W.rt TRUTH_CHECK_W.bm into GWI_TRUTH
+		crop TRUTH_CHECK_S.lt TRUTH_CHECK_S.tp TRUTH_CHECK_S.rt TRUTH_CHECK_S.bm into GWI_TRUTH
+		crop TRUTH_CHECK_E.lt TRUTH_CHECK_E.tp TRUTH_CHECK_E.rt TRUTH_CHECK_E.bm into GWI_TRUTH
+	end
+end
+
+break
+
+
+#########################################################
+> CHECK_TRUTH
+
+assign TRUTH_TEST false
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	when TRUTH_ENABLED is true
+		sprite diff _BLOB for 0 using GWI_TRUTH at TRUTH_CHECK_N.lt TRUTH_CHECK_N.tp
+		when _BLOB.num is greater than 1500
+			assign TRUTH_TEST true
+		otherwise
+			sprite diff _BLOB for 1 using GWI_TRUTH at TRUTH_CHECK_W.lt TRUTH_CHECK_W.tp
+			when _BLOB.num is greater than 500
+				assign TRUTH_TEST true
+			otherwise
+				sprite diff _BLOB for 2 using GWI_TRUTH at TRUTH_CHECK_S.lt TRUTH_CHECK_S.tp
+				when _BLOB.num is greater than 500
+					assign TRUTH_TEST true
+				otherwise
+					sprite diff _BLOB for 3 using GWI_TRUTH at TRUTH_CHECK_E.lt TRUTH_CHECK_E.tp
+					when _BLOB.num is greater than 500
+						assign TRUTH_TEST true
+					end				
+				end
+			end		
+		end
 	end
 end
 

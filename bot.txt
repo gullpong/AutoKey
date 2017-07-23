@@ -72,6 +72,12 @@ register STATUS_VERT_STOPPED
 register STATUS_ACTION
 
 
+import bot_settings.txt INIT_TRUTH
+when TRUTH_ENABLED is true
+	sound dingdong
+	delay for 500
+end
+
 sync
 	import bot_settings.txt LOCATE_POTIONBAR
 	when POTION_BAR is less than 0
@@ -399,15 +405,6 @@ with
 		delay for 250
 	end
 
-#with
-#	iterate forever
-#		import bot_settings.txt CHECK_TRUTH
-#		when TRUTH_TEST is true
-#			finish sync			
-#		end		
-#		delay for 1000
-#	end
-	
 with
 	iterate forever
 		import bot_settings.txt CHECK_STONE
@@ -439,6 +436,16 @@ with
 			delay for 1000
 		end
 		delay for 500
+	end
+	
+with
+	iterate forever
+		import bot_settings.txt CHECK_TRUTH
+		when TRUTH_TEST is true
+			sound alert
+			delay for 1000
+		end		
+		delay for 1000
 	end
 	
 with
