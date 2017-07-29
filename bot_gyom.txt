@@ -15,7 +15,7 @@ register TIMER_1_COUNT
 register TIMER_3_COUNT
 
 assign SKILL_1.row 1
-assign SKILL_1.col 7
+assign SKILL_1.col 6
 
 assign SKILL_2.row 2
 assign SKILL_2.col 6
@@ -168,11 +168,14 @@ break
 
 delay for 1000
 
-key 3 for 500
+key 2 for 500
 delay for 700
 
-key 4 for 500
+key 3 for 500
 delay for 1000
+
+key 4 for 500
+delay for 700
 
 key 5 for 500
 delay for 700
