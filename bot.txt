@@ -447,8 +447,8 @@ with
 		import bot_settings.txt CHECK_SCREEN
 		when SCREEN_TEST is true
 			increase _SCREEN_COUNT
-			when SCREEN_COUNT is greater than 2
-				when SCREEN_COUNT is greater than 7
+			when _SCREEN_COUNT is greater than 2
+				when _SCREEN_COUNT is greater than 7
 					# Serious notification
 					sound alert
 				otherwise
