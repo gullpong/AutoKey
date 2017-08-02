@@ -33,12 +33,12 @@ register SKILL_INDEX with row col
 register SKILL_BAR
 assign SKILL_BAR 1019
 
-register TRUTH_TEST
-register TRUTH_ENABLED
-register TRUTH_CHECK_N with en lt tp rt bm
-register TRUTH_CHECK_W with en lt tp rt bm
-register TRUTH_CHECK_S with en lt tp rt bm
-register TRUTH_CHECK_E with en lt tp rt bm
+register SCREEN_TEST
+register SCREEN_ENABLED
+register SCREEN_CHECK_N with en lt tp rt bm
+register SCREEN_CHECK_W with en lt tp rt bm
+register SCREEN_CHECK_S with en lt tp rt bm
+register SCREEN_CHECK_E with en lt tp rt bm
 
 break
 
@@ -48,51 +48,49 @@ break
 
 sub
 	register _IN with id stat x y
-
+	
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign MINIMAP.lt _IN.x
 	assign MINIMAP.tp _IN.y
 	
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign MINIMAP.rt _IN.x
 	assign MINIMAP.bm _IN.y
 	
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign LAYOUT.lt _IN.x
 
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign LAYOUT.rt _IN.x
 
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign LAYOUT.tf _IN.y
 
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign LAYOUT.bc _IN.y
 	
 	delay for 500
-	sound beep
-	delay for 200
-	sound beep
+	sound cool
 	hook _IN with key space down
-	sound dingdong	
+	sound coin
 end
 
 break
@@ -104,38 +102,36 @@ break
 sub
 	register _IN with id stat x y
 
-	delay for 500
-	sound beep
+	delay for 500	
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign MINIMAP.lt _IN.x
 	assign MINIMAP.tp _IN.y
 	
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign MINIMAP.rt _IN.x
 	assign MINIMAP.bm _IN.y
 	
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign LAYOUT.lt _IN.x
 
 	delay for 500
-	sound beep
+	sound plus
 	hook _IN with button left up
-	sound pop
+	sound click
 	assign LAYOUT.rt _IN.x
 	
 	delay for 500
-	sound beep
-	delay for 200
-	sound beep
+	sound cool
 	hook _IN with key space down
-	sound dingdong	
+	sound coin
 end
 
 break
@@ -408,9 +404,9 @@ break
 
 
 #########################################################
-> INIT_TRUTH
+> INIT_SCREEN
 
-assign TRUTH_ENABLED false
+assign SCREEN_ENABLED false
 
 sub
 	register _SPR with x y
@@ -419,49 +415,49 @@ sub
 	
 	sprite find _SPR for 5 using GWI_BOT over 0 0 1360 768
 	when _SPR.x is greater than 0
-		assign TRUTH_CHECK_N.en true
-		assign TRUTH_CHECK_N.lt computing _SPR.x sub 189
-		assign TRUTH_CHECK_N.tp computing _SPR.y add 16
-		assign TRUTH_CHECK_N.rt computing _SPR.x add 181
-		assign TRUTH_CHECK_N.bm computing _SPR.y add 165
-		assign TRUTH_ENABLED true
+		assign SCREEN_CHECK_N.en true
+		assign SCREEN_CHECK_N.lt computing _SPR.x sub 189
+		assign SCREEN_CHECK_N.tp computing _SPR.y add 16
+		assign SCREEN_CHECK_N.rt computing _SPR.x add 181
+		assign SCREEN_CHECK_N.bm computing _SPR.y add 165
+		assign SCREEN_ENABLED true
 	end
 
 	sprite find _SPR for 6 using GWI_BOT over 0 0 1360 768
 	when _SPR.x is greater than 0
-		assign TRUTH_CHECK_W.en true
-		assign TRUTH_CHECK_W.lt computing _SPR.x sub 110
-		assign TRUTH_CHECK_W.tp computing _SPR.y add 14
-		assign TRUTH_CHECK_W.rt computing _SPR.x add 103
-		assign TRUTH_CHECK_W.bm computing _SPR.y add 313
-		assign TRUTH_ENABLED true
+		assign SCREEN_CHECK_W.en true
+		assign SCREEN_CHECK_W.lt computing _SPR.x sub 110
+		assign SCREEN_CHECK_W.tp computing _SPR.y add 14
+		assign SCREEN_CHECK_W.rt computing _SPR.x add 103
+		assign SCREEN_CHECK_W.bm computing _SPR.y add 313
+		assign SCREEN_ENABLED true
 	end
 
 	sprite find _SPR for 7 using GWI_BOT over 0 0 1360 768
 	when _SPR.x is greater than 0
-		assign TRUTH_CHECK_S.en true
-		assign TRUTH_CHECK_S.lt computing _SPR.x sub 170
-		assign TRUTH_CHECK_S.tp computing _SPR.y add 14
-		assign TRUTH_CHECK_S.rt computing _SPR.x add 153
-		assign TRUTH_CHECK_S.bm computing _SPR.y add 279
-		assign TRUTH_ENABLED true
+		assign SCREEN_CHECK_S.en true
+		assign SCREEN_CHECK_S.lt computing _SPR.x sub 170
+		assign SCREEN_CHECK_S.tp computing _SPR.y add 14
+		assign SCREEN_CHECK_S.rt computing _SPR.x add 153
+		assign SCREEN_CHECK_S.bm computing _SPR.y add 279
+		assign SCREEN_ENABLED true
 	end
 
 	sprite find _SPR for 8 using GWI_BOT over 0 0 1360 768
 	when _SPR.x is greater than 0
-		assign TRUTH_CHECK_E.en true
-		assign TRUTH_CHECK_E.lt computing _SPR.x sub 144
-		assign TRUTH_CHECK_E.tp computing _SPR.y add 16
-		assign TRUTH_CHECK_E.rt computing _SPR.x add 101
-		assign TRUTH_CHECK_E.bm computing _SPR.y add 362
-		assign TRUTH_ENABLED true
+		assign SCREEN_CHECK_E.en true
+		assign SCREEN_CHECK_E.lt computing _SPR.x sub 144
+		assign SCREEN_CHECK_E.tp computing _SPR.y add 16
+		assign SCREEN_CHECK_E.rt computing _SPR.x add 101
+		assign SCREEN_CHECK_E.bm computing _SPR.y add 362
+		assign SCREEN_ENABLED true
 	end
 	
-	when TRUTH_ENABLED is true
-		crop TRUTH_CHECK_N.lt TRUTH_CHECK_N.tp TRUTH_CHECK_N.rt TRUTH_CHECK_N.bm into GWI_TRUTH 
-		crop TRUTH_CHECK_W.lt TRUTH_CHECK_W.tp TRUTH_CHECK_W.rt TRUTH_CHECK_W.bm into GWI_TRUTH
-		crop TRUTH_CHECK_S.lt TRUTH_CHECK_S.tp TRUTH_CHECK_S.rt TRUTH_CHECK_S.bm into GWI_TRUTH
-		crop TRUTH_CHECK_E.lt TRUTH_CHECK_E.tp TRUTH_CHECK_E.rt TRUTH_CHECK_E.bm into GWI_TRUTH
+	when SCREEN_ENABLED is true
+		crop SCREEN_CHECK_N.lt SCREEN_CHECK_N.tp SCREEN_CHECK_N.rt SCREEN_CHECK_N.bm into GWI_SCREEN 
+		crop SCREEN_CHECK_W.lt SCREEN_CHECK_W.tp SCREEN_CHECK_W.rt SCREEN_CHECK_W.bm into GWI_SCREEN
+		crop SCREEN_CHECK_S.lt SCREEN_CHECK_S.tp SCREEN_CHECK_S.rt SCREEN_CHECK_S.bm into GWI_SCREEN
+		crop SCREEN_CHECK_E.lt SCREEN_CHECK_E.tp SCREEN_CHECK_E.rt SCREEN_CHECK_E.bm into GWI_SCREEN
 	end
 end
 
@@ -469,42 +465,42 @@ break
 
 
 #########################################################
-> CHECK_TRUTH
+> CHECK_SCREEN
 
-assign TRUTH_TEST false
+assign SCREEN_TEST false
 
 sub
 	register _BLOB with x y width height num lt tp rt bm
-	when TRUTH_ENABLED is true
+	when SCREEN_ENABLED is true
 		iterate 1 times
-			when TRUTH_CHECK_N.en is true
-				sprite diff _BLOB for 0 using GWI_TRUTH at TRUTH_CHECK_N.lt TRUTH_CHECK_N.tp
+			when SCREEN_CHECK_N.en is true
+				sprite diff _BLOB for 0 using GWI_SCREEN at SCREEN_CHECK_N.lt SCREEN_CHECK_N.tp
 				when _BLOB.num is greater than 2000
-					assign TRUTH_TEST true
+					assign SCREEN_TEST true
 					finish iterate
 				end
 			end
 			
-			when TRUTH_CHECK_W.en is true
-				sprite diff _BLOB for 1 using GWI_TRUTH at TRUTH_CHECK_W.lt TRUTH_CHECK_W.tp
+			when SCREEN_CHECK_W.en is true
+				sprite diff _BLOB for 1 using GWI_SCREEN at SCREEN_CHECK_W.lt SCREEN_CHECK_W.tp
 				when _BLOB.num is greater than 1000
-					assign TRUTH_TEST true
+					assign SCREEN_TEST true
 					finish iterate
 				end
 			end
 
-			when TRUTH_CHECK_S.en is true
-				sprite diff _BLOB for 2 using GWI_TRUTH at TRUTH_CHECK_S.lt TRUTH_CHECK_S.tp
+			when SCREEN_CHECK_S.en is true
+				sprite diff _BLOB for 2 using GWI_SCREEN at SCREEN_CHECK_S.lt SCREEN_CHECK_S.tp
 				when _BLOB.num is greater than 1000
-					assign TRUTH_TEST true
+					assign SCREEN_TEST true
 					finish iterate
 				end
 			end
 
-			when TRUTH_CHECK_E.en is true
-				sprite diff _BLOB for 3 using GWI_TRUTH at TRUTH_CHECK_E.lt TRUTH_CHECK_E.tp
+			when SCREEN_CHECK_E.en is true
+				sprite diff _BLOB for 3 using GWI_SCREEN at SCREEN_CHECK_E.lt SCREEN_CHECK_E.tp
 				when _BLOB.num is greater than 1000
-					assign TRUTH_TEST true
+					assign SCREEN_TEST true
 					finish iterate
 				end
 			end

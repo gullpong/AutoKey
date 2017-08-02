@@ -72,9 +72,9 @@ register STATUS_VERT_STOPPED
 register STATUS_ACTION
 
 
-import bot_settings.txt INIT_TRUTH
-when TRUTH_ENABLED is true
-	sound dingdong
+import bot_settings.txt INIT_SCREEN
+when SCREEN_ENABLED is true
+	sound cool
 	delay for 500
 end
 
@@ -409,21 +409,23 @@ with
 	iterate forever
 		import bot_settings.txt CHECK_STONE
 		when STONE_TEST is true
-			sound alert
-			iterate 15 times
-				key left for 200
-				key right for 200
-			end		
-			finish sync
-		end		
-		delay for 1000
+			iterate 2 times
+				sound alert
+				iterate 10 times
+					key left for 100
+					key right for 100
+				end
+			end
+		otherwise
+			delay for 1000
+		end
 	end
 
 with
 	iterate forever
 		import bot_settings.txt CHECK_CURSE
 		when CURSE_TEST is true
-			sound alert
+			sound buzz
 			delay for 500
 		end
 		delay for 1000
@@ -440,21 +442,23 @@ with
 	end
 	
 with
-	register _TRUTH_COUNT
+	register _SCREEN_COUNT
 	iterate forever
-		import bot_settings.txt CHECK_TRUTH
-		when TRUTH_TEST is true
-			increase _TRUTH_COUNT
-			when _TRUTH_COUNT is less than 7
-				sound beep
-				delay for 150
-				sound beep
-			otherwise
-				sound alert
+		import bot_settings.txt CHECK_SCREEN
+		when SCREEN_TEST is true
+			increase _SCREEN_COUNT
+			when SCREEN_COUNT is greater than 2
+				when SCREEN_COUNT is greater than 7
+					# Serious notification
+					sound alert
+				otherwise
+					# Minor notification
+					sound plus
+				end
 				delay for 500
-			end			
+			end
 		otherwise
-			assign _TRUTH_COUNT 0
+			assign _SCREEN_COUNT 0
 		end
 		delay for 1000
 	end
@@ -466,9 +470,8 @@ with
 		when MVPEXP_TEST is true
 			when _MVPEXP_COUNT is less than 5
 				increase _MVPEXP_COUNT
-				sound pip
-				delay for 100
-				sound pip
+				sound coin
+				delay for 500
 			end
 		otherwise
 			assign _MVPEXP_COUNT 0
