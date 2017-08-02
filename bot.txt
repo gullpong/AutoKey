@@ -75,7 +75,7 @@ register STATUS_ACTION
 import bot_settings.txt INIT_SCREEN
 when SCREEN_ENABLED is true
 	sound cool
-	delay for 500
+	delay for 1000
 end
 
 sync
