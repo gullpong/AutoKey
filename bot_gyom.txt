@@ -245,7 +245,7 @@ read _READ for "»≠ªÏ¿ª" of 255 170 170 over 0 705 560 720
 when _READ.x is greater than 0
 	when TIMER_1_COUNT is less than 0
 		assign TIMER_1.on true
-		assign TIMER_1_COUNT 600
+		assign TIMER_1_COUNT 200
 	end
 end
 assign TIMER_1_COUNT computing TIMER_1_COUNT sub 1
