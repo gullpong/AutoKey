@@ -300,3 +300,22 @@ assign JUMP_DISABLE_COUNT 1
 
 break
 
+
+##################################################
+> ARCANA_FORK_CROSS_CAVERN
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 180
+assign MINIMAP.bm 120
+
+assign LAYOUT.lt 55
+assign LAYOUT.rt 145
+assign LAYOUT.tf 80
+assign LAYOUT.bc 180
+
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 1
+
+break
+
