@@ -29,6 +29,9 @@ assign JUMP_UP_PERCENTAGE 80
 assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 1
 
+register ATTACK_STYLE
+assign ATTACK_STYLE 0
+
 register FALL_DELAY
 assign FALL_DELAY 1200
 
@@ -36,7 +39,7 @@ register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
 
 
-alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN"
+alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_FORK_CROSS_CAVERN"
 import self [MAP]
 
 break
@@ -78,16 +81,30 @@ break
 ##################################################
 > ATTACK
 
-sync
-	when STATUS_MOVING_RIGHT is true
-		key right for 1000
-	otherwise 
-		key left for 1000
+when ATTACK_STYLE is equal to 0
+	sync
+		when STATUS_MOVING_RIGHT is true
+			key right for 1000
+		otherwise 
+			key left for 1000
+		end
+	with
+		key x for 300
+		key v for 300
+		key s for 300
 	end
-with
-	delay for 300
-	key v for 300
-	key s for 300
+otherwise
+	sync
+		when STATUS_MOVING_RIGHT is true
+			key right for 1000
+		otherwise 
+			key left for 1000
+		end
+	with
+		delay for 300
+		key v for 300
+		key s for 300
+	end
 end
 
 break
@@ -232,6 +249,19 @@ break
 import bot_maps.txt [MAP]
 assign JUMP_DISABLE_COUNT 2
 assign FALL_DELAY 1000
+assign ATTACK_STYLE 1
 
 break
+
+
+##################################################
+> ARCANA_LOWER_FORK_CAVERN
+> ARCANA_FORK_CROSS_CAVERN
+
+import bot_maps.txt [MAP]
+assign FALL_DELAY 1000
+
+break
+
+
 
