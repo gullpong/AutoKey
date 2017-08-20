@@ -53,12 +53,12 @@ break
 #########################################################
 > UNIQUE
 
-assign LABEL_INDEX 2
+assign LABEL_INDEX 1
 break
 
 
 #########################################################
 > LEGENDARY
 
-assign LABEL_INDEX 3
+assign LABEL_INDEX 2
 break
