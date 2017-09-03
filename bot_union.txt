@@ -2,7 +2,7 @@
 > SETUP
 
 assign POTION_HUD_TYPE 1
-assign POTION_HP_THOLD 40
+assign POTION_HP_THOLD 30
 assign POTION_MP_THOLD 10
 
 assign TIMER_1.dur 170
@@ -20,8 +20,8 @@ assign SKILL_2.col 6
 assign SKILL_3.row 1
 assign SKILL_3.col 8
 
-#assign SKILL_4.row 2
-#assign SKILL_4.col 4
+assign SKILL_4.row 2
+assign SKILL_4.col 4
 
 #assign SKILL_5.row 2
 #assign SKILL_5.col 9
@@ -29,12 +29,14 @@ assign SKILL_3.col 8
 assign TURN_AROUND_PERCENTAGE 0
 
 assign JUMP_STYLE 0
-assign JUMP_UP_PERCENTAGE 70
-assign JUMP_DN_PERCENTAGE 70
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_UP_PERCENTAGE 100
+assign JUMP_DN_PERCENTAGE 100
+assign JUMP_DISABLE_COUNT 8
 
 alias [MAP] among "MANUAL" "PATROL" "TIMETEMPLE_TWO_STORY" "TIMETEMPLE_FOUR_STORY" "DEFHQ_UFO_AISLE" "PERION_ABANDONED_SOUTH" "PERION_LONELY_BOULDER" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
 import bot_maps.txt [MAP]
+
+register ATTACK_TOGGLE
 
 break
 
@@ -75,17 +77,23 @@ break
 ##################################################
 > ATTACK
 
+sound pip
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 1300
+		key right for 1200
 	otherwise 
-		key left for 1300
+		key left for 1200
 	end
 with
-	key a for 500
-	#key s for 500
+	when ATTACK_TOGGLE is equal to 0
+		key a for 200
+		assign ATTACK_TOGGLE 1
+	otherwise
+		key s for 200
+		assign ATTACK_TOGGLE 0
+	end
 	key v for 500
-	delay for 300
+	delay for 500
 end
 
 break
@@ -94,6 +102,7 @@ break
 ##################################################
 > SOAR
 
+delay for 300
 sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 1100
@@ -104,9 +113,9 @@ with
 	key x for 100
 	delay for 200
 	sync
-		key v for 800	
-	with
 		key up for 800
+	with
+		key v for 800		
 	end
 end
 
@@ -157,8 +166,7 @@ break
 ##################################################
 > SKILL_4
 
-key r for 50
-delay for 700
+key r for 500
 
 break
 

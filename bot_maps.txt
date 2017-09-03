@@ -33,9 +33,9 @@ assign LAYOUT.rt 165
 assign LAYOUT.tf 80
 assign LAYOUT.bc 80
 
-assign JUMP_UP_PERCENTAGE 50
+#assign JUMP_UP_PERCENTAGE 50
 #assign JUMP_DN_PERCENTAGE 50
-assign JUMP_DISABLE_COUNT 1
+#assign JUMP_DISABLE_COUNT 1
 
 break
 
@@ -53,9 +53,9 @@ assign LAYOUT.rt 140
 assign LAYOUT.tf 95
 assign LAYOUT.bc 135
 
-assign JUMP_UP_PERCENTAGE 80
-assign JUMP_DN_PERCENTAGE 50
-assign JUMP_DISABLE_COUNT 1
+#assign JUMP_UP_PERCENTAGE 80
+#assign JUMP_DN_PERCENTAGE 50
+#assign JUMP_DISABLE_COUNT 1
 
 break
 
