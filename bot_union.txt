@@ -47,8 +47,14 @@ break
 
 delay for 500
 
-key b for 500
-delay for 1000
+#key b for 500
+#delay for 1000
+
+key w for 500
+delay for 700
+
+key 5 for 500
+delay for 700
 
 key 6 for 500
 delay for 700
@@ -59,7 +65,7 @@ delay for 700
 key 8 for 500
 delay for 700
 
-key 9 for 500
+#key 9 for 500
 
 break
 
@@ -88,10 +94,10 @@ sync
 with
 	key x for 100
 	key x for 100
-	delay for 200
-	key a for 100
+	delay for 250
+	key d for 100
 end
-delay for 600
+delay for 700
 
 break
 
