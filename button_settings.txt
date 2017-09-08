@@ -6,8 +6,10 @@ gawi button.gwi as GWI_BUTTON
 register BUTTON_ID
 register BUTTON_PRESSED
 register BUTTON_DELAY
+register BUTTON_AWAY
 
 assign BUTTON_DELAY 100
+assign BUTTON_AWAY true
 
 break
 
@@ -23,7 +25,9 @@ sub
 		assign _SPR.y computing _SPR.y add 8
 		button left click at _SPR.x _SPR.y
 		delay for BUTTON_DELAY
-		button none at 10 10
+		when BUTTON_AWAY is true		
+			button none at 10 10
+		end
 		assign BUTTON_PRESSED true
 	end
 end
