@@ -22,8 +22,8 @@ assign SKILL_1.col 8
 #assign SKILL_3.row 1
 #assign SKILL_3.col 8
 
-#assign SKILL_4.row 2
-#assign SKILL_4.col 4
+assign SKILL_4.row 2
+assign SKILL_4.col 4
 
 #assign SKILL_5.row 2
 #assign SKILL_5.col 10
@@ -170,6 +170,9 @@ break
 
 ##################################################
 > SKILL_4
+
+key r for 500
+delay for 1000
 
 break
 
