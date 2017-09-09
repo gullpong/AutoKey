@@ -9,16 +9,15 @@ assign TIMER_1.dur 170
 assign TIMER_1.on true
 
 assign TIMER_2.dur 300
-assign TIMER_2.on true
 
 #assign TIMER_3.dur 10
 #assign TIMER_3.on true
 
-#assign SKILL_1.row 2
-#assign SKILL_1.col 7
+assign SKILL_1.row 2
+assign SKILL_1.col 8
 
-#assign SKILL_2.row 1
-#assign SKILL_2.col 6
+#assign SKILL_2.row 2
+#assign SKILL_2.col 9
 
 #assign SKILL_3.row 1
 #assign SKILL_3.col 8
@@ -47,8 +46,8 @@ break
 
 delay for 500
 
-#key b for 500
-#delay for 1000
+key b for 500
+delay for 1000
 
 key w for 500
 delay for 700
@@ -65,7 +64,7 @@ delay for 700
 key 8 for 500
 delay for 700
 
-#key 9 for 500
+key 9 for 500
 
 break
 
@@ -93,11 +92,12 @@ sync
 	end
 with
 	key x for 100
+	delay for 100
 	key x for 100
-	delay for 250
-	key d for 100
+	delay for 100
+	key a for 100
 end
-delay for 700
+delay for 600
 
 break
 
@@ -148,14 +148,15 @@ break
 ##################################################
 > SKILL_1
 
-key r for 500
+key g for 500
 
 break
 
 ##################################################
 > SKILL_2
 
-key g for 500
+key h for 500
+delay for 1500
 
 break
 
@@ -205,6 +206,10 @@ break
 > HAVEN_DUMPYARD_4
 
 import bot_maps.txt [MAP]
+
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 0
+
 
 break
 
