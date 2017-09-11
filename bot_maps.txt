@@ -200,6 +200,26 @@ break
 
 
 ##################################################
+> HAVEN_DUMPYARD_5
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 220
+assign MINIMAP.bm 130
+
+assign LAYOUT.lt 60
+assign LAYOUT.rt 140
+assign LAYOUT.tf 80
+assign LAYOUT.bc 90
+
+assign JUMP_UP_PERCENTAGE 60
+assign JUMP_DN_PERCENTAGE 60
+assign JUMP_DISABLE_COUNT 2
+
+break
+
+
+##################################################
 > LACHELN_CHICKEN_RUN_1
 
 assign MINIMAP.lt 10
