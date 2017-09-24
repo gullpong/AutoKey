@@ -5,6 +5,9 @@ snapshot
 import bot_settings.txt INITIALIZE
 import button_settings.txt INITIALIZE
 
+register MVPEXP_CHECK
+assign MVPEXP_CHECK true
+
 register TIMER_1 with dur on
 register TIMER_2 with dur on
 register TIMER_3 with dur on
@@ -466,6 +469,9 @@ with
 with
 	register _MVPEXP_COUNT
 	iterate forever
+		when MVPEXP_CHECK is false
+			finish iterate
+		end
 		import bot_settings.txt CHECK_MVPEXP
 		when MVPEXP_TEST is true
 			when _MVPEXP_COUNT is less than 5

@@ -5,6 +5,8 @@ assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 50
 assign POTION_MP_THOLD 30
 
+assign MVPEXP_CHECK false
+
 assign TIMER_1.dur 240
 assign TIMER_1.on true
 assign TIMER_2.dur 300
