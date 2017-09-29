@@ -1,0 +1,236 @@
+##################################################
+> SETUP
+
+assign POTION_HUD_TYPE 0
+assign POTION_HP_THOLD 40
+
+assign TIMER_1.dur 170
+assign TIMER_1.on true
+
+assign TIMER_2.dur 300
+
+#assign TIMER_3.dur 10
+#assign TIMER_3.on true
+
+#assign SKILL_1.row 2
+#assign SKILL_1.col 1
+
+#assign SKILL_2.row 2
+#assign SKILL_2.col 2
+
+#assign SKILL_3.row 1
+#assign SKILL_3.col 8
+
+#assign SKILL_4.row 2
+#assign SKILL_4.col 4
+
+#assign SKILL_5.row 2
+#assign SKILL_5.col 10
+
+assign TURN_AROUND_PERCENTAGE 0
+
+assign JUMP_STYLE 0
+assign JUMP_UP_PERCENTAGE 50
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 1
+
+register ATTACK_CYCLE
+assign ATTACK_CYCLE 0
+
+alias [MAP] among "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4" "HAVEN_DUMPYARD_5"
+import self [MAP]
+
+break
+
+
+##################################################
+> TIMER_1
+
+delay for 500
+
+key 9 for 500
+
+break
+
+
+##################################################
+> TIMER_2
+
+key = for 500
+
+break
+
+##################################################
+> TIMER_3
+
+break
+
+##################################################
+> ATTACK
+
+when ATTACK_CYCLE is equal to 0
+	sync
+		when STATUS_MOVING_RIGHT is true
+			key right for 1000
+		otherwise 
+			key left for 1000
+		end
+	with
+		key x for 200
+		key a for 800
+	end
+	sync
+		when STATUS_MOVING_RIGHT is true
+			key right for 1000
+		otherwise 
+			key left for 1000
+		end
+	with
+		key s for 500
+		delay for 500
+	end
+end
+
+when ATTACK_CYCLE is equal to 1
+	iterate 3 times
+		sync
+			when STATUS_MOVING_RIGHT is true
+				key right for 600
+			otherwise 
+				key left for 600
+			end
+		with
+			key e for 600
+		end
+	end
+end
+
+when ATTACK_CYCLE is equal to 2
+	sync
+		when STATUS_MOVING_RIGHT is true
+			key right for 1700
+		otherwise 
+			key left for 1700
+		end
+	with
+		key x for 200
+		key w for 1500
+	end
+	delay for 500
+end
+
+sync
+	iterate 10 times
+	end
+with
+	finish sync
+end
+
+increase ATTACK_CYCLE
+when ATTACK_CYCLE is greater than 1
+	assign ATTACK_CYCLE 0
+end
+
+break
+
+
+##################################################
+> SOAR
+
+delay for 100
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+with
+	key x for 200
+end
+sync
+	key up for 200
+with
+	key v for 200
+end
+delay for 500
+
+break
+
+
+##################################################
+> FALL
+
+sync
+	key down for 1200
+with
+	when STATUS_MOVING_RIGHT is true
+		key right for 200
+	otherwise 
+		key left for 200
+	end
+	key x for 100
+	key a for 100
+end
+#delay for 400
+
+break
+
+
+##################################################
+> SKILL_1
+
+key r for 500
+delay for 500
+
+break
+
+##################################################
+> SKILL_2
+
+key h for 500
+delay for 4000
+
+break
+
+##################################################
+> SKILL_3
+
+break
+
+##################################################
+> SKILL_4
+
+break
+
+##################################################
+> SKILL_5
+
+break
+
+
+##################################################
+> SPECIAL_CHECK
+
+break
+
+##################################################
+> SPECIAL_ACTION
+
+break
+
+
+##################################################
+##################################################
+##################################################
+> HAVEN_DUMPYARD_1
+> HAVEN_DUMPYARD_3
+> HAVEN_DUMPYARD_4
+> HAVEN_DUMPYARD_5
+
+import bot_maps.txt [MAP]
+
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 0
+
+break
+

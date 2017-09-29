@@ -52,7 +52,7 @@ assign JUMP_DISABLE_COUNT 2
 # Let's motor.
 assign MONITOR_DELAY 100
 
-alias [PLAYER] among "bot_union.txt" "bot_gyom.txt" "bot_kong.txt" "bot_yamjon.txt"
+alias [PLAYER] among "bot_union.txt" "bot_gyom.txt" "bot_kong.txt" "bot_dalkom.txt" "bot_yamjon.txt"
 import [PLAYER] SETUP
 
 
