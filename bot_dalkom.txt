@@ -32,7 +32,7 @@ assign TURN_AROUND_PERCENTAGE 0
 assign JUMP_STYLE 0
 assign JUMP_UP_PERCENTAGE 50
 assign JUMP_DN_PERCENTAGE 50
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_DISABLE_COUNT 3
 
 register ATTACK_CYCLE
 assign ATTACK_CYCLE 0
@@ -228,9 +228,6 @@ break
 > HAVEN_DUMPYARD_5
 
 import bot_maps.txt [MAP]
-
-assign JUMP_UP_PERCENTAGE 0
-assign JUMP_DN_PERCENTAGE 0
 
 break
 
