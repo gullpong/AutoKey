@@ -37,7 +37,7 @@ assign JUMP_DISABLE_COUNT 3
 register ATTACK_CYCLE
 assign ATTACK_CYCLE 0
 
-alias [MAP] among "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4" "HAVEN_DUMPYARD_5"
+alias [MAP] among "JOURNEY_RESTING_CAVE"
 import self [MAP]
 
 break
@@ -222,12 +222,14 @@ break
 ##################################################
 ##################################################
 ##################################################
-> HAVEN_DUMPYARD_1
-> HAVEN_DUMPYARD_3
-> HAVEN_DUMPYARD_4
-> HAVEN_DUMPYARD_5
+> JOURNEY_RESTING_CAVE
 
 import bot_maps.txt [MAP]
+
+assign JUMP_UP_PERCENTAGE 60
+assign JUMP_DN_PERCENTAGE 60
+assign JUMP_DISABLE_COUNT 2
+
 
 break
 
