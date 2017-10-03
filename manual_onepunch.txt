@@ -1,4 +1,3 @@
-import maple_story.txt INITIALIZE
 
 register IN with id stat x y
 

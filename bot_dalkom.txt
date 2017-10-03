@@ -152,7 +152,7 @@ sync
 with
 	key v for 200
 end
-delay for 500
+delay for 300
 
 break
 
@@ -226,8 +226,8 @@ break
 
 import bot_maps.txt [MAP]
 
-assign JUMP_UP_PERCENTAGE 60
-assign JUMP_DN_PERCENTAGE 60
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 2
 
 
