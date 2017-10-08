@@ -236,6 +236,25 @@ break
 
 
 ##################################################
+> CHURUP_CIRCLE_FOREST
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 140
+assign MINIMAP.bm 105
+
+assign LAYOUT.lt 27
+assign LAYOUT.rt 118
+assign LAYOUT.tf 75
+assign LAYOUT.bc 75
+
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
 > LACHELN_CHICKEN_RUN_1
 
 assign MINIMAP.lt 10
