@@ -2,38 +2,29 @@
 > SETUP
 
 assign POTION_HUD_TYPE 1
-assign POTION_HP_THOLD 40
-assign POTION_MP_THOLD 10
+assign POTION_HP_THOLD 50
+assign POTION_MP_THOLD 30
 
-assign TIMER_1.dur 170
+assign TIMER_1.dur 240
 assign TIMER_1.on true
-
 assign TIMER_2.dur 300
 
-#assign TIMER_3.dur 10
-#assign TIMER_3.on true
-
 assign SKILL_1.row 2
-assign SKILL_1.col 8
+assign SKILL_1.col 3
 
 assign SKILL_2.row 2
-assign SKILL_2.col 9
+assign SKILL_2.col 4
 
-#assign SKILL_3.row 1
-#assign SKILL_3.col 8
-
-assign SKILL_4.row 2
-assign SKILL_4.col 4
-
-#assign SKILL_5.row 2
-#assign SKILL_5.col 10
+assign SKILL_3.row 2
+assign SKILL_3.col 9
 
 assign TURN_AROUND_PERCENTAGE 0
 
 assign JUMP_STYLE 0
-assign JUMP_UP_PERCENTAGE 50
+assign JUMP_UP_PERCENTAGE 70
 assign JUMP_DN_PERCENTAGE 50
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_DISABLE_COUNT 2
+
 
 alias [MAP] among "MANUAL" "PATROL" "TIMETEMPLE_TWO_STORY" "TIMETEMPLE_FOUR_STORY" "DEFHQ_UFO_AISLE" "PERION_ABANDONED_SOUTH" "PERION_LONELY_BOULDER" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4" "HAVEN_DUMPYARD_5"
 import self [MAP]
@@ -44,15 +35,9 @@ break
 ##################################################
 > TIMER_1
 
-delay for 500
-
-key b for 500
 delay for 1000
 
 key w for 500
-delay for 700
-
-key 5 for 500
 delay for 700
 
 key 6 for 500
@@ -67,7 +52,6 @@ delay for 700
 key 9 for 500
 
 break
-
 
 ##################################################
 > TIMER_2
@@ -86,18 +70,15 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 500
+		key right for 1100
 	otherwise 
-		key left for 500
+		key left for 1100
 	end
 with
-	key x for 100
-	delay for 100
-	key x for 100
-	delay for 100
-	key a for 100
+	key a for 500
+	key v for 300
+	delay for 300
 end
-delay for 600
 
 break
 
@@ -105,23 +86,23 @@ break
 ##################################################
 > SOAR
 
-delay for 100
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
+		key right for 300
 	otherwise 
-		key left for 200
+		key left for 300
 	end
 with
-	key x for 200
-	key up for 50
-	key up for 50				
+	key x for 100
+	#key v for 300
+	delay for 300
+	sync
+		key up for 300
+	with
+		key v for 300
+	end
 end
-when STATUS_MOVING_RIGHT is true
-	key right for 800
-otherwise 
-	key left for 800
-end
+delay for 200
 
 break
 
@@ -138,9 +119,9 @@ with
 		key left for 200
 	end
 	key x for 100
-	key a for 100
+	#key v for 300
 end
-#delay for 400
+delay for 100
 
 break
 
@@ -148,42 +129,29 @@ break
 ##################################################
 > SKILL_1
 
-sync
-	when STATUS_MOVING_RIGHT is true
-		key right for 500
-	otherwise 
-		key left for 500
-	end
-with
-	key x for 100
-	delay for 100
-	key x for 100
-	delay for 100
-	key g for 100
-	key a for 100
-end
-delay for 600
+key e for 500
+delay for 1000
 
 break
 
 ##################################################
 > SKILL_2
 
-key h for 500
-delay for 500
+key r for 500
+delay for 1000
 
 break
 
 ##################################################
 > SKILL_3
 
+key h for 500
+delay for 1500
+
 break
 
 ##################################################
 > SKILL_4
-
-key r for 500
-delay for 1000
 
 break
 
@@ -215,27 +183,12 @@ break
 > PERION_ABANDONED_SOUTH
 > PERION_LONELY_BOULDER
 > PERION_ROUGH_WILDERNESS
-#> HAVEN_DUMPYARD_1
+> HAVEN_DUMPYARD_1
 > HAVEN_DUMPYARD_3
 > HAVEN_DUMPYARD_4
 > HAVEN_DUMPYARD_5
 
 import bot_maps.txt [MAP]
-
-assign JUMP_UP_PERCENTAGE 0
-assign JUMP_DN_PERCENTAGE 0
-
-break
-
-##################################################
-> HAVEN_DUMPYARD_1
-
-import bot_maps.txt [MAP]
-
-assign JUMP_UP_PERCENTAGE 0
-assign JUMP_DN_PERCENTAGE 50
-assign JUMP_DISABLE_COUNT 5
-
 
 break
 

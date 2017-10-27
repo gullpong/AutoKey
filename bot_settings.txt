@@ -218,7 +218,7 @@ assign ELITEBOSS_TEST false
 
 sub
 	register _SPR with x y	
-	sprite find _SPR for 2 using GWI_BOT by 20 over 39 437 59 456
+	sprite find _SPR for 2 using GWI_BOT over 39 437 59 456
 	when _SPR.x is greater than 0
 		assign ELITEBOSS_TEST true
 	end
@@ -235,49 +235,49 @@ assign MVPEXP_TEST false
 sub
 	register _READ with x y
 	iterate 1 times
-		read _READ for "°æ»Ñ" of 255 136 238 over 0 625 560 720
+		read _READ for "°æ»Ñ" of 255 136 238 over 0 660 560 755
 		when _READ.x is greater than 0
 			assign MVPEXP_TEST true
 			finish iterate
 		end
-		read _READ for "¤¡¤³" of 255 136 238 over 0 625 560 720
+		read _READ for "¤¡¤³" of 255 136 238 over 0 660 560 755
 		when _READ.x is greater than 0
 			assign MVPEXP_TEST true
 			finish iterate
 		end
-		read _READ for "¸¶°æ" of 255 136 238 over 0 625 560 720
-		when _READ.x is greater than 0
-			assign MVPEXP_TEST true
-			finish iterate
-		end
-
-		read _READ for "°æ»Ñ" of 68 34 0 over 0 625 560 720
-		when _READ.x is greater than 0
-			assign MVPEXP_TEST true
-			finish iterate
-		end
-		read _READ for "¤¡¤³" of 68 34 0 over 0 625 560 720
-		when _READ.x is greater than 0
-			assign MVPEXP_TEST true
-			finish iterate
-		end
-		read _READ for "¸¶°æ" of 68 34 0 over 0 625 560 720
+		read _READ for "¸¶°æ" of 255 136 238 over 0 660 560 755
 		when _READ.x is greater than 0
 			assign MVPEXP_TEST true
 			finish iterate
 		end
 
-		read _READ for "°æ»Ñ" of 119 0 68 over 0 625 560 720
+		read _READ for "°æ»Ñ" of 68 34 0 over 0 660 560 755
 		when _READ.x is greater than 0
 			assign MVPEXP_TEST true
 			finish iterate
 		end
-		read _READ for "¤¡¤³" of 119 0 68 over 0 625 560 720
+		read _READ for "¤¡¤³" of 68 34 0 over 0 660 560 755
 		when _READ.x is greater than 0
 			assign MVPEXP_TEST true
 			finish iterate
 		end
-		read _READ for "¸¶°æ" of 119 0 68 over 0 625 560 720
+		read _READ for "¸¶°æ" of 68 34 0 over 0 660 560 755
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+
+		read _READ for "°æ»Ñ" of 119 0 68 over 0 660 560 755
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¤¡¤³" of 119 0 68 over 0 660 560 755
+		when _READ.x is greater than 0
+			assign MVPEXP_TEST true
+			finish iterate
+		end
+		read _READ for "¸¶°æ" of 119 0 68 over 0 660 560 755
 		when _READ.x is greater than 0
 			assign MVPEXP_TEST true
 			finish iterate
