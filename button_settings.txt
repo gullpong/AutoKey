@@ -19,7 +19,7 @@ break
 
 sub
 	register _SPR with x y	
-	sprite find _SPR for BUTTON_ID using GWI_BUTTON over 0 0 1366 768
+	sprite find _SPR for BUTTON_ID using GWI_BUTTON by 20 over 0 0 1366 768
 	assign BUTTON_PRESSED false
 	when _SPR.x is greater than 0
 		assign _SPR.y computing _SPR.y add 8
@@ -57,6 +57,14 @@ import self CLICK_BUTTON
 when BUTTON_PRESSED is false
 	assign BUTTON_ID 3
 	import self CLICK_BUTTON
+	when BUTTON_PRESSED is false
+		assign BUTTON_ID 16
+		import self CLICK_BUTTON
+		when BUTTON_PRESSED is false
+			assign BUTTON_ID 17
+			import self CLICK_BUTTON
+		end
+	end
 end
 break
 
