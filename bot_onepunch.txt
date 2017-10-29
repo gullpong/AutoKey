@@ -1,8 +1,9 @@
 ##################################################
 > SETUP
 
-assign POTION_HUD_TYPE 0
+assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 40
+assign POTION_MP_THOLD 0
 
 assign MVPEXP_CHECK false
 
@@ -14,8 +15,8 @@ assign TIMER_2.dur 300
 #assign TIMER_3.dur 10
 #assign TIMER_3.on true
 
-assign SKILL_1.row 1
-assign SKILL_1.col 7
+#assign SKILL_1.row 1
+#assign SKILL_1.col 7
 
 #assign SKILL_2.row 2
 #assign SKILL_2.col 2
@@ -43,7 +44,7 @@ register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
 
 
-alias [MAP] among "MANUAL" "JOURNEY_RESTING_CAVE" "CHURUP_CIRCLE_FOREST"
+alias [MAP] among "MANUAL" "HAVEN_DUMPYARD_3" "JOURNEY_RESTING_CAVE"
 import self [MAP]
 
 break
@@ -57,7 +58,13 @@ delay for 500
 key b for 500
 delay for 1500
 
+key 7 for 500
+delay for 700
+
 key 9 for 500
+
+key 0 for 500
+
 
 break
 
@@ -75,62 +82,35 @@ break
 break
 
 ##################################################
-> ATTACK
+> PUNCH
 
-when ATTACK_CYCLE is equal to 0
-	sync
-		when STATUS_MOVING_RIGHT is true
-			key right for 1000
-		otherwise 
-			key left for 1000
-		end
-	with
-		key x for 200
-		key a for 800
-	end
-	sync
-		when STATUS_MOVING_RIGHT is true
-			key right for 1000
-		otherwise 
-			key left for 1000
-		end
-	with
-		key s for 500
-		delay for 500
-	end
-end
-
-when ATTACK_CYCLE is equal to 1
-	iterate 3 times
+iterate 2 times
+	when ATTACK_CYCLE is equal to 0
 		sync
-			when STATUS_MOVING_RIGHT is true
-				key right for 600
-			otherwise 
-				key left for 600
-			end
+			key w for 400
 		with
-			key e for 600
+			key 1 for 100
+			key 3 for 50
+			key 2 for 200
+			#key 3 for 50
 		end
-	end
-	delay for 300
-end
-
-when ATTACK_CYCLE is equal to 2
-	sync
-		when STATUS_MOVING_RIGHT is true
-			key right for 1700
-		otherwise 
-			key left for 1700
+		key x
+		delay for 100
+	otherwise	
+		sync
+			key w for 200
+			#key w for 100
+		with
+			key 4 for 200
+			#key 4 for 100
 		end
-	with
-		key x for 200
-		key w for 1500
+		key x
+		delay for 100
 	end
-	delay for 500
 end
 
 increase ATTACK_CYCLE
-when ATTACK_CYCLE is greater than 1
+when ATTACK_CYCLE is greater than 3
 	assign ATTACK_CYCLE 0
 end
 
@@ -138,24 +118,40 @@ break
 
 
 ##################################################
+> ATTACK
+
+when STATUS_MOVING_RIGHT is true
+	key right for 300
+otherwise 
+	key left for 300
+end
+key x for 100
+key x for 100
+delay for 200
+import self PUNCH
+
+break
+
+
+##################################################
 > SOAR
 
-delay for 100
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
+		key right for 500
 	otherwise 
-		key left for 200
+		key left for 500
 	end
 with
-	key x for 200
+	key x for 100
+	sync
+		key up for 400
+	with
+		delay for 200
+		key v for 200
+	end
 end
-sync
-	key up for 200
-with
-	key v for 200
-end
-delay for 300
+import self PUNCH
 
 break
 
@@ -172,9 +168,8 @@ with
 		key left for 200
 	end
 	key x for 100
-	key a for 100
+	import self PUNCH
 end
-#delay for 400
 
 break
 
@@ -255,29 +250,23 @@ break
 import bot_maps.txt [MAP]
 
 assign JUMP_UP_PERCENTAGE 80
-assign JUMP_DN_PERCENTAGE 60
-assign JUMP_DISABLE_COUNT 1
-
-break
 
 ##################################################
 > JOURNEY_RESTING_CAVE
 
 import bot_maps.txt [MAP]
-
-assign JUMP_UP_PERCENTAGE 80
-assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DN_PERCENTAGE 60
 assign JUMP_DISABLE_COUNT 2
 
 break
 
+
 ##################################################
-> CHURUP_CIRCLE_FOREST
+> HAVEN_DUMPYARD_3
 
 import bot_maps.txt [MAP]
-
-assign JUMP_UP_PERCENTAGE 100
-assign JUMP_DN_PERCENTAGE 70
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 50
+assign JUMP_DISABLE_COUNT 2
 
 break
