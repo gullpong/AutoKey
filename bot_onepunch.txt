@@ -3,14 +3,14 @@
 
 assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 40
-assign POTION_MP_THOLD 0
+assign POTION_MP_THOLD 10
 
 assign MVPEXP_CHECK false
 
 assign TIMER_1.dur 160
 assign TIMER_1.on true
 
-assign TIMER_2.dur 300
+#assign TIMER_2.dur 300
 
 #assign TIMER_3.dur 10
 #assign TIMER_3.on true
