@@ -8,6 +8,7 @@ assign POTION_MP_THOLD 30
 assign TIMER_1.dur 240
 assign TIMER_1.on true
 assign TIMER_2.dur 300
+assign TIMER_3.dur 8
 
 assign SKILL_1.row 2
 assign SKILL_1.col 3
@@ -62,6 +63,9 @@ break
 
 ##################################################
 > TIMER_3
+
+key f for 500
+delay for 500
 
 break
 

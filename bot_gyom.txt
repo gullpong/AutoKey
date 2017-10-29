@@ -243,7 +243,7 @@ when _SPR.x is greater than 0
 	assign FLAMEWOLF_CHECK true
 end
 
-read _READ for "화살을" of 255 170 170 over 0 705 560 720
+read _READ for "화살을" of 255 170 170 over 0 735 560 755
 when _READ.x is greater than 0
 	when TIMER_1_COUNT is less than 0
 		assign TIMER_1.on true
