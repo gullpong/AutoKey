@@ -195,4 +195,3 @@ break
 import bot_maps.txt [MAP]
 
 break
-
