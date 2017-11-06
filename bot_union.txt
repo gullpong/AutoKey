@@ -8,16 +8,16 @@ assign POTION_MP_THOLD 30
 assign TIMER_1.dur 240
 assign TIMER_1.on true
 assign TIMER_2.dur 300
-assign TIMER_3.dur 8
+#assign TIMER_3.dur 8
 
-assign SKILL_1.row 2
-assign SKILL_1.col 3
+#assign SKILL_1.row 2
+#assign SKILL_1.col 3
 
-assign SKILL_2.row 2
-assign SKILL_2.col 4
+#assign SKILL_2.row 2
+#assign SKILL_2.col 4
 
-assign SKILL_3.row 2
-assign SKILL_3.col 9
+#assign SKILL_3.row 2
+#assign SKILL_3.col 9
 
 assign TURN_AROUND_PERCENTAGE 0
 
@@ -38,8 +38,8 @@ break
 
 delay for 1000
 
-key w for 500
-delay for 700
+#key w for 500
+#delay for 700
 
 key 6 for 500
 delay for 700
@@ -50,7 +50,7 @@ delay for 700
 key 8 for 500
 delay for 700
 
-key 9 for 500
+#key 9 for 500
 
 break
 

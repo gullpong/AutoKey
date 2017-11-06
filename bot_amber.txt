@@ -5,18 +5,18 @@ assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 50
 assign POTION_MP_THOLD 30
 
-assign TIMER_1.dur 240
+assign TIMER_1.dur 360
 assign TIMER_1.on true
-#assign TIMER_2.dur 300
+assign TIMER_2.dur 300
 
 assign SKILL_1.row 2
-assign SKILL_1.col 3
+assign SKILL_1.col 4
 
 assign SKILL_2.row 2
-assign SKILL_2.col 6
+assign SKILL_2.col 9
 
 assign SKILL_3.row 2
-assign SKILL_3.col 10
+assign SKILL_3.col 8
 
 assign TURN_AROUND_PERCENTAGE 0
 
@@ -26,7 +26,7 @@ assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 1
 
 
-alias [MAP] among "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
+alias [MAP] among "TIMETEMPLE_TWO_STORY" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4"
 import self [MAP]
 
 break
@@ -47,9 +47,6 @@ key 7 for 500
 delay for 700
 
 key 8 for 500
-delay for 700
-
-key h for 500
 delay for 700
 
 key 9 for 500
@@ -80,8 +77,8 @@ sync
 with
 	key x for 100
 	delay for 200	
+	key d for 300
 	key v for 300
-	key s for 300
 end
 delay for 200
 
@@ -99,12 +96,12 @@ sync
 	end
 with
 	key x for 100
-	key v for 300
+	key d for 300
 	#delay for 250
 	sync
 		key up for 300
 	with
-		key s for 300
+		key v for 300
 	end
 end
 delay for 200
@@ -124,7 +121,7 @@ with
 		key left for 200
 	end
 	key x for 100
-	key v for 300
+	key d for 300
 end
 
 break
@@ -133,7 +130,7 @@ break
 ##################################################
 > SKILL_1
 
-key e for 500
+key r for 500
 delay for 500
 
 break
@@ -141,7 +138,7 @@ break
 ##################################################
 > SKILL_2
 
-key g for 500
+key h for 500
 delay for 1000
 
 break
@@ -149,7 +146,7 @@ break
 ##################################################
 > SKILL_3
 
-key 0 for 500
+key g for 500
 delay for 1000
 
 break
@@ -179,6 +176,8 @@ break
 ##################################################
 ##################################################
 ##################################################
+##################################################
+> TIMETEMPLE_TWO_STORY
 > PERION_ROUGH_WILDERNESS
 > HAVEN_DUMPYARD_3
 > HAVEN_DUMPYARD_4
