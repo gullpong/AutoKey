@@ -27,7 +27,7 @@ assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 2
 
 
-alias [MAP] among "MANUAL" "PATROL" "TIMETEMPLE_TWO_STORY" "TIMETEMPLE_FOUR_STORY" "DEFHQ_UFO_AISLE" "PERION_ABANDONED_SOUTH" "PERION_LONELY_BOULDER" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4" "HAVEN_DUMPYARD_5"
+alias [MAP] among "MANUAL" "PATROL" "MAGATIA_KEEP_OUT" "TIMETEMPLE_TWO_STORY" "TIMETEMPLE_FOUR_STORY" "DEFHQ_UFO_AISLE" "PERION_ABANDONED_SOUTH" "PERION_LONELY_BOULDER" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4" "HAVEN_DUMPYARD_5"
 import self [MAP]
 
 break
@@ -38,11 +38,14 @@ break
 
 delay for 1000
 
+key b for 500
+delay for 1500
+
 #key w for 500
 #delay for 700
 
-key 6 for 500
-delay for 700
+#key 6 for 500
+#delay for 700
 
 key 7 for 500
 delay for 700
@@ -74,15 +77,17 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 1100
+		key right for 500
 	otherwise 
-		key left for 1100
+		key left for 500
 	end
 with
-	key a for 500
-	key v for 300
-	delay for 300
+	key x for 100
+	key x for 100
+	#delay for 200
+	key a for 200
 end
+delay for 500
 
 break
 
@@ -123,9 +128,9 @@ with
 		key left for 200
 	end
 	key x for 100
-	#key v for 300
+	key a for 300
 end
-delay for 100
+#delay for 100
 
 break
 
@@ -181,6 +186,7 @@ break
 ##################################################
 > MANUAL
 > PATROL
+> MAGATIA_KEEP_OUT
 > TIMETEMPLE_TWO_STORY
 > TIMETEMPLE_FOUR_STORY
 > DEFHQ_UFO_AISLE

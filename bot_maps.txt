@@ -21,6 +21,25 @@ break
 
 
 ##################################################
+> MAGATIA_KEEP_OUT
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 190
+assign MINIMAP.bm 100
+
+assign LAYOUT.lt 30
+assign LAYOUT.rt 165
+assign LAYOUT.tf 81
+assign LAYOUT.bc 81
+
+assign JUMP_UP_PERCENTAGE 0
+assign JUMP_DN_PERCENTAGE 0
+
+break
+
+
+##################################################
 > TIMETEMPLE_TWO_STORY
 
 assign MINIMAP.lt 0
