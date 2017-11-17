@@ -487,4 +487,5 @@ with
 	# =========================================================
 end
 
-sound alert
+#sound alert
+sound cool

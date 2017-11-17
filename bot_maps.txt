@@ -80,6 +80,26 @@ break
 
 
 ##################################################
+> KTOWER_CAFE
+
+assign MINIMAP.lt 0
+assign MINIMAP.tp 60
+assign MINIMAP.rt 190
+assign MINIMAP.bm 135
+
+assign LAYOUT.lt 55
+assign LAYOUT.rt 165
+assign LAYOUT.tf 90
+assign LAYOUT.bc 108
+
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 30
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
 > DEFHQ_UFO_AISLE
 
 assign MINIMAP.lt 0
