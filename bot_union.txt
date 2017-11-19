@@ -5,16 +5,16 @@ assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 50
 assign POTION_MP_THOLD 30
 
-assign TIMER_1.dur 240
+assign TIMER_1.dur 180
 assign TIMER_1.on true
 assign TIMER_2.dur 300
-#assign TIMER_3.dur 8
+assign TIMER_3.dur 5
 
 assign SKILL_1.row 2
-assign SKILL_1.col 8
+assign SKILL_1.col 2
 
 #assign SKILL_2.row 2
-#assign SKILL_2.col 4
+#assign SKILL_2.col 9
 
 #assign SKILL_3.row 2
 #assign SKILL_3.col 9
@@ -30,10 +30,6 @@ assign JUMP_DISABLE_COUNT 2
 alias [MAP] among "MANUAL" "PATROL" "MAGATIA_KEEP_OUT" "TIMETEMPLE_TWO_STORY" "TIMETEMPLE_FOUR_STORY" "KTOWER_CAFE" "DEFHQ_UFO_AISLE" "PERION_ABANDONED_SOUTH" "PERION_LONELY_BOULDER" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4" "HAVEN_DUMPYARD_5"
 import self [MAP]
 
-register CLIMBING
-
-register PREV_POS
-
 break
 
 
@@ -42,11 +38,11 @@ break
 
 delay for 1000
 
-key b for 500
-delay for 1500
+#key b for 500
+#delay for 1500
 
-#key w for 500
-#delay for 700
+key 5 for 500
+delay for 700
 
 key 6 for 500
 delay for 700
@@ -57,7 +53,7 @@ delay for 700
 key 8 for 500
 delay for 700
 
-key 9 for 500
+#key 9 for 500
 
 break
 
@@ -71,8 +67,7 @@ break
 ##################################################
 > TIMER_3
 
-key f for 500
-delay for 500
+key e for 100
 
 break
 
@@ -87,9 +82,8 @@ sync
 	end
 with
 	key x for 100
-#	delay for 100
-#	key x for 100
-	key d for 200
+	key x for 100
+	key f for 100
 end
 delay for 600
 
@@ -99,12 +93,12 @@ break
 ##################################################
 > SOAR
 
-assign _RANDOM random over 600
-when STATUS_MOVING_RIGHT is true
-	key right for _RANDOM
-otherwise
-	key left for _RANDOM
-end
+#assign _RANDOM random over 600
+#when STATUS_MOVING_RIGHT is true
+#	key right for _RANDOM
+#otherwise
+#	key left for _RANDOM
+#end
 
 sync
 	when STATUS_MOVING_RIGHT is true
@@ -141,7 +135,12 @@ with
 	delay for 100
 	key x for 100
 	delay for 300
-	key d for 200
+	assign _RANDOM random over 100
+	when _RANDOM is less than 20
+		key f for 100
+	otherwise
+		key d for 200
+	end
 	delay for 200
 	finish sync
 end
@@ -204,7 +203,7 @@ break
 ##################################################
 > SKILL_2
 
-key r for 500
+key h for 500
 delay for 1000
 
 break
@@ -250,15 +249,13 @@ break
 > KTOWER_CAFE
 > PERION_ABANDONED_SOUTH
 > PERION_LONELY_BOULDER
-> PERION_ROUGH_WILDERNESS
 > HAVEN_DUMPYARD_1
 > HAVEN_DUMPYARD_3
-> HAVEN_DUMPYARD_4
 > HAVEN_DUMPYARD_5
 
 import bot_maps.txt [MAP]
 
-assign JUMP_UP_PERCENTAGE 100
+assign JUMP_UP_PERCENTAGE 0
 assign JUMP_DN_PERCENTAGE 0
 assign JUMP_DISABLE_COUNT 0
 
@@ -266,9 +263,23 @@ break
 
 ##################################################
 > DEFHQ_UFO_AISLE
+> HAVEN_DUMPYARD_4
 
 import bot_maps.txt [MAP]
 
 assign JUMP_UP_PERCENTAGE 60
 assign JUMP_DN_PERCENTAGE 30
 assign JUMP_DISABLE_COUNT 0
+
+break
+
+##################################################
+> PERION_ROUGH_WILDERNESS
+
+import bot_maps.txt [MAP]
+
+assign JUMP_UP_PERCENTAGE 80
+assign JUMP_DN_PERCENTAGE 40
+assign JUMP_DISABLE_COUNT 0
+
+break
