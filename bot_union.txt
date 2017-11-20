@@ -74,45 +74,41 @@ break
 ##################################################
 > ATTACK
 
-assign _RANDOM random over 100
-when _RANDOM is less than 50
-	sync
-		when STATUS_MOVING_RIGHT is true
-			key right for 300
-		otherwise 
-			key left for 300
-		end
-	with
-		key x for 100
-		key x for 100
-		key d for 100
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 300
+	otherwise 
+		key left for 300
 	end
-	delay for 700
-
-otherwise
-	sync
-		when STATUS_MOVING_RIGHT is true
-			key right for 600
-		otherwise 
-			key left for 600
-		end
-	with
-		key x for 100
-		delay for 100
-		key x for 100
-		delay for 100
-		key x for 100
-		delay for 150
-		key d for 100
-	end
-	delay for 700
+with
+	key x for 100
+	key x for 100
+	key d for 100
 end
+delay for 700
 
 break
 
 
 ##################################################
 > SOAR
+
+sync
+	when STATUS_MOVING_RIGHT is true
+		key right for 600
+	otherwise 
+		key left for 600
+	end
+with
+	key x for 100
+	delay for 100
+	key x for 100
+	delay for 100
+	key x for 100
+	delay for 150
+	key d for 100
+end
+delay for 700
 
 break
 
@@ -199,7 +195,7 @@ break
 
 import bot_maps.txt [MAP]
 
-assign JUMP_UP_PERCENTAGE 0
+assign JUMP_UP_PERCENTAGE 70
 assign JUMP_DN_PERCENTAGE 0
 assign JUMP_DISABLE_COUNT 0
 
