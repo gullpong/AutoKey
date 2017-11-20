@@ -84,11 +84,11 @@ break
 
 assign MINIMAP.lt 0
 assign MINIMAP.tp 60
-assign MINIMAP.rt 190
+assign MINIMAP.rt 170
 assign MINIMAP.bm 135
 
-assign LAYOUT.lt 55
-assign LAYOUT.rt 165
+assign LAYOUT.lt 35
+assign LAYOUT.rt 145
 assign LAYOUT.tf 90
 assign LAYOUT.bc 108
 

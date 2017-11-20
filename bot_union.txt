@@ -8,13 +8,13 @@ assign POTION_MP_THOLD 30
 assign TIMER_1.dur 180
 assign TIMER_1.on true
 assign TIMER_2.dur 300
-assign TIMER_3.dur 5
+assign TIMER_3.dur 8
 
 assign SKILL_1.row 2
 assign SKILL_1.col 2
 
-#assign SKILL_2.row 2
-#assign SKILL_2.col 9
+assign SKILL_2.row 2
+assign SKILL_2.col 8
 
 #assign SKILL_3.row 2
 #assign SKILL_3.col 9
@@ -38,8 +38,8 @@ break
 
 delay for 1000
 
-#key b for 500
-#delay for 1500
+key b for 500
+delay for 1500
 
 key 5 for 500
 delay for 700
@@ -53,7 +53,7 @@ delay for 700
 key 8 for 500
 delay for 700
 
-#key 9 for 500
+key 9 for 500
 
 break
 
@@ -74,101 +74,45 @@ break
 ##################################################
 > ATTACK
 
-sync
-	when STATUS_MOVING_RIGHT is true
-		key right for 300
-	otherwise 
-		key left for 300
+assign _RANDOM random over 100
+when _RANDOM is less than 50
+	sync
+		when STATUS_MOVING_RIGHT is true
+			key right for 300
+		otherwise 
+			key left for 300
+		end
+	with
+		key x for 100
+		key x for 100
+		key d for 100
 	end
-with
-	key x for 100
-	key x for 100
-	key f for 100
+	delay for 700
+
+otherwise
+	sync
+		when STATUS_MOVING_RIGHT is true
+			key right for 600
+		otherwise 
+			key left for 600
+		end
+	with
+		key x for 100
+		delay for 100
+		key x for 100
+		delay for 100
+		key x for 100
+		delay for 150
+		key d for 100
+	end
+	delay for 700
 end
-delay for 600
 
 break
 
 
 ##################################################
 > SOAR
-
-#assign _RANDOM random over 600
-#when STATUS_MOVING_RIGHT is true
-#	key right for _RANDOM
-#otherwise
-#	key left for _RANDOM
-#end
-
-sync
-	when STATUS_MOVING_RIGHT is true
-		key right for 100
-	otherwise
-		key left for 100
-	end
-with
-	key x for 100
-end
-
-assign CLIMBING 0
-sync
-	key up for 500
-with
-	assign PREV_POS 0	
-	iterate forever
-		snapshot
-		import bot_settings.txt LOCATE_PLAYER
-		when PLAYER_POS.x is not below 0
-			when PREV_POS is equal to PLAYER_POS.x
-				increase CLIMBING
-			otherwise
-				assign CLIMBING 0
-			end
-		end
-		when CLIMBING is greater than 1
-			finish sync
-		end
-		assign PREV_POS PLAYER_POS.x	
-		delay for 100
-	end
-with
-	delay for 100
-	key x for 100
-	delay for 300
-	assign _RANDOM random over 100
-	when _RANDOM is less than 20
-		key f for 100
-	otherwise
-		key d for 200
-	end
-	delay for 200
-	finish sync
-end
-	
-when CLIMBING is greater than 1
-	assign PREV_POS 999
-	iterate 20 times
-		snapshot
-		import bot_settings.txt LOCATE_PLAYER
-		when PLAYER_POS.y is not below 0
-			when PREV_POS is not above PLAYER_POS.y
-				finish iterate
-			end
-		end
-		assign PREV_POS PLAYER_POS.y
-		key up for 200
-	end
-	when STATUS_MOVING_RIGHT is false
-		key right for 100
-	otherwise
-		key left for 100
-	end	
-	key d for 200
-	delay for 600
-	
-otherwise
-	delay for 400
-end
 
 break
 
@@ -195,7 +139,7 @@ break
 ##################################################
 > SKILL_1
 
-key g for 500
+key w for 500
 delay for 1000
 
 break
