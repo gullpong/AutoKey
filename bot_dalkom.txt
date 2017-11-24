@@ -38,14 +38,27 @@ assign JUMP_DISABLE_COUNT 3
 
 register ATTACK_CYCLE
 assign ATTACK_CYCLE 0
+register ATTACK_CYCLE_MAX
 
 register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
 
-
 alias [MAP] among "MANUAL" "JOURNEY_RESTING_CAVE" "CHURUP_CIRCLE_FOREST"
 import self [MAP]
 
+alias [ATTACK_COMBO] among "CURVE" "CURVE-WIND"
+import self [ATTACK_COMBO]
+
+break
+
+##################################################
+> CURVE
+assign ATTACK_CYCLE_MAX 1
+break
+
+##################################################
+> CURVE-WIND
+assign ATTACK_CYCLE_MAX 2
 break
 
 
@@ -130,7 +143,7 @@ when ATTACK_CYCLE is equal to 2
 end
 
 increase ATTACK_CYCLE
-when ATTACK_CYCLE is greater than 1
+when ATTACK_CYCLE is greater than ATTACK_CYCLE_MAX
 	assign ATTACK_CYCLE 0
 end
 
