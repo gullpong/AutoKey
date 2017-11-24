@@ -46,18 +46,18 @@ assign FLAMEWOLF_CHECK false
 alias [MAP] among "MANUAL" "JOURNEY_RESTING_CAVE" "CHURUP_CIRCLE_FOREST"
 import self [MAP]
 
-alias [ATTACK_COMBO] among "CURVE" "CURVE-WIND"
+alias [ATTACK_COMBO] among "AC" "ACW"
 import self [ATTACK_COMBO]
 
 break
 
 ##################################################
-> CURVE
+> AC
 assign ATTACK_CYCLE_MAX 1
 break
 
 ##################################################
-> CURVE-WIND
+> ACW
 assign ATTACK_CYCLE_MAX 2
 break
 
