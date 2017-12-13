@@ -43,7 +43,7 @@ register ATTACK_CYCLE_MAX
 register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
 
-alias [MAP] among "MANUAL" "JOURNEY_RESTING_CAVE" "CHURUP_CIRCLE_FOREST"
+alias [MAP] among "MANUAL" "JOURNEY_RESTING_CAVE" "CHEWCHEW_CIRCLE_FOREST"
 import self [MAP]
 
 alias [ATTACK_COMBO] among "AC" "ACW"
@@ -285,7 +285,7 @@ assign JUMP_DISABLE_COUNT 2
 break
 
 ##################################################
-> CHURUP_CIRCLE_FOREST
+> CHEWCHEW_CIRCLE_FOREST
 
 import bot_maps.txt [MAP]
 
