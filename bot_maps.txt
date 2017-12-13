@@ -275,7 +275,7 @@ break
 
 
 ##################################################
-> CHURUP_CIRCLE_FOREST
+> CHEWCHEW_CIRCLE_FOREST
 
 assign MINIMAP.lt 0
 assign MINIMAP.tp 60
