@@ -2,8 +2,8 @@
 > SETUP
 
 assign POTION_HUD_TYPE 1
-assign POTION_HP_THOLD 35
-assign POTION_MP_THOLD 10
+assign POTION_HP_THOLD 20
+assign POTION_MP_THOLD 5
 
 assign MVPEXP_CHECK false
 
