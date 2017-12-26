@@ -1,0 +1,61 @@
+exclusive
+snapshot
+snapshot
+
+gawi fishing.gwi as GWI_FISHING
+
+register _SPR with x y
+
+register FISHING_ON
+assign FISHING_ON false
+
+register HOLD_COUNT
+assign HOLD_COUNT 0
+
+register SPACE_DOWN
+assign SPACE_DOWN false
+
+iterate forever
+	snapshot
+	
+	sprite find _SPR for 0 using GWI_FISHING by 40 over 0 0 1366 768
+	when _SPR.x is greater than 0
+	
+		assign FISHING_ON true	
+		assign SPACE_DOWN true
+
+		sprite find _SPR for 2 using GWI_FISHING by 20 over 0 0 1366 768
+		when _SPR.x is greater than 0
+			when HOLD_COUNT is greater than 0
+				assign HOLD_COUNT 0
+				assign SPACE_DOWN false
+			otherwise
+				assign SPACE_DOWN true
+			end
+			increase HOLD_COUNT
+			
+		otherwise
+			assign HOLD_COUNT 0
+			sprite find _SPR for 3 using GWI_FISHING by 20 over 0 0 1366 768
+			when _SPR.x is greater than 0
+				assign SPACE_DOWN false
+			end
+		end
+		
+		when SPACE_DOWN is true
+			key space down
+		otherwise
+			key space up
+		end
+		delay for 50
+
+	otherwise
+		when FISHING_ON is true
+			key space up
+		end
+		assign FISHING_ON false
+		assign HOLD_COUNT 0
+		delay for 100
+	end
+
+end
