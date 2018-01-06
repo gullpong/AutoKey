@@ -1,5 +1,7 @@
 *.cfg
 
+*.pyc
+
 *.bmp
 *.png
 
