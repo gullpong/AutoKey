@@ -48,21 +48,21 @@ break
 
 sub
 	register _IN with id stat x y
-	
+
 	delay for 500
 	sound plus
 	hook _IN with button left up
 	sound click
 	assign MINIMAP.lt _IN.x
 	assign MINIMAP.tp _IN.y
-	
+
 	delay for 500
 	sound plus
 	hook _IN with button left up
 	sound click
 	assign MINIMAP.rt _IN.x
 	assign MINIMAP.bm _IN.y
-	
+
 	delay for 500
 	sound plus
 	hook _IN with button left up
@@ -86,7 +86,7 @@ sub
 	hook _IN with button left up
 	sound click
 	assign LAYOUT.bc _IN.y
-	
+
 	delay for 500
 	sound cool
 	hook _IN with key space down
@@ -102,20 +102,20 @@ break
 sub
 	register _IN with id stat x y
 
-	delay for 500	
+	delay for 500
 	sound plus
 	hook _IN with button left up
 	sound click
 	assign MINIMAP.lt _IN.x
 	assign MINIMAP.tp _IN.y
-	
+
 	delay for 500
 	sound plus
 	hook _IN with button left up
 	sound click
 	assign MINIMAP.rt _IN.x
 	assign MINIMAP.bm _IN.y
-	
+
 	delay for 500
 	sound plus
 	hook _IN with button left up
@@ -127,7 +127,7 @@ sub
 	hook _IN with button left up
 	sound click
 	assign LAYOUT.rt _IN.x
-	
+
 	delay for 500
 	sound cool
 	hook _IN with key space down
@@ -185,7 +185,7 @@ break
 assign STONE_TEST false
 
 sub
-	register _SPR with x y	
+	register _SPR with x y
 	sprite find _SPR for 1 using GWI_BOT by 20 over 0 0 1360 600
 	when _SPR.x is greater than 0
 		assign STONE_TEST true
@@ -217,7 +217,7 @@ break
 assign ELITEBOSS_TEST false
 
 sub
-	register _SPR with x y	
+	register _SPR with x y
 	sprite find _SPR for 2 using GWI_BOT over 39 437 59 456
 	when _SPR.x is greater than 0
 		assign ELITEBOSS_TEST true
@@ -297,10 +297,10 @@ sub
 	assign _LOCATED false
 	iterate 10 times
 		snapshot
-		register _SPR with x y	
+		register _SPR with x y
 		sprite find _SPR for 4 using GWI_BOT by 20 over 0 686 1360 768
 		when _SPR.x is greater than 0
-			assign POTION_BAR computing _SPR.x add 1		
+			assign POTION_BAR computing _SPR.x add 1
 			assign _LOCATED true
 			finish iterate
 		end
@@ -325,22 +325,22 @@ sub
 	register _END
 	assign _END computing POTION_BAR add 164
 
-	when POTION_HUD_TYPE is equal to 1	
+	when POTION_HUD_TYPE is equal to 1
 		assign _POR computing POTION_HP_THOLD mul 164
 		assign _POR computing _POR div 100
 		blob _BLOB lighter 240 60 150 by 0 over POTION_BAR 717 _END 717
 		when _BLOB.width is less than _POR
 			assign POTION_TEST true
-		otherwise		
+		otherwise
 			assign _POR computing POTION_MP_THOLD mul 164
 			assign _POR computing _POR div 100
 			blob _BLOB lighter 0 210 230 by 0 over POTION_BAR 733 _END 733
 			when _BLOB.num is less than _POR
 				assign POTION_TEST true
-			end		
+			end
 		end
 	end
-	
+
 	when POTION_HUD_TYPE is equal to 2
 		assign _POR computing POTION_HP_THOLD mul 164
 		assign _POR computing _POR div 100
@@ -362,10 +362,10 @@ sub
 	assign _LOCATED false
 	iterate 10 times
 		snapshot
-		register _SPR with x y	
+		register _SPR with x y
 		sprite find _SPR for 0 using GWI_BOT over 0 686 1360 768
 		when _SPR.x is greater than 0
-			assign SKILL_BAR computing _SPR.x add 4		
+			assign SKILL_BAR computing _SPR.x add 4
 			assign _LOCATED true
 			finish iterate
 		end
@@ -382,21 +382,37 @@ break
 #########################################################
 > CHECK_SKILL
 
-assign SKILL_TEST true
+assign SKILL_TEST false
 
 sub
+	register _BASE with x y
+	assign _BASE.x computing SKILL_INDEX.col mul 35
+	assign _BASE.x computing _BASE.x add SKILL_BAR
+	assign _BASE.y computing SKILL_INDEX.row mul 35
+	assign _BASE.y computing _BASE.y add 688
+
 	register _BLOB with x y width height num lt tp rt bm
 	register _POS with lt tp rt bm
-	assign _POS.lt computing SKILL_INDEX.col mul 35
-	assign _POS.lt computing _POS.lt add SKILL_BAR
-	assign _POS.rt computing _POS.lt add 25	
-	assign _POS.tp computing SKILL_INDEX.row mul 35
-	assign _POS.tp computing _POS.tp add 719
-	assign _POS.bm computing _POS.tp add 0
-	
-	blob _BLOB for 0 0 0 over _POS.lt _POS.tp _POS.rt _POS.bm
-	when _BLOB.num is greater than 10
-		assign SKILL_TEST false
+
+	assign _POS.lt computing _BASE.x add 0
+	assign _POS.rt computing _BASE.x add 5
+	assign _POS.tp computing _BASE.y add 2
+	assign _POS.bm computing _BASE.y add 9
+	blob _BLOB for 221 221 221 over _POS.lt _POS.tp _POS.rt _POS.bm
+	when _BLOB.num is greater than 0
+
+		blob _BLOB for 102 102 102 over _POS.lt _POS.tp _POS.rt _POS.bm
+		when _BLOB.num is greater than 0
+
+			assign _POS.lt computing _BASE.x add 0
+			assign _POS.rt computing _BASE.x add 25
+			assign _POS.tp computing _BASE.y add 31
+			assign _POS.bm computing _BASE.y add 31
+			blob _BLOB lighter 1 1 1 by 0 over _POS.lt _POS.tp _POS.rt _POS.bm
+			when _BLOB.num is greater than 10
+				assign SKILL_TEST true
+			end
+		end
 	end
 end
 
@@ -410,9 +426,9 @@ assign SCREEN_ENABLED false
 
 sub
 	register _SPR with x y
-	
+
 	snapshot
-	
+
 	sprite find _SPR for 5 using GWI_BOT over 0 0 1360 768
 	when _SPR.x is greater than 0
 		assign SCREEN_CHECK_N.en true
@@ -452,9 +468,9 @@ sub
 		assign SCREEN_CHECK_E.bm computing _SPR.y add 362
 		assign SCREEN_ENABLED true
 	end
-	
+
 	when SCREEN_ENABLED is true
-		crop SCREEN_CHECK_N.lt SCREEN_CHECK_N.tp SCREEN_CHECK_N.rt SCREEN_CHECK_N.bm into GWI_SCREEN 
+		crop SCREEN_CHECK_N.lt SCREEN_CHECK_N.tp SCREEN_CHECK_N.rt SCREEN_CHECK_N.bm into GWI_SCREEN
 		crop SCREEN_CHECK_W.lt SCREEN_CHECK_W.tp SCREEN_CHECK_W.rt SCREEN_CHECK_W.bm into GWI_SCREEN
 		crop SCREEN_CHECK_S.lt SCREEN_CHECK_S.tp SCREEN_CHECK_S.rt SCREEN_CHECK_S.bm into GWI_SCREEN
 		crop SCREEN_CHECK_E.lt SCREEN_CHECK_E.tp SCREEN_CHECK_E.rt SCREEN_CHECK_E.bm into GWI_SCREEN
@@ -480,7 +496,7 @@ sub
 					finish iterate
 				end
 			end
-			
+
 			when SCREEN_CHECK_W.en is true
 				sprite diff _BLOB for 1 using GWI_SCREEN at SCREEN_CHECK_W.lt SCREEN_CHECK_W.tp
 				when _BLOB.num is greater than 1000

@@ -18,12 +18,17 @@ register SKILL_3 with row col thold on
 register SKILL_4 with row col thold on
 register SKILL_5 with row col thold on
 
+register BOT_POS with x y
+
 register TURN_AROUND_PERCENTAGE
 
 register JUMP_STYLE
 register JUMP_UP_PERCENTAGE
 register JUMP_DN_PERCENTAGE
 register JUMP_DISABLE_COUNT
+
+register DEFAULT_ATTACK_WIDTH
+register DEFAULT_JUMP_HEIGHT
 
 
 ################################################################
@@ -49,6 +54,10 @@ assign JUMP_UP_PERCENTAGE 50
 assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 2
 
+assign DEFAULT_ATTACK_WIDTH 25
+assign DEFAULT_JUMP_HEIGHT 30
+
+
 # Let's motor.
 assign MONITOR_DELAY 100
 
@@ -64,8 +73,9 @@ register _READ with x y
 register _IN with id stat x y
 register _RANDOM
 register _PREV with x y
-register _STP with h v
 
+register STATUS_POSX_UNKNOWN
+register STATUS_POSY_UNKNOWN
 register STATUS_MOVING_RIGHT
 register STATUS_JUMPING_UP
 register STATUS_TURNED_AROUND
@@ -92,9 +102,9 @@ sync
 	end
 
 	iterate forever
-	
+
 		snapshot
-		
+
 		# =========================================================
 		# Check skill activeness
 		# =========================================================
@@ -112,7 +122,7 @@ sync
 				assign SKILL_1.thold 0
 			end
 		end
-		
+
 		when SKILL_2.row is greater than 0
 			assign SKILL_INDEX.row computing SKILL_2.row sub 1
 			assign SKILL_INDEX.col computing SKILL_2.col sub 1
@@ -176,52 +186,65 @@ sync
 		# =========================================================
 		# Check player position
 		# =========================================================
+		assign STATUS_POSX_UNKNOWN false
+		assign STATUS_POSY_UNKNOWN false
 		import bot_settings.txt LOCATE_PLAYER
-		when PLAYER_POS.x is not below 0
-			when _PREV.x is equal to PLAYER_POS.x
+		when PLAYER_POS.x is less than 0
+			assign STATUS_POSX_UNKNOWN true
+		otherwise
+			assign BOT_POS.x PLAYER_POS.x
+		end
+		when PLAYER_POS.y is less than 0
+			assign STATUS_POSY_UNKNOWN true
+		otherwise
+			assign BOT_POS.y PLAYER_POS.y
+		end
+
+		when BOT_POS.y is not below 0
+			when _PREV.x is equal to BOT_POS.x
 				assign STATUS_HORZ_STOPPED true
 			otherwise
 				assign STATUS_HORZ_STOPPED false
-			end			
-			assign _PREV.x PLAYER_POS.x
-			when PLAYER_POS.x is less than LAYOUT.lt
+			end
+			assign _PREV.x BOT_POS.x
+			when BOT_POS.x is less than LAYOUT.lt
 				when STATUS_MOVING_RIGHT is false
 					assign STATUS_TURNED_AROUND true
 				end
 				assign STATUS_MOVING_RIGHT true
 			end
-			when PLAYER_POS.x is greater than LAYOUT.rt
+			when BOT_POS.x is greater than LAYOUT.rt
 				when STATUS_MOVING_RIGHT is true
 					assign STATUS_TURNED_AROUND true
 				end
 				assign STATUS_MOVING_RIGHT false
 			end
 		end
-		
-		when PLAYER_POS.y is not below 0
-			when _PREV.y is equal to PLAYER_POS.y
+
+		when BOT_POS.y is not below 0
+			when _PREV.y is equal to BOT_POS.y
 				assign STATUS_VERT_STOPPED true
 			otherwise
 				assign STATUS_VERT_STOPPED false
 			end
-			assign _PREV.y PLAYER_POS.y
-			when PLAYER_POS.y is less than LAYOUT.tf
+			assign _PREV.y BOT_POS.y
+			when BOT_POS.y is less than LAYOUT.tf
 				assign STATUS_JUMPING_UP false
 			end
-			when PLAYER_POS.y is greater than LAYOUT.bc
+			when BOT_POS.y is greater than LAYOUT.bc
 				assign STATUS_JUMPING_UP true
 			end
 		end
-		
+
 		import [PLAYER] SPECIAL_CHECK
-		
+
 		delay for MONITOR_DELAY
 	end
-	
+
 with
 
 	iterate forever
-	
+
 		# =========================================================
 		# Perform timer action
 		# =========================================================
@@ -239,7 +262,7 @@ with
 			import [PLAYER] TIMER_3
 			assign TIMER_3.on false
 		end
-		
+
 		# =========================================================
 		# Use active skill
 		# =========================================================
@@ -273,7 +296,7 @@ with
 		# =========================================================
 		assign STATUS_ACTION 1
 		assign _RANDOM random over 100
-		when _RANDOM is less than TURN_AROUND_PERCENTAGE		
+		when _RANDOM is less than TURN_AROUND_PERCENTAGE
 			when STATUS_MOVING_RIGHT is true
 				assign STATUS_MOVING_RIGHT false
 			otherwise
@@ -281,7 +304,7 @@ with
 			end
 		end
 
-		when STATUS_JUMP_SKIPPED is greater than JUMP_DISABLE_COUNT		
+		when STATUS_JUMP_SKIPPED is greater than JUMP_DISABLE_COUNT
 			when JUMP_STYLE is equal to 0
 				#
 				# Random jump
@@ -298,7 +321,7 @@ with
 						assign STATUS_ACTION 3
 					end
 				end
-				
+
 			otherwise
 				#
 				# Cyclic jump
@@ -310,49 +333,65 @@ with
 						assign STATUS_ACTION 2
 					otherwise
 						assign STATUS_ACTION 3
-					end	
+					end
 				end
-			end		
-		end		
+			end
+		end
 		assign STATUS_JUMP_SKIPPED computing STATUS_JUMP_SKIPPED add 1
-	
+
 		import [PLAYER] SPECIAL_ACTION
-		
+
 		when STATUS_ACTION is equal to 1
 			import [PLAYER] ATTACK
+
+			when STATUS_POSX_UNKNOWN is true
+				when STATUS_MOVING_RIGHT is true
+					assign BOT_POS.x computing BOT_POS.x add DEFAULT_ATTACK_WIDTH
+				otherwise
+					assign BOT_POS.x computing BOT_POS.x sub DEFAULT_ATTACK_WIDTH
+				end
+			end
 		end
 
 		when STATUS_ACTION is equal to 2
 			import [PLAYER] SOAR
+
+			when STATUS_POSY_UNKNOWN is true
+				assign BOT_POS.y computing BOT_POS.y sub DEFAULT_JUMP_HEIGHT
+			end
 		end
 
 		when STATUS_ACTION is equal to 3
 			import [PLAYER] FALL
+
+			when STATUS_POSY_UNKNOWN is true
+				assign BOT_POS.y computing BOT_POS.y add DEFAULT_JUMP_HEIGHT
+			end
 		end
-		
+
 	end
 
 with
 	# =========================================================
 	# Elapse timer
-	# =========================================================	
+	# =========================================================
 	sub
 		register _DURATION
 		when TIMER_1.dur is greater than 0
 			assign _DURATION computing TIMER_1.dur mul 1000
-			iterate forever	
+			iterate forever
 				delay for _DURATION
 				assign TIMER_1.on true
 			end
 		end
 	end
-	
+
 with
 	sub
 		register _DURATION
 		when TIMER_2.dur is greater than 0
 			assign _DURATION computing TIMER_2.dur mul 1000
-			iterate forever	
+			iterate forever
 				delay for _DURATION
 				assign TIMER_2.on true
 			end
@@ -364,7 +403,7 @@ with
 		register _DURATION
 		when TIMER_3.dur is greater than 0
 			assign _DURATION computing TIMER_3.dur mul 1000
-			iterate forever	
+			iterate forever
 				delay for _DURATION
 				assign TIMER_3.on true
 			end
@@ -375,7 +414,7 @@ with
 with
 	# =========================================================
 	# Drink potion
-	# =========================================================	
+	# =========================================================
 	iterate forever
 		import bot_settings.txt CHECK_POTION
 		when POTION_TEST is true
@@ -389,7 +428,7 @@ with
 with
 	# =========================================================
 	# Click buttons
-	# =========================================================	
+	# =========================================================
 	iterate forever
 		#import button_settings.txt CLICK_OKAY
 		import button_settings.txt CLICK_REWARD
@@ -399,7 +438,7 @@ with
 with
 	# =========================================================
 	# Check screen
-	# =========================================================	
+	# =========================================================
 	iterate forever
 		import bot_settings.txt CHECK_MAPOUT
 		when MAPOUT_TEST is true
@@ -443,7 +482,7 @@ with
 		end
 		delay for 1000
 	end
-	
+
 with
 	register _SCREEN_COUNT
 	iterate forever
@@ -465,7 +504,7 @@ with
 		end
 		delay for 1000
 	end
-	
+
 with
 	register _MVPEXP_COUNT
 	iterate forever

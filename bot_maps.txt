@@ -2,7 +2,7 @@
 > MANUAL
 
 import bot_settings.txt INPUT_STAGE
-	
+
 break
 
 
@@ -343,8 +343,10 @@ assign MINIMAP.bm 130
 
 assign LAYOUT.lt 55
 assign LAYOUT.rt 75
-assign LAYOUT.tf 85
-assign LAYOUT.bc 140
+#assign LAYOUT.tf 85
+#assign LAYOUT.bc 140
+assign LAYOUT.tf 10000
+assign LAYOUT.bc 99999
 
 assign JUMP_UP_PERCENTAGE 0
 assign JUMP_DN_PERCENTAGE 90
@@ -383,8 +385,10 @@ assign MINIMAP.bm 120
 
 assign LAYOUT.lt 35
 assign LAYOUT.rt 155
-assign LAYOUT.tf 80
-assign LAYOUT.bc 180
+#assign LAYOUT.tf 80
+#assign LAYOUT.bc 180
+assign LAYOUT.tf 10000
+assign LAYOUT.bc 99999
 
 assign JUMP_STYLE 1
 assign JUMP_DISABLE_COUNT 1
@@ -402,8 +406,10 @@ assign MINIMAP.bm 120
 
 assign LAYOUT.lt 55
 assign LAYOUT.rt 145
-assign LAYOUT.tf 80
-assign LAYOUT.bc 180
+#assign LAYOUT.tf 80
+#assign LAYOUT.bc 180
+assign LAYOUT.tf 10000
+assign LAYOUT.bc 99999
 
 assign JUMP_STYLE 1
 assign JUMP_DISABLE_COUNT 1

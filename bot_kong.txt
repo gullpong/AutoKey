@@ -1,7 +1,7 @@
 ##################################################
 > SETUP
 
-assign POTION_HUD_TYPE 1
+assign POTION_HUD_TYPE 0
 assign POTION_HP_THOLD 50
 assign POTION_MP_THOLD 30
 
@@ -87,7 +87,7 @@ when ATTACK_STYLE is equal to 0
 	sync
 		when STATUS_MOVING_RIGHT is true
 			key right for 1000
-		otherwise 
+		otherwise
 			key left for 1000
 		end
 	with
@@ -99,7 +99,7 @@ otherwise
 	sync
 		when STATUS_MOVING_RIGHT is true
 			key right for 1000
-		otherwise 
+		otherwise
 			key left for 1000
 		end
 	with
@@ -118,7 +118,7 @@ break
 sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 1100
-	otherwise 
+	otherwise
 		key left for 1100
 	end
 with
@@ -142,7 +142,7 @@ sync
 with
 	when STATUS_MOVING_RIGHT is true
 		key right for 400
-	otherwise 
+	otherwise
 		key left for 400
 	end
 	key x for 100

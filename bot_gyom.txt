@@ -1,9 +1,9 @@
 ##################################################
 > SETUP
 
-assign POTION_HUD_TYPE 1
-assign POTION_HP_THOLD 0
-assign POTION_MP_THOLD 0
+assign POTION_HUD_TYPE 0
+assign POTION_HP_THOLD 30
+assign POTION_MP_THOLD 10
 
 assign MVPEXP_CHECK false
 
@@ -31,6 +31,9 @@ assign JUMP_STYLE 0
 assign JUMP_UP_PERCENTAGE 80
 assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 1
+
+assign DEFAULT_ATTACK_WIDTH 25
+assign DEFAULT_JUMP_HEIGHT 30
 
 register SOAR_DELAY
 assign SOAR_DELAY 900
@@ -87,7 +90,7 @@ assign TIMER_3_COUNT 2000
 when SUMMON_EVOLVE is true
 	assign SUMMON_EVOLVE false
 	key q for 500
-	delay for 700	
+	delay for 700
 	assign TIMER_3_COUNT 370
 end
 
@@ -99,7 +102,7 @@ break
 sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 100
-	otherwise 
+	otherwise
 		key left for 100
 	end
 with
@@ -109,14 +112,14 @@ end
 sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 700
-	otherwise 
+	otherwise
 		key left for 700
 	end
 with
 	#delay for 50
 	#key d for 50
-	key d for 100
-	delay for 600
+	key d for 300
+	delay for 400
 end
 
 break
@@ -129,17 +132,17 @@ delay for 100
 sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 200
-	otherwise 
+	otherwise
 		key left for 200
 	end
 with
 	key x for 200
 	key up for 50
-	key up for 50				
+	key up for 50
 end
 when STATUS_MOVING_RIGHT is true
 	key right for SOAR_DELAY
-otherwise 
+otherwise
 	key left for SOAR_DELAY
 end
 
@@ -154,12 +157,12 @@ sync
 with
 	when STATUS_MOVING_RIGHT is true
 		key right for 200
-	otherwise 
+	otherwise
 		key left for 200
 	end
 	key x for 100
 	delay for 100
-	key d for 100
+	key d for 300
 end
 
 break
@@ -191,23 +194,31 @@ break
 sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 200
-	otherwise 
+	otherwise
 		key left for 200
 	end
 with
 	key x for 100
 	key x for 100
 end
-sync	
+sync
 	when STATUS_MOVING_RIGHT is true
 		key right for 800
-	otherwise 
+	otherwise
 		key left for 800
 	end
 with
 	delay for 100
 	key s for 100
 	delay for 600
+end
+
+when STATUS_POSX_UNKNOWN is true
+	when STATUS_MOVING_RIGHT is true
+		assign BOT_POS.x computing BOT_POS.x add DEFAULT_ATTACK_WIDTH
+	otherwise
+		assign BOT_POS.x computing BOT_POS.x sub DEFAULT_ATTACK_WIDTH
+	end
 end
 
 break
