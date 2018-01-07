@@ -475,6 +475,16 @@ with
 
 with
 	iterate forever
+		import bot_settings.txt LOCATE_RIVAL
+		when RIVAL_POS.x is greater than 0
+			sound bump
+			delay for 500
+		end
+		delay for 1000
+	end
+
+with
+	iterate forever
 		import bot_settings.txt CHECK_ELITEBOSS
 		when ELITEBOSS_TEST is true
 			sound dingdong

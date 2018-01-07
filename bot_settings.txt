@@ -12,6 +12,7 @@ register MINIMAP with lt tp rt bm
 register LAYOUT with lt rt tf bc
 
 register PLAYER_POS with x y
+register RIVAL_POS with x y
 register RPORTAL_POS with x y
 
 register MAPOUT_TEST
@@ -151,6 +152,19 @@ break
 
 
 #########################################################
+> LOCATE_RIVAL
+
+sub
+	register _BLOB with x y width height num lt tp rt bm
+	blob _BLOB for 238 0 0 over MINIMAP.lt MINIMAP.tp MINIMAP.rt MINIMAP.bm
+	assign RIVAL_POS.x _BLOB.x
+	assign RIVAL_POS.y _BLOB.y
+end
+
+break
+
+
+#########################################################
 > LOCATE_RPORTAL
 
 sub
@@ -218,9 +232,14 @@ assign ELITEBOSS_TEST false
 
 sub
 	register _SPR with x y
-	sprite find _SPR for 2 using GWI_BOT over 39 437 59 456
+	sprite find _SPR for 2 using GWI_BOT over 413 41 423 51
 	when _SPR.x is greater than 0
 		assign ELITEBOSS_TEST true
+	otherwise
+		sprite find _SPR for 2 using GWI_BOT over 583 41 593 51
+		when _SPR.x is greater than 0
+			assign ELITEBOSS_TEST true
+		end
 	end
 end
 
