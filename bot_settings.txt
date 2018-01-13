@@ -6,7 +6,9 @@ font dotum8.fnt
 gawi bot.gwi as GWI_BOT
 
 register MONITOR_DELAY
+register MONITOR_PERSEC
 assign MONITOR_DELAY 200
+assign MONITOR_PERSEC 5
 
 register MINIMAP with lt tp rt bm
 register LAYOUT with lt rt tf bc

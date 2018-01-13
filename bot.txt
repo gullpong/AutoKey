@@ -60,6 +60,7 @@ assign DEFAULT_JUMP_HEIGHT 30
 
 # Let's motor.
 assign MONITOR_DELAY 100
+assign MONITOR_PERSEC 10
 
 alias [PLAYER] among "bot_union.txt" "bot_gyom.txt" "bot_kong.txt" "bot_dalkom.txt" "bot_signus.txt" "bot_amber.txt"
 import [PLAYER] SETUP

@@ -85,13 +85,13 @@ break
 
 key w for 500
 delay for 700
-assign TIMER_3_COUNT 2000
+assign TIMER_3_COUNT computing 200 mul MONITOR_PERSEC
 
 when SUMMON_EVOLVE is true
 	assign SUMMON_EVOLVE false
 	key q for 500
 	delay for 700
-	assign TIMER_3_COUNT 370
+	#assign TIMER_3_COUNT computing 37 mul MONITOR_PERSEC
 end
 
 break
@@ -231,7 +231,7 @@ key g for 500
 delay for 500
 
 assign SUMMON_EVOLVE true
-assign TIMER_3_COUNT 500
+assign TIMER_3_COUNT computing 50 mul MONITOR_PERSEC
 
 break
 
@@ -254,19 +254,19 @@ when _SPR.x is greater than 0
 	assign FLAMEWOLF_CHECK true
 end
 
+decrease TIMER_1_COUNT
 read _READ for "»≠ªÏ¿ª" of 255 170 170 over 0 735 560 755
 when _READ.x is greater than 0
 	when TIMER_1_COUNT is less than 0
 		assign TIMER_1.on true
-		assign TIMER_1_COUNT 200
+		assign TIMER_1_COUNT computing 20 mul MONITOR_PERSEC
 	end
 end
-assign TIMER_1_COUNT computing TIMER_1_COUNT sub 1
 
+decrease TIMER_3_COUNT
 when TIMER_3_COUNT is equal to 0
 	assign TIMER_3.on true
 end
-assign TIMER_3_COUNT computing TIMER_3_COUNT sub 1
 
 break
 

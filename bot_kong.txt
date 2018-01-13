@@ -23,6 +23,7 @@ assign SKILL_3.col 5
 assign SKILL_4.row 2
 assign SKILL_4.col 3
 
+register SKILL_1_COUNT
 
 assign TURN_AROUND_PERCENTAGE 0
 
@@ -160,6 +161,7 @@ break
 
 key g for 500
 delay for 1000
+assign SKILL_1_COUNT computing 47 mul MONITOR_PERSEC
 
 break
 
@@ -207,6 +209,11 @@ break
 sprite find _SPR for 3 using GWI_BOT over 200 0 1200 500
 when _SPR.x is greater than 0
 	assign FLAMEWOLF_CHECK true
+end
+
+decrease SKILL_1_COUNT
+when SKILL_1_COUNT is equal to 0
+	assign SKILL_1.on true
 end
 
 break
