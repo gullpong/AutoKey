@@ -87,6 +87,13 @@ break
 ##################################################
 > ATTACK
 
+assign _RANDOM random over 100
+when _RANDOM is greater than 50
+	assign ATTACK_STYLE 0
+otherwise
+	assign ATTACK_STYLE 1
+end
+
 when ATTACK_STYLE is equal to 0
 	sync
 		when STATUS_MOVING_RIGHT is true
@@ -161,6 +168,7 @@ break
 
 key g for 500
 delay for 1000
+
 assign SKILL_1_COUNT computing 47 mul MONITOR_PERSEC
 
 break
@@ -194,6 +202,8 @@ break
 
 key ins for 500
 delay for 500
+
+key y for 200
 
 break
 
