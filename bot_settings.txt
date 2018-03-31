@@ -42,6 +42,7 @@ register SCREEN_CHECK_N with en lt tp rt bm
 register SCREEN_CHECK_W with en lt tp rt bm
 register SCREEN_CHECK_S with en lt tp rt bm
 register SCREEN_CHECK_E with en lt tp rt bm
+register SCREEN_CHECK_C with en lt tp rt bm
 
 break
 
@@ -489,12 +490,23 @@ sub
 		assign SCREEN_CHECK_E.bm computing _SPR.y add 362
 		assign SCREEN_ENABLED true
 	end
+	
+	sprite find _SPR for 9 using GWI_BOT over 0 0 1360 768
+	when _SPR.x is greater than 0
+		assign SCREEN_CHECK_C.en true
+		assign SCREEN_CHECK_C.lt computing _SPR.x sub 77
+		assign SCREEN_CHECK_C.tp computing _SPR.y add 16
+		assign SCREEN_CHECK_C.rt computing _SPR.x add 89
+		assign SCREEN_CHECK_C.bm computing _SPR.y add 26
+		assign SCREEN_ENABLED true
+	end	
 
 	when SCREEN_ENABLED is true
 		crop SCREEN_CHECK_N.lt SCREEN_CHECK_N.tp SCREEN_CHECK_N.rt SCREEN_CHECK_N.bm into GWI_SCREEN
 		crop SCREEN_CHECK_W.lt SCREEN_CHECK_W.tp SCREEN_CHECK_W.rt SCREEN_CHECK_W.bm into GWI_SCREEN
 		crop SCREEN_CHECK_S.lt SCREEN_CHECK_S.tp SCREEN_CHECK_S.rt SCREEN_CHECK_S.bm into GWI_SCREEN
 		crop SCREEN_CHECK_E.lt SCREEN_CHECK_E.tp SCREEN_CHECK_E.rt SCREEN_CHECK_E.bm into GWI_SCREEN
+		crop SCREEN_CHECK_C.lt SCREEN_CHECK_C.tp SCREEN_CHECK_C.rt SCREEN_CHECK_C.bm into GWI_SCREEN
 	end
 end
 
@@ -541,6 +553,15 @@ sub
 					finish iterate
 				end
 			end
+
+			when SCREEN_CHECK_C.en is true
+				sprite diff _BLOB for 4 using GWI_SCREEN at SCREEN_CHECK_C.lt SCREEN_CHECK_C.tp
+				when _BLOB.num is greater than 50
+					assign SCREEN_TEST true
+					finish iterate
+				end
+			end
+
 		end
 	end
 end

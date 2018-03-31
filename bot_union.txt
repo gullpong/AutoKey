@@ -1,9 +1,9 @@
 ##################################################
 > SETUP
 
-assign POTION_HUD_TYPE 0
+assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 50
-assign POTION_MP_THOLD 30
+assign POTION_MP_THOLD 10
 
 assign TIMER_1.dur 180
 assign TIMER_1.on true
@@ -42,13 +42,19 @@ break
 
 delay for 1000
 
-key b for 500
-delay for 1500
+#key b for 500
+#delay for 1500
+
+key 6 for 500
+delay for 700
 
 key 7 for 500
 delay for 700
 
-key 9 for 500
+key 8 for 500
+delay for 700
+
+#key 9 for 500
 
 break
 
@@ -69,6 +75,11 @@ break
 
 ##################################################
 > COMBO
+
+key a for 100
+delay for 600
+
+break
 
 key a for 100
 delay for 300
