@@ -454,9 +454,11 @@ sub
 	sprite find _SPR for 5 using GWI_BOT over 0 0 1360 768
 	when _SPR.x is greater than 0
 		assign SCREEN_CHECK_N.en true
-		assign SCREEN_CHECK_N.lt computing _SPR.x sub 189
+		#assign SCREEN_CHECK_N.lt computing _SPR.x sub 189
+		assign SCREEN_CHECK_N.lt computing _SPR.x sub 169
 		assign SCREEN_CHECK_N.tp computing _SPR.y add 16
-		assign SCREEN_CHECK_N.rt computing _SPR.x add 181
+		#assign SCREEN_CHECK_N.rt computing _SPR.x add 181
+		assign SCREEN_CHECK_N.rt computing _SPR.x add 201
 		assign SCREEN_CHECK_N.bm computing _SPR.y add 165
 		assign SCREEN_ENABLED true
 	end
