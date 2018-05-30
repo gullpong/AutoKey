@@ -201,6 +201,8 @@ break
 key 3 for 500
 delay for 500
 
+key pgdn for 1000
+
 break
 
 ##################################################
@@ -295,5 +297,16 @@ import bot_maps.txt [MAP]
 assign JUMP_UP_PERCENTAGE 100
 assign JUMP_DN_PERCENTAGE 70
 assign JUMP_DISABLE_COUNT 1
+
+break
+
+##################################################
+> LACHELN_CHICKEN_RUN_2
+
+import bot_maps.txt [MAP]
+
+assign JUMP_UP_PERCENTAGE 100
+assign JUMP_DN_PERCENTAGE 70
+assign JUMP_DISABLE_COUNT 2
 
 break
