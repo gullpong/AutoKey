@@ -12,8 +12,8 @@ assign TIMER_2.dur 300
 assign SKILL_1.row 2
 assign SKILL_1.col 4
 
-#assign SKILL_2.row 2
-#assign SKILL_2.col 6
+assign SKILL_2.row 2
+assign SKILL_2.col 6
 
 assign SKILL_3.row 1
 assign SKILL_3.col 8

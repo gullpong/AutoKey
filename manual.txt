@@ -38,6 +38,10 @@ register _IN with id stat x y
 register _RANDOM
 
 sync
+	import bot_settings.txt LOCATE_POTIONBAR
+	when POTION_BAR is less than 0
+		finish sync
+	end
 	import bot_settings.txt LOCATE_SKILLBAR
 	when SKILL_BAR is less than 0
 		finish sync
