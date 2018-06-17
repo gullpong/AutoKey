@@ -8,7 +8,7 @@ iterate forever
 	sound pip
 	hook _IN with key space down
 
-	button left click at 670 500
+	button left click at 500 500
 
 	delay for 200
 

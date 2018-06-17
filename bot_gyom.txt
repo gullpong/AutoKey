@@ -233,6 +233,8 @@ delay for 500
 assign SUMMON_EVOLVE true
 assign TIMER_3_COUNT computing 50 mul MONITOR_PERSEC
 
+key pgdn for 1000
+
 break
 
 ##################################################

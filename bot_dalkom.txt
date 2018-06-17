@@ -46,7 +46,7 @@ register ATTACK_CYCLE_MAX
 register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
 
-alias [MAP] among "MANUAL" "JOURNEY_RESTING_CAVE" "CHEWCHEW_CIRCLE_FOREST"
+alias [MAP] among "MANUAL" "JOURNEY_RESTING_CAVE" "CHEWCHEW_CIRCLE_FOREST" "LACHELN_CHICKEN_RUN_2"
 import self [MAP]
 
 alias [ATTACK_COMBO] among "AC" "ACW"
@@ -201,6 +201,8 @@ break
 key 3 for 500
 delay for 500
 
+key pgdn for 1000
+
 break
 
 ##################################################
@@ -295,5 +297,16 @@ import bot_maps.txt [MAP]
 assign JUMP_UP_PERCENTAGE 100
 assign JUMP_DN_PERCENTAGE 70
 assign JUMP_DISABLE_COUNT 1
+
+break
+
+##################################################
+> LACHELN_CHICKEN_RUN_2
+
+import bot_maps.txt [MAP]
+
+assign JUMP_UP_PERCENTAGE 100
+assign JUMP_DN_PERCENTAGE 70
+assign JUMP_DISABLE_COUNT 2
 
 break
