@@ -9,7 +9,8 @@ assign MVPEXP_CHECK false
 
 assign TIMER_1.dur 360
 assign TIMER_1.on true
-assign TIMER_2.dur 300
+#assign TIMER_2.dur 300
+#assign TIMER_2.dur 100
 #assign TIMER_3.dur 200
 assign TIMER_3.on true
 
@@ -76,7 +77,8 @@ break
 ##################################################
 > TIMER_2
 
-key = for 500
+#key = for 500
+key pgdn for 1000
 
 break
 
@@ -232,8 +234,6 @@ delay for 500
 
 assign SUMMON_EVOLVE true
 assign TIMER_3_COUNT computing 50 mul MONITOR_PERSEC
-
-key pgdn for 1000
 
 break
 
