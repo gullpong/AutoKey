@@ -235,15 +235,25 @@ assign ELITEBOSS_TEST false
 
 sub
 	register _SPR with x y
+	sprite find _SPR for 2 using GWI_BOT over 413 98 423 108
+	when _SPR.x is greater than 0
+		assign ELITEBOSS_TEST true
+	end
+	sprite find _SPR for 2 using GWI_BOT over 583 98 593 108
+	when _SPR.x is greater than 0
+		assign ELITEBOSS_TEST true
+	end
 	sprite find _SPR for 2 using GWI_BOT over 413 41 423 51
 	when _SPR.x is greater than 0
 		blob _BLOB for 255 204 0 over 423 63 466 75
 		when _BLOB.num is less than 10
 			assign ELITEBOSS_TEST true
 		end
-	otherwise
-		sprite find _SPR for 2 using GWI_BOT over 583 41 593 51
-		when _SPR.x is greater than 0
+	end
+	sprite find _SPR for 2 using GWI_BOT over 583 41 593 51
+	when _SPR.x is greater than 0
+		blob _BLOB for 255 204 0 over 593 63 636 75
+		when _BLOB.num is less than 10
 			assign ELITEBOSS_TEST true
 		end
 	end
