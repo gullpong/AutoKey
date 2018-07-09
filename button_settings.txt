@@ -80,7 +80,7 @@ end
 break
 
 #########################################################
-> CLIKC_YES
+> CLICK_YES
 
 assign BUTTON_ID 6
 import self CLICK_BUTTON

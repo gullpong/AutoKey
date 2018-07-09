@@ -432,6 +432,7 @@ with
 	# =========================================================
 	iterate forever
 		#import button_settings.txt CLICK_OKAY
+		import button_settings.txt CLICK_YES
 		import button_settings.txt CLICK_REWARD
 		delay for 1000
 	end

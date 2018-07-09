@@ -43,6 +43,8 @@ assign FALL_DELAY 1200
 
 register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
+register FLARE_CHECK
+assign FLARE_CHECK false
 
 
 alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_FORK_CROSS_CAVERN"
@@ -221,6 +223,11 @@ when _SPR.x is greater than 0
 	assign FLAMEWOLF_CHECK true
 end
 
+import bot_settings.txt CHECK_RESCUE
+when RESCUE_TEST is false
+	assign FLARE_CHECK true
+end
+
 decrease SKILL_1_COUNT
 when SKILL_1_COUNT is equal to 0
 	assign SKILL_1.on true
@@ -249,6 +256,13 @@ when FLAMEWOLF_CHECK is true
 		end
 	end
 	assign FLAMEWOLF_CHECK false
+end
+
+when FLARE_CHECK is true
+	key pgdn for 500
+	delay for 500
+	import button_settings.txt CLICK_YES
+	assign FLARE_CHECK false
 end
 
 break
