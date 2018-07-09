@@ -47,6 +47,13 @@ assign SUMMON_EVOLVE false
 register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
 
+register FLARE_CHECK
+assign FLARE_CHECK false
+
+alias [RESCUE_SOLDIER] among "ENABLE_RESCUE" "DISABLE_RESCUE"
+register RESCUE_ENABLED
+import self [RESCUE_SOLDIER]
+
 
 alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_LOWER_FORK_CAVERN" "ARCANA_FORK_CROSS_CAVERN"
 import self [MAP]
@@ -265,6 +272,13 @@ when _READ.x is greater than 0
 	end
 end
 
+when RESCUE_ENABLED is true
+	import bot_settings.txt CHECK_RESCUE
+	when RESCUE_TEST is false
+		assign FLARE_CHECK true
+	end
+end
+
 decrease TIMER_3_COUNT
 when TIMER_3_COUNT is equal to 0
 	assign TIMER_3.on true
@@ -295,6 +309,26 @@ when FLAMEWOLF_CHECK is true
 	end
 	assign FLAMEWOLF_CHECK false
 end
+
+when FLARE_CHECK is true
+	key pgdn for 500
+	delay for 500
+	import button_settings.txt CLICK_YES
+	assign FLARE_CHECK false
+end
+
+break
+
+
+##################################################
+> ENABLE_RESCUE
+assign RESCUE_ENABLED true
+
+break
+
+##################################################
+> DISABLE_RESCUE
+assign RESCUE_ENABLED false
 
 break
 

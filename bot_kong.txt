@@ -43,9 +43,13 @@ assign FALL_DELAY 1200
 
 register FLAMEWOLF_CHECK
 assign FLAMEWOLF_CHECK false
+
 register FLARE_CHECK
 assign FLARE_CHECK false
 
+alias [RESCUE_SOLDIER] among "ENABLE_RESCUE" "DISABLE_RESCUE"
+register RESCUE_ENABLED
+import self [RESCUE_SOLDIER]
 
 alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_FORK_CROSS_CAVERN"
 import self [MAP]
@@ -223,9 +227,11 @@ when _SPR.x is greater than 0
 	assign FLAMEWOLF_CHECK true
 end
 
-import bot_settings.txt CHECK_RESCUE
-when RESCUE_TEST is false
-	assign FLARE_CHECK true
+when RESCUE_ENABLED is true
+	import bot_settings.txt CHECK_RESCUE
+	when RESCUE_TEST is false
+		assign FLARE_CHECK true
+	end
 end
 
 decrease SKILL_1_COUNT
@@ -267,6 +273,18 @@ end
 
 break
 
+
+##################################################
+> ENABLE_RESCUE
+assign RESCUE_ENABLED true
+
+break
+
+##################################################
+> DISABLE_RESCUE
+assign RESCUE_ENABLED false
+
+break
 
 
 ##################################################
