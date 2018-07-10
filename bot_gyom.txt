@@ -94,7 +94,7 @@ break
 
 key w for 500
 delay for 700
-assign TIMER_3_COUNT computing 200 mul MONITOR_PERSEC
+assign TIMER_3_COUNT computing 180 mul MONITOR_PERSEC
 
 when SUMMON_EVOLVE is true
 	assign SUMMON_EVOLVE false
@@ -240,7 +240,10 @@ key g for 500
 delay for 500
 
 assign SUMMON_EVOLVE true
-assign TIMER_3_COUNT computing 50 mul MONITOR_PERSEC
+assign _RANDOM computing 50 mul MONITOR_PERSEC
+when TIMER_3_COUNT is greater than _RANDOM
+	assign TIMER_3_COUNT _RANDOM
+end
 
 break
 
