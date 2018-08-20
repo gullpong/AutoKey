@@ -71,12 +71,6 @@ assign CHECK_MVPEXP false
 alias [PLAYER] among "bot_union.txt" "bot_gyom.txt" "bot_kong.txt" "bot_dalkom.txt" "bot_signus.txt" "bot_amber.txt"
 import [PLAYER] SETUP
 
-# TEST
-
-assign RETREAT_CYCLE duration 1 min
-assign RETREAT_TIMER.on time later 10 sec
-assign RETREAT_TIMER.off time later 20 sec
-
 
 ################################################################
 
