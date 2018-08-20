@@ -97,6 +97,18 @@ with
 			end
 		end
 
+		delay for DELAY_CHECK		
+	end
+
+with
+	iterate forever
+
+		import bot_settings.txt CHECK_VIOLETTA
+		when VIOLETTA_TEST is true
+			sound boing
+			delay for 500
+		end
+		
 		delay for DELAY_CHECK
 	end
 end

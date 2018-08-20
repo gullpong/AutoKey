@@ -456,7 +456,7 @@ with
 		when SCREEN_TEST is true
 			import bot_settings.txt CHECK_VIOLETTA
 			when VIOLETTA_TEST is true
-				assign _TEMP duration 2 min
+				assign _TEMP duration 3 min
 				assign RETREAT_TIMER.on time later RETREAT_CYCLE
 				assign RETREAT_TIMER.on computing RETREAT_TIMER.on sub _TEMP
 				assign _TEMP duration 20 sec
