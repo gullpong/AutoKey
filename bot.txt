@@ -55,12 +55,14 @@ register DEFAULT_JUMP_HEIGHT
 assign DEFAULT_ATTACK_WIDTH 25
 assign DEFAULT_JUMP_HEIGHT 30
 
-register CHECK_MAPOUT
+register CHECK_CREST
+#register CHECK_MAPOUT
 register CHECK_FLAMEWOLF
 register CHECK_RESCUE
 register CHECK_ELITEBOSS
 register CHECK_MVPEXP
-assign CHECK_MAPOUT true
+assign CHECK_CREST true
+#assign CHECK_MAPOUT true
 assign CHECK_FLAMEWOLF true
 assign CHECK_RESCUE false
 assign CHECK_ELITEBOSS false
@@ -68,6 +70,12 @@ assign CHECK_MVPEXP false
 
 alias [PLAYER] among "bot_union.txt" "bot_gyom.txt" "bot_kong.txt" "bot_dalkom.txt" "bot_signus.txt" "bot_amber.txt"
 import [PLAYER] SETUP
+
+# TEST
+
+assign RETREAT_CYCLE duration 1 min
+assign RETREAT_TIMER.on time later 10 sec
+assign RETREAT_TIMER.off time later 20 sec
 
 
 ################################################################
@@ -96,6 +104,9 @@ register _READ with x y
 register _IN with id stat x y
 register _RANDOM
 register _NOW
+
+
+import bot_settings.txt INIT_CREST
 
 import bot_settings.txt INIT_SCREEN
 when SCREEN_ENABLED is true

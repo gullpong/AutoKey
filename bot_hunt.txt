@@ -227,7 +227,8 @@ sync
 				when BUTTON_PRESSED is false
 					finish sub
 				end
-				assign CHECK_MAPOUT false
+				#assign CHECK_MAPOUT false
+				assign CHECK_CREST false
 				iterate 10 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is greater than 0
@@ -236,7 +237,8 @@ sync
 					delay for 1000
 				end
 				when _SPR.x is less than 0
-					assign CHECK_MAPOUT true
+					#assign CHECK_MAPOUT true
+					assign CHECK_CREST true
 					finish sub
 				end
 				
@@ -397,11 +399,25 @@ with
 	
 with 
 	register _NOTIFY
+	register _CREST_COUNT
 	register _SCREEN_COUNT
 	register _MVPEXP_COUNT
 	register _TEMP
 
 	iterate forever
+	
+		when CHECK_CREST is false
+			import bot_settings.txt CHECK_CREST
+			when CREST_TEST is false			
+				increase _CREST_COUNT
+				when _CREST_COUNT is greater than 2
+					assign QUIT true
+				end		
+			otherwise
+				assign _CREST_COUNT 0			
+			end			
+		end
+	
 		# =========================================================
 		# Notify game status
 		# =========================================================
@@ -490,16 +506,16 @@ with
 		delay for DELAY_CHECK
 	end
 
-with
-	iterate forever
-		when CHECK_MAPOUT is true
-			import bot_settings.txt CHECK_MAPOUT
-			when MAPOUT_TEST is true
-				assign QUIT true
-			end
-		end	
-		delay for DELAY_MONITOR
-	end
+#with
+#	iterate forever
+#		when CHECK_MAPOUT is true
+#			import bot_settings.txt CHECK_MAPOUT
+#			when MAPOUT_TEST is true
+#				assign QUIT true
+#			end
+#		end	
+#		delay for DELAY_MONITOR
+#	end
 	
 with
 	iterate forever

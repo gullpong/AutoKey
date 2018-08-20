@@ -56,20 +56,23 @@ sync
 					otherwise
 						key right for 100
 					end
-					key up for 500
+					key up for 200
 					
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is less than 0
 						iterate forever
-							import bot_settings.txt CHECK_MAPOUT
-							when MAPOUT_TEST is true
+							import bot_settings.txt CHECK_CREST
+							when CREST_TEST is true
+							#import bot_settings.txt CHECK_MAPOUT
+							#when MAPOUT_TEST is true
 								finish iterate
 							end			
 							delay for DELAY_MONITOR
 						end
+						#delay for 2 sec
+						delay for 1 sec
 						
 						assign DO_HUNT false
-						delay for 2 sec
 						
 						# Change routine
 						assign ROUTINE 0

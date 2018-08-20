@@ -25,14 +25,6 @@ register SKILL_INDEX with row col
 register SKILL_BAR
 assign SKILL_BAR 1019
 
-register SCREEN_TEST
-register SCREEN_ENABLED
-register SCREEN_CHECK_N with en lt tp rt bm
-register SCREEN_CHECK_W with en lt tp rt bm
-register SCREEN_CHECK_S with en lt tp rt bm
-register SCREEN_CHECK_E with en lt tp rt bm
-register SCREEN_CHECK_C with en lt tp rt bm
-
 register MAPOUT_TEST
 register STONE_TEST
 register CURSE_TEST
@@ -41,6 +33,16 @@ register RESCUE_TEST
 register MVPEXP_TEST
 register FLAMEWOLF_TEST
 register VIOLETTA_TEST
+
+register CREST_TEST
+
+register SCREEN_TEST
+register SCREEN_ENABLED
+register SCREEN_CHECK_N with en lt tp rt bm
+register SCREEN_CHECK_W with en lt tp rt bm
+register SCREEN_CHECK_S with en lt tp rt bm
+register SCREEN_CHECK_E with en lt tp rt bm
+register SCREEN_CHECK_C with en lt tp rt bm
 
 break
 
@@ -511,6 +513,29 @@ end
 
 break
 
+#########################################################
+> INIT_CREST
+
+snapshot
+
+crop 24 34 28 38 into GWI_CREST
+
+break
+
+#########################################################
+> CHECK_CREST
+
+assign CREST_TEST false
+
+sub
+	register _SPR with x y
+	sprite find _SPR for 0 using GWI_CREST over 24 34 28 38
+	when _SPR.x is greater than 0
+		assign CREST_TEST true
+	end
+end
+
+break
 
 #########################################################
 > INIT_SCREEN
