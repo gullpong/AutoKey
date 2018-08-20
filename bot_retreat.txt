@@ -1,0 +1,99 @@
+
+register DO_HUNT
+
+sync
+	register _MOVE_LEFT
+	register _MOVE_RIGHT
+	register _MOVE_LITTLE
+	register _DIST
+	
+	iterate forever
+	
+		when DO_HUNT is true
+			when BOT_X_UNKNOWN is false
+				when BOT_POS.x is greater than 40
+					assign _MOVE_LEFT true
+					assign _DIST computing BOT_POS.x sub 40
+					when _DIST is less than 5
+						assign _MOVE_LITTLE true
+					otherwise
+						assign _MOVE_LITTLE false
+					end
+				otherwise
+					assign _MOVE_LEFT false
+				end
+				
+				when BOT_POS.x is less than 37
+					assign _MOVE_RIGHT true
+					assign _DIST computing 37 sub BOT_POS.x
+					when _DIST is less than 5
+						assign _MOVE_LITTLE true
+					otherwise
+						assign _MOVE_LITTLE false
+					end				
+				otherwise
+					assign _MOVE_RIGHT false
+				end
+			end
+			
+			when _MOVE_LEFT is true
+				when _MOVE_LITTLE is true
+					key left for 200
+				otherwise
+					key left for 600
+				end
+			otherwise
+				when _MOVE_RIGHT is true
+					when _MOVE_LITTLE is true
+						key right for 200
+					otherwise
+						key right for 600
+					end
+				otherwise
+					assign _RANDOM random over 100
+					when _RANDOM is less than 50
+						key left for 100
+					otherwise
+						key right for 100
+					end
+					key up for 500
+					
+					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
+					when _SPR.x is less than 0
+						iterate forever
+							import bot_settings.txt CHECK_MAPOUT
+							when MAPOUT_TEST is true
+								finish iterate
+							end			
+							delay for DELAY_MONITOR
+						end
+						
+						assign DO_HUNT false
+						delay for 2 sec
+						
+						# Change routine
+						assign ROUTINE 0
+						finish sync
+					end
+				end
+			end
+		end
+			
+		delay for 500
+	end
+	
+with
+	iterate forever
+
+		assign _NOW time
+
+		when RETREAT_TIMER.off is unequal to 0
+			when _NOW is greater than RETREAT_TIMER.off
+				assign RETREAT_TIMER.off computing RETREAT_TIMER.off add RETREAT_CYCLE
+				assign DO_HUNT true
+			end
+		end
+
+		delay for DELAY_CHECK
+	end
+end

@@ -110,7 +110,7 @@ sync
 with
 	iterate forever
 		delay for 100
-		when STATUS_HORZ_STOPPED is true
+		when BOT_HORZ_STOPPED is true
 			assign CLIMBING computing CLIMBING add 1
 		otherwise
 			assign CLIMBING 0
@@ -128,7 +128,7 @@ end
 when CLIMBING is greater than 2
 	iterate 20 times
 		key up for 200
-		when STATUS_VERT_STOPPED is true
+		when BOT_VERT_STOPPED is true
 			finish iterate
 		end
 	end

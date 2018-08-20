@@ -5,18 +5,15 @@ assign POTION_HUD_TYPE 0
 assign POTION_HP_THOLD 30
 assign POTION_MP_THOLD 10
 
-assign MVPEXP_CHECK false
+assign TIMER_1.dur duration 180 sec
+assign TIMER_1.on true
+assign TIMER_2.dur duration 300 sec
+#assign TIMER_3.dur duration 200 sec
+#assign TIMER_3.on true
 
 register MEMBER_NO
-
 alias [NAME] among "LIGHT" "DARK" "GREEN" "DASH" "NOEL"
 import self [NAME]
-
-assign TIMER_1.dur 180
-assign TIMER_1.on true
-assign TIMER_2.dur 300
-#assign TIMER_3.dur 200
-#assign TIMER_3.on true
 
 register SOAR_DELAY
 assign SOAR_DELAY 700
@@ -26,17 +23,14 @@ assign FALL_DELAY 1200
 when MEMBER_NO is equal to 1
 	assign SKILL_1.row 2
 	assign SKILL_1.col 8
-
 	assign SKILL_2.row 2
 	assign SKILL_2.col 6
 end
 when MEMBER_NO is equal to 2
 	assign SKILL_1.row 2
 	assign SKILL_1.col 4
-
 	assign SKILL_2.row 2
 	assign SKILL_2.col 6
-
 	#assign SKILL_5.row 2
 	#assign SKILL_5.col 7
 end
@@ -49,17 +43,14 @@ end
 when MEMBER_NO is equal to 4
 	assign SKILL_1.row 2
 	assign SKILL_1.col 3
-
 	assign SKILL_2.row 2
 	assign SKILL_2.col 6
-
 	assign SKILL_5.row 2
 	assign SKILL_5.col 7
 end
 when MEMBER_NO is equal to 5
 	assign SKILL_1.row 2
 	assign SKILL_1.col 7
-
 	assign SKILL_5.row 2
 	assign SKILL_5.col 9
 
@@ -429,13 +420,13 @@ break
 
 
 ##################################################
-> SPECIAL_CHECK
+> CHECK
 
 break
 
 
 ##################################################
-> SPECIAL_ACTION
+> ACTION
 
 break
 

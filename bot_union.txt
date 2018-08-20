@@ -5,17 +5,15 @@ assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 50
 assign POTION_MP_THOLD 10
 
-assign TIMER_1.dur 180
+assign TIMER_1.dur duration 180 sec
 assign TIMER_1.on true
-assign TIMER_2.dur 300
+assign TIMER_2.dur duration 300 sec
 assign TIMER_3.dur 15
 
 #assign SKILL_1.row 2
 #assign SKILL_1.col 2
-
 #assign SKILL_2.row 2
 #assign SKILL_2.col 8
-
 #assign SKILL_3.row 2
 #assign SKILL_3.col 7
 
@@ -29,10 +27,10 @@ assign JUMP_DISABLE_COUNT 2
 assign DEFAULT_ATTACK_WIDTH 30
 assign DEFAULT_JUMP_HEIGHT 30
 
+register NEXT_COMBO
+
 alias [MAP] among "MANUAL" "PATROL" "MAGATIA_KEEP_OUT" "TIMETEMPLE_TWO_STORY" "TIMETEMPLE_FOUR_STORY" "KTOWER_CAFE" "DEFHQ_UFO_AISLE" "PERION_ABANDONED_SOUTH" "PERION_LONELY_BOULDER" "PERION_ROUGH_WILDERNESS" "HAVEN_DUMPYARD_1" "HAVEN_DUMPYARD_3" "HAVEN_DUMPYARD_4" "HAVEN_DUMPYARD_5"
 import self [MAP]
-
-register NEXT_COMBO
 
 break
 
@@ -215,12 +213,12 @@ break
 
 
 ##################################################
-> SPECIAL_CHECK
+> CHECK
 
 break
 
 ##################################################
-> SPECIAL_ACTION
+> ACTION
 
 break
 

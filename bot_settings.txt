@@ -5,24 +5,12 @@ font dotum8.fnt
 
 gawi bot.gwi as GWI_BOT
 
-register MONITOR_DELAY
-register MONITOR_PERSEC
-assign MONITOR_DELAY 200
-assign MONITOR_PERSEC 5
-
 register MINIMAP with lt tp rt bm
 register LAYOUT with lt rt tf bc
 
 register PLAYER_POS with x y
 register RIVAL_POS with x y
 register RPORTAL_POS with x y
-
-register MAPOUT_TEST
-register STONE_TEST
-register CURSE_TEST
-register ELITEBOSS_TEST
-register RESCUE_TEST
-register MVPEXP_TEST
 
 register POTION_TEST
 register POTION_HP_THOLD
@@ -44,6 +32,15 @@ register SCREEN_CHECK_W with en lt tp rt bm
 register SCREEN_CHECK_S with en lt tp rt bm
 register SCREEN_CHECK_E with en lt tp rt bm
 register SCREEN_CHECK_C with en lt tp rt bm
+
+register MAPOUT_TEST
+register STONE_TEST
+register CURSE_TEST
+register ELITEBOSS_TEST
+register RESCUE_TEST
+register MVPEXP_TEST
+register FLAMEWOLF_TEST
+register VIOLETTA_TEST
 
 break
 
@@ -292,6 +289,32 @@ sub
 			assign RESCUE_TEST true
 		end
 	end
+end
+
+break
+
+
+#########################################################
+> CHECK_FLAMEWOLF
+
+assign FLAMEWOLF_TEST false
+
+sprite find _SPR for 3 using GWI_BOT over 200 0 1200 500
+when _SPR.x is greater than 0
+	assign FLAMEWOLF_TEST true
+end
+
+break
+
+
+#########################################################
+> CHECK_VIOLETTA
+
+assign VIOLETTA_TEST false
+
+sprite find _SPR for 11 using GWI_BOT over 910 610 960 650
+when _SPR.x is greater than 0
+	assign VIOLETTA_TEST true
 end
 
 break
@@ -617,3 +640,4 @@ sub
 end
 
 break
+

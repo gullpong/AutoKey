@@ -26,7 +26,7 @@ sub
 		button left click at _SPR.x _SPR.y
 		delay for BUTTON_DELAY
 		when BUTTON_AWAY is true		
-			button none at 10 10
+			button none at 10 65
 		end
 		assign BUTTON_PRESSED true
 	end
@@ -127,5 +127,26 @@ break
 > CLICK_USE
 
 assign BUTTON_ID 14
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_BOSSNEXT
+
+assign BUTTON_ID 18
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_BOSSGO
+
+assign BUTTON_ID 19
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_SIGNUS
+
+assign BUTTON_ID 20
 import self CLICK_BUTTON
 break

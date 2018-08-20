@@ -1,0 +1,528 @@
+
+register STATUS_MOVING_RIGHT
+register STATUS_JUMPING_UP
+register STATUS_TURNED_AROUND
+assign STATUS_MOVING_RIGHT true
+assign STATUS_JUMPING_UP true
+assign STATUS_TURNED_AROUND false
+
+register DO_FLAMEWOLF
+register DO_RESCUE
+register DO_RETREAT
+
+sync
+	register _ACTION
+	register _JUMP_SKIPPED
+	
+	iterate forever
+		# =========================================================
+		# Perform timer action
+		# =========================================================
+		when TIMER_1.on is true
+			import [PLAYER] TIMER_1
+			assign TIMER_1.on false
+		end
+
+		when TIMER_2.on is true
+			import [PLAYER] TIMER_2
+			assign TIMER_2.on false
+		end
+
+		when TIMER_3.on is true
+			import [PLAYER] TIMER_3
+			assign TIMER_3.on false
+		end
+
+		# =========================================================
+		# Use active skill
+		# =========================================================
+		when SKILL_1.on is true
+			import [PLAYER] SKILL_1
+			assign SKILL_1.on false
+		end
+
+		when SKILL_2.on is true
+			import [PLAYER] SKILL_2
+			assign SKILL_2.on false
+		end
+
+		when SKILL_3.on is true
+			import [PLAYER] SKILL_3
+			assign SKILL_3.on false
+		end
+
+		when SKILL_4.on is true
+			import [PLAYER] SKILL_4
+			assign SKILL_4.on false
+		end
+
+		when SKILL_5.on is true
+			import [PLAYER] SKILL_5
+			assign SKILL_5.on false
+		end
+
+		# Custom action routine
+		import [PLAYER] ACTION
+
+		# =========================================================
+		# Control player movement
+		# =========================================================
+		when BOT_LEFT_OUT is true
+			when STATUS_MOVING_RIGHT is false
+				assign STATUS_TURNED_AROUND true
+				assign STATUS_MOVING_RIGHT true
+			otherwise
+				assign STATUS_TURNED_AROUND false
+			end
+		end
+		when BOT_RIGHT_OUT is true
+			when STATUS_MOVING_RIGHT is true
+				assign STATUS_TURNED_AROUND true
+				assign STATUS_MOVING_RIGHT false
+			otherwise
+				assign STATUS_TURNED_AROUND false
+			end
+		end
+		when BOT_AT_BOTTOM is true
+			assign STATUS_JUMPING_UP true
+		end
+		when BOT_AT_TOP is true
+			assign STATUS_JUMPING_UP false
+		end
+		
+		assign _ACTION 1
+		assign _RANDOM random over 100
+		when _RANDOM is less than TURN_AROUND_PERCENTAGE
+			when STATUS_MOVING_RIGHT is true
+				assign STATUS_MOVING_RIGHT false
+			otherwise
+				assign STATUS_MOVING_RIGHT true
+			end
+		end
+
+		when _JUMP_SKIPPED is greater than JUMP_DISABLE_COUNT
+			when JUMP_STYLE is equal to 0
+				#
+				# Random jump
+				#
+				assign _RANDOM random over 100
+				when STATUS_JUMPING_UP is true
+					when _RANDOM is less than JUMP_UP_PERCENTAGE
+						assign _JUMP_SKIPPED 0
+						assign _ACTION 2
+					end
+				otherwise
+					when _RANDOM is less than JUMP_DN_PERCENTAGE
+						assign _JUMP_SKIPPED 0
+						assign _ACTION 3
+					end
+				end
+
+			otherwise
+				#
+				# Cyclic jump
+				#
+				when STATUS_TURNED_AROUND is true
+					assign STATUS_TURNED_AROUND false
+					assign _JUMP_SKIPPED 0
+					when STATUS_JUMPING_UP is true
+						assign _ACTION 2
+					otherwise
+						assign _ACTION 3
+					end
+				end
+			end
+		end
+		increase _JUMP_SKIPPED
+
+		when _ACTION is equal to 1
+			import [PLAYER] ATTACK
+
+			when BOT_X_UNKNOWN is true
+				when STATUS_MOVING_RIGHT is true
+					assign BOT_POS.x computing BOT_POS.x add DEFAULT_ATTACK_WIDTH
+				otherwise
+					assign BOT_POS.x computing BOT_POS.x sub DEFAULT_ATTACK_WIDTH
+				end
+			end
+		end
+
+		when _ACTION is equal to 2
+			import [PLAYER] SOAR
+
+			when BOT_Y_UNKNOWN is true
+				assign BOT_POS.y computing BOT_POS.y sub DEFAULT_JUMP_HEIGHT
+			end
+		end
+
+		when _ACTION is equal to 3
+			import [PLAYER] FALL
+
+			when BOT_Y_UNKNOWN is true
+				assign BOT_POS.y computing BOT_POS.y add DEFAULT_JUMP_HEIGHT
+			end
+		end
+
+		# =========================================================
+		# Do special action
+		# =========================================================
+		when DO_FLAMEWOLF is true
+			iterate 10 times
+				sprite find _SPR for 3 using GWI_BOT over 200 0 1200 500
+				when _SPR.x is greater than 0
+					finish iterate
+				end
+				delay for 100
+			end
+			when _SPR.x is greater than 0
+				assign _SPR.x computing _SPR.x sub 16
+				button left click at _SPR.x _SPR.y
+				delay for 500
+				iterate 10 times
+					key space for 100
+					delay for 300
+				end
+			end
+			assign DO_FLAMEWOLF false
+		end
+
+		when DO_RESCUE is true
+			key pgdn for 500
+			delay for 500
+			import button_settings.txt CLICK_YES
+			assign DO_RESCUE false
+		end
+		
+		when DO_RETREAT is true
+			sub
+				key l for 100				
+				delay for 500
+				sprite find _SPR for 12 using GWI_BOT over 200 0 1200 500
+				when _SPR.x is less than 0
+					finish sub
+				end
+				iterate 10 times
+					import button_settings.txt CLICK_BOSSNEXT
+					sprite find _SPR for 13 using GWI_BOT over 200 0 1200 500
+					when _SPR.x is greater than 0
+						finish iterate
+					end
+					delay for 100
+				end
+				when _SPR.x is less than 0
+					finish sub
+				end
+				iterate 5 times
+					import button_settings.txt CLICK_SIGNUS
+					sprite find _SPR for 14 using GWI_BOT over 200 0 1200 500
+					when _SPR.x is greater than 0
+						finish iterate
+					end
+					delay for 100
+				end
+				when _SPR.x is less than 0
+					finish sub
+				end
+				import button_settings.txt CLICK_BOSSGO
+				when BUTTON_PRESSED is false
+					finish sub
+				end
+				assign CHECK_MAPOUT false
+				iterate 10 times
+					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
+					when _SPR.x is greater than 0
+						finish iterate
+					end
+					delay for 1000
+				end
+				when _SPR.x is less than 0
+					assign CHECK_MAPOUT true
+					finish sub
+				end
+				
+				assign DO_RETREAT false
+				
+				# Change routine
+				assign ROUTINE 1
+				finish sync
+			end
+		end
+		
+	end
+
+with
+	iterate forever
+		# =========================================================
+		# Check skill activeness
+		# =========================================================
+		when SKILL_1.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_1.row sub 1
+			assign SKILL_INDEX.col computing SKILL_1.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_1.thold is greater than 1
+					assign SKILL_1.on true
+					assign SKILL_1.thold 0
+				end
+				increase SKILL_1.thold
+			otherwise
+				assign SKILL_1.thold 0
+			end
+		end
+
+		when SKILL_2.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_2.row sub 1
+			assign SKILL_INDEX.col computing SKILL_2.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_2.thold is greater than 1
+					assign SKILL_2.on true
+					assign SKILL_2.thold 0
+				end
+				increase SKILL_2.thold
+			otherwise
+				assign SKILL_2.thold 0
+			end
+		end
+
+		when SKILL_3.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_3.row sub 1
+			assign SKILL_INDEX.col computing SKILL_3.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_3.thold is greater than 1
+					assign SKILL_3.on true
+					assign SKILL_3.thold 0
+				end
+				increase SKILL_3.thold
+			otherwise
+				assign SKILL_3.thold 0
+			end
+		end
+
+		when SKILL_4.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_4.row sub 1
+			assign SKILL_INDEX.col computing SKILL_4.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_4.thold is greater than 1
+					assign SKILL_4.on true
+					assign SKILL_4.thold 0
+				end
+				increase SKILL_4.thold
+			otherwise
+				assign SKILL_4.thold 0
+			end
+		end
+
+		when SKILL_5.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_5.row sub 1
+			assign SKILL_INDEX.col computing SKILL_5.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_5.thold is greater than 1
+					assign SKILL_5.on true
+					assign SKILL_5.thold 0
+				end
+				increase SKILL_5.thold
+			otherwise
+				assign SKILL_5.thold 0
+			end
+		end
+		
+		# =========================================================
+		# Check timer
+		# =========================================================
+		assign _NOW time
+
+		when TIMER_1.dur is greater than 0
+			when TIMER_1.ts is equal to 0
+				assign TIMER_1.ts time later TIMER_1.dur
+			end
+			when _NOW is greater than TIMER_1.ts
+				assign TIMER_1.on true
+				assign TIMER_1.ts time later TIMER_1.dur
+			end
+		end
+
+		when TIMER_2.dur is greater than 0
+			when TIMER_2.ts is equal to 0
+				assign TIMER_2.ts time later TIMER_2.dur
+			end
+			when _NOW is greater than TIMER_2.ts
+				assign TIMER_2.on true
+				assign TIMER_2.ts time later TIMER_2.dur
+			end
+		end
+		
+		when TIMER_3.dur is greater than 0
+			when TIMER_3.ts is equal to 0
+				assign TIMER_3.ts time later TIMER_3.dur
+			end
+			when _NOW is greater than TIMER_3.ts
+				assign TIMER_3.on true
+				assign TIMER_3.ts time later TIMER_3.dur
+			end
+		end
+		
+		# Custom check routine
+		import [PLAYER] CHECK
+		
+		# =========================================================
+		# Check special action
+		# =========================================================
+		when CHECK_FLAMEWOLF is true
+			import bot_settings.txt CHECK_FLAMEWOLF
+			when FLAMEWOLF_TEST is true
+				assign DO_FLAMEWOLF true
+			end
+		end
+		
+		when CHECK_RESCUE is true
+			import bot_settings.txt CHECK_RESCUE
+			when RESCUE_TEST is false
+				assign DO_RESCUE true
+			end
+		end
+		
+		when RETREAT_TIMER.on is unequal to 0
+			when _NOW is greater than RETREAT_TIMER.on
+				assign RETREAT_TIMER.on computing RETREAT_TIMER.on add RETREAT_CYCLE
+				assign DO_RETREAT true
+			end
+		end
+
+		delay for DELAY_CHECK
+	end
+	
+with 
+	register _NOTIFY
+	register _SCREEN_COUNT
+	register _MVPEXP_COUNT
+	register _TEMP
+
+	iterate forever
+		# =========================================================
+		# Notify game status
+		# =========================================================
+		assign _NOTIFY 0
+		
+		import bot_settings.txt CHECK_CURSE
+		when CURSE_TEST is true
+			assign _NOTIFY 1
+		end
+
+		import bot_settings.txt LOCATE_RIVAL
+		when RIVAL_POS.x is greater than 0
+			assign _NOTIFY 2
+		end
+
+		when CHECK_ELITEBOSS is true
+			import bot_settings.txt CHECK_ELITEBOSS
+			when ELITEBOSS_TEST is true
+				assign _NOTIFY 4
+			end
+		end
+		
+		when CHECK_MVPEXP is true
+			import bot_settings.txt CHECK_MVPEXP
+			when MVPEXP_TEST is true
+				when _MVPEXP_COUNT is less than 5
+					increase _MVPEXP_COUNT
+					assign _NOTIFY 5
+				end
+			otherwise
+				assign _MVPEXP_COUNT 0
+			end
+		end
+		
+		import bot_settings.txt CHECK_SCREEN
+		when SCREEN_TEST is true
+			import bot_settings.txt CHECK_VIOLETTA
+			when VIOLETTA_TEST is true
+				assign _TEMP duration 1 min
+				assign RETREAT_TIMER.on time later RETREAT_CYCLE
+				assign RETREAT_TIMER.on computing RETREAT_TIMER.on sub _TEMP
+				assign _TEMP duration 15 sec
+				assign RETREAT_TIMER.off time later RETREAT_CYCLE
+				assign RETREAT_TIMER.off computing RETREAT_TIMER.off add _TEMP
+				
+				assign _NOTIFY 6
+			otherwise
+				increase _SCREEN_COUNT
+				when _SCREEN_COUNT is greater than 2
+					when _SCREEN_COUNT is greater than 7
+						assign _NOTIFY 9
+					otherwise
+						assign _NOTIFY 3
+					end
+				end
+			end
+		otherwise
+			assign _SCREEN_COUNT 0
+		end
+		
+		when _NOTIFY is unequal to 0
+			when _NOTIFY is equal to 1
+				sound buzz
+			end
+			when _NOTIFY is equal to 2
+				sound bump
+			end
+			when _NOTIFY is equal to 3
+				sound plus
+			end
+			when _NOTIFY is equal to 4
+				sound dingdong
+			end
+			when _NOTIFY is equal to 5
+				sound coin
+			end
+			when _NOTIFY is equal to 6
+				sound boing
+			end			
+			when _NOTIFY is equal to 9
+				sound alert
+			end
+			delay for 500
+		end
+		
+		delay for DELAY_CHECK
+	end
+
+with
+	iterate forever
+		when CHECK_MAPOUT is true
+			import bot_settings.txt CHECK_MAPOUT
+			when MAPOUT_TEST is true
+				assign QUIT true
+			end
+		end	
+		delay for DELAY_MONITOR
+	end
+	
+with
+	iterate forever
+		import bot_settings.txt CHECK_STONE
+		when STONE_TEST is true
+			iterate 2 times
+				sound alert
+				iterate 10 times
+					key left for 100
+					key right for 100
+				end
+			end
+		otherwise
+			delay for DELAY_CHECK
+		end
+	end
+
+with
+	iterate forever
+		#import button_settings.txt CLICK_OKAY
+		import button_settings.txt CLICK_YES
+		import button_settings.txt CLICK_REWARD
+		
+		delay for DELAY_CHECK
+	end
+end

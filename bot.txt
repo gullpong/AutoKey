@@ -3,36 +3,6 @@ snapshot
 snapshot
 
 import bot_settings.txt INITIALIZE
-import button_settings.txt INITIALIZE
-
-register MVPEXP_CHECK
-assign MVPEXP_CHECK true
-
-register TIMER_1 with dur on
-register TIMER_2 with dur on
-register TIMER_3 with dur on
-
-register SKILL_1 with row col thold on
-register SKILL_2 with row col thold on
-register SKILL_3 with row col thold on
-register SKILL_4 with row col thold on
-register SKILL_5 with row col thold on
-
-register BOT_POS with x y
-
-register TURN_AROUND_PERCENTAGE
-
-register JUMP_STYLE
-register JUMP_UP_PERCENTAGE
-register JUMP_DN_PERCENTAGE
-register JUMP_DISABLE_COUNT
-
-register DEFAULT_ATTACK_WIDTH
-register DEFAULT_JUMP_HEIGHT
-
-
-################################################################
-
 assign MINIMAP.lt 0
 assign MINIMAP.tp 60
 assign MINIMAP.rt 220
@@ -47,20 +17,54 @@ assign POTION_HUD_TYPE 1
 assign POTION_HP_THOLD 40
 assign POTION_MP_THOLD 10
 
+import button_settings.txt INITIALIZE
+
+register DELAY_MONITOR
+register DELAY_CHECK
+assign DELAY_MONITOR 100
+assign DELAY_CHECK duration 1 sec
+
+register RETREAT_TIMER with on off
+register RETREAT_CYCLE
+assign RETREAT_CYCLE duration 20 min
+
+register TIMER_1 with dur ts on
+register TIMER_2 with dur ts on
+register TIMER_3 with dur ts on
+
+register SKILL_1 with row col thold on
+register SKILL_2 with row col thold on
+register SKILL_3 with row col thold on
+register SKILL_4 with row col thold on
+register SKILL_5 with row col thold on
+
+register TURN_AROUND_PERCENTAGE
 assign TURN_AROUND_PERCENTAGE 10
 
+register JUMP_STYLE
+register JUMP_UP_PERCENTAGE
+register JUMP_DN_PERCENTAGE
+register JUMP_DISABLE_COUNT
 assign JUMP_STYLE 0
 assign JUMP_UP_PERCENTAGE 50
 assign JUMP_DN_PERCENTAGE 50
 assign JUMP_DISABLE_COUNT 2
 
+register DEFAULT_ATTACK_WIDTH
+register DEFAULT_JUMP_HEIGHT
 assign DEFAULT_ATTACK_WIDTH 25
 assign DEFAULT_JUMP_HEIGHT 30
 
-
-# Let's motor.
-assign MONITOR_DELAY 100
-assign MONITOR_PERSEC 10
+register CHECK_MAPOUT
+register CHECK_FLAMEWOLF
+register CHECK_RESCUE
+register CHECK_ELITEBOSS
+register CHECK_MVPEXP
+assign CHECK_MAPOUT true
+assign CHECK_FLAMEWOLF true
+assign CHECK_RESCUE false
+assign CHECK_ELITEBOSS false
+assign CHECK_MVPEXP false
 
 alias [PLAYER] among "bot_union.txt" "bot_gyom.txt" "bot_kong.txt" "bot_dalkom.txt" "bot_signus.txt" "bot_amber.txt"
 import [PLAYER] SETUP
@@ -68,28 +72,35 @@ import [PLAYER] SETUP
 
 ################################################################
 
+# Global internal variables
+register BOT_POS with x y
+register BOT_X_UNKNOWN
+register BOT_Y_UNKNOWN
+register BOT_HORZ_STOPPED
+register BOT_VERT_STOPPED
+register BOT_LEFT_OUT
+register BOT_RIGHT_OUT
+register BOT_AT_BOTTOM
+register BOT_AT_TOP
+
+register QUIT
+assign QUIT false
+
+register ROUTINE
+assign ROUTINE 0	# Hunt: 0, Retreat: 1
+
+# Global temporary variables
 register _BLOB with x y width height num lt tp rt bm
 register _SPR with x y
 register _READ with x y
 register _IN with id stat x y
 register _RANDOM
-register _PREV with x y
-
-register STATUS_POSX_UNKNOWN
-register STATUS_POSY_UNKNOWN
-register STATUS_MOVING_RIGHT
-register STATUS_JUMPING_UP
-register STATUS_TURNED_AROUND
-register STATUS_JUMP_SKIPPED
-register STATUS_HORZ_STOPPED
-register STATUS_VERT_STOPPED
-register STATUS_ACTION
-
+register _NOW
 
 import bot_settings.txt INIT_SCREEN
 when SCREEN_ENABLED is true
 	sound cool
-	delay for 1000
+	delay for 1 sec
 end
 
 sync
@@ -102,320 +113,93 @@ sync
 		finish sync
 	end
 
+	# =========================================================
+	# Execute routine
+	# =========================================================
 	iterate forever
+		when QUIT is true
+			finish sync
+		end
+	
+		when ROUTINE is equal to 0
+			import bot_hunt.txt
+		end
 
+		when ROUTINE is equal to 1
+			import bot_retreat.txt
+		end
+	end
+	
+with
+	register _PREV with x y
+
+	iterate forever
+		# Global screen snapshot
 		snapshot
 
 		# =========================================================
-		# Check skill activeness
+		# Monitor bot position
 		# =========================================================
-		when SKILL_1.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_1.row sub 1
-			assign SKILL_INDEX.col computing SKILL_1.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_1.thold is greater than 5
-					assign SKILL_1.on true
-					assign SKILL_1.thold 0
-				end
-				assign SKILL_1.thold computing SKILL_1.thold add 1
-			otherwise
-				assign SKILL_1.thold 0
-			end
-		end
-
-		when SKILL_2.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_2.row sub 1
-			assign SKILL_INDEX.col computing SKILL_2.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_2.thold is greater than 5
-					assign SKILL_2.on true
-					assign SKILL_2.thold 0
-				end
-				assign SKILL_2.thold computing SKILL_2.thold add 1
-			otherwise
-				assign SKILL_2.thold 0
-			end
-		end
-
-		when SKILL_3.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_3.row sub 1
-			assign SKILL_INDEX.col computing SKILL_3.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_3.thold is greater than 5
-					assign SKILL_3.on true
-					assign SKILL_3.thold 0
-				end
-				assign SKILL_3.thold computing SKILL_3.thold add 1
-			otherwise
-				assign SKILL_3.thold 0
-			end
-		end
-
-		when SKILL_4.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_4.row sub 1
-			assign SKILL_INDEX.col computing SKILL_4.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_4.thold is greater than 5
-					assign SKILL_4.on true
-					assign SKILL_4.thold 0
-				end
-				assign SKILL_4.thold computing SKILL_4.thold add 1
-			otherwise
-				assign SKILL_4.thold 0
-			end
-		end
-
-		when SKILL_5.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_5.row sub 1
-			assign SKILL_INDEX.col computing SKILL_5.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_5.thold is greater than 5
-					assign SKILL_5.on true
-					assign SKILL_5.thold 0
-				end
-				assign SKILL_5.thold computing SKILL_5.thold add 1
-			otherwise
-				assign SKILL_5.thold 0
-			end
-		end
-
-		# =========================================================
-		# Check player position
-		# =========================================================
-		assign STATUS_POSX_UNKNOWN false
-		assign STATUS_POSY_UNKNOWN false
 		import bot_settings.txt LOCATE_PLAYER
+
 		when PLAYER_POS.x is less than 0
-			assign STATUS_POSX_UNKNOWN true
+			assign BOT_X_UNKNOWN true
 		otherwise
+			assign BOT_X_UNKNOWN false
 			assign BOT_POS.x PLAYER_POS.x
 		end
+
 		when PLAYER_POS.y is less than 0
-			assign STATUS_POSY_UNKNOWN true
+			assign BOT_Y_UNKNOWN true
 		otherwise
+			assign BOT_Y_UNKNOWN false
 			assign BOT_POS.y PLAYER_POS.y
 		end
-
+		
 		when BOT_POS.y is not below 0
 			when _PREV.x is equal to BOT_POS.x
-				assign STATUS_HORZ_STOPPED true
+				assign BOT_HORZ_STOPPED true
 			otherwise
-				assign STATUS_HORZ_STOPPED false
+				assign BOT_HORZ_STOPPED false
 			end
-			assign _PREV.x BOT_POS.x
+			assign _PREV.x BOT_POS.x			
+
 			when BOT_POS.x is less than LAYOUT.lt
-				when STATUS_MOVING_RIGHT is false
-					assign STATUS_TURNED_AROUND true
-				end
-				assign STATUS_MOVING_RIGHT true
+				assign BOT_LEFT_OUT true
+			otherwise
+				assign BOT_LEFT_OUT false
 			end
 			when BOT_POS.x is greater than LAYOUT.rt
-				when STATUS_MOVING_RIGHT is true
-					assign STATUS_TURNED_AROUND true
-				end
-				assign STATUS_MOVING_RIGHT false
+				assign BOT_RIGHT_OUT true
+			otherwise
+				assign BOT_RIGHT_OUT false
 			end
 		end
 
 		when BOT_POS.y is not below 0
 			when _PREV.y is equal to BOT_POS.y
-				assign STATUS_VERT_STOPPED true
+				assign BOT_VERT_STOPPED true
 			otherwise
-				assign STATUS_VERT_STOPPED false
+				assign BOT_VERT_STOPPED false
 			end
 			assign _PREV.y BOT_POS.y
+
 			when BOT_POS.y is less than LAYOUT.tf
-				assign STATUS_JUMPING_UP false
+				assign BOT_AT_TOP true
+			otherwise
+				assign BOT_AT_TOP false
 			end
 			when BOT_POS.y is greater than LAYOUT.bc
-				assign STATUS_JUMPING_UP true
-			end
-		end
-
-		import [PLAYER] SPECIAL_CHECK
-
-		delay for MONITOR_DELAY
-	end
-
-with
-
-	iterate forever
-
-		# =========================================================
-		# Perform timer action
-		# =========================================================
-		when TIMER_1.on is true
-			import [PLAYER] TIMER_1
-			assign TIMER_1.on false
-		end
-
-		when TIMER_2.on is true
-			import [PLAYER] TIMER_2
-			assign TIMER_2.on false
-		end
-
-		when TIMER_3.on is true
-			import [PLAYER] TIMER_3
-			assign TIMER_3.on false
-		end
-
-		# =========================================================
-		# Use active skill
-		# =========================================================
-		when SKILL_1.on is true
-			import [PLAYER] SKILL_1
-			assign SKILL_1.on false
-		end
-
-		when SKILL_2.on is true
-			import [PLAYER] SKILL_2
-			assign SKILL_2.on false
-		end
-
-		when SKILL_3.on is true
-			import [PLAYER] SKILL_3
-			assign SKILL_3.on false
-		end
-
-		when SKILL_4.on is true
-			import [PLAYER] SKILL_4
-			assign SKILL_4.on false
-		end
-
-		when SKILL_5.on is true
-			import [PLAYER] SKILL_5
-			assign SKILL_5.on false
-		end
-
-		# =========================================================
-		# Control player movement
-		# =========================================================
-		assign STATUS_ACTION 1
-		assign _RANDOM random over 100
-		when _RANDOM is less than TURN_AROUND_PERCENTAGE
-			when STATUS_MOVING_RIGHT is true
-				assign STATUS_MOVING_RIGHT false
+				assign BOT_AT_BOTTOM true
 			otherwise
-				assign STATUS_MOVING_RIGHT true
+				assign BOT_AT_BOTTOM false
 			end
 		end
 
-		when STATUS_JUMP_SKIPPED is greater than JUMP_DISABLE_COUNT
-			when JUMP_STYLE is equal to 0
-				#
-				# Random jump
-				#
-				assign _RANDOM random over 100
-				when STATUS_JUMPING_UP is true
-					when _RANDOM is less than JUMP_UP_PERCENTAGE
-						assign STATUS_JUMP_SKIPPED 0
-						assign STATUS_ACTION 2
-					end
-				otherwise
-					when _RANDOM is less than JUMP_DN_PERCENTAGE
-						assign STATUS_JUMP_SKIPPED 0
-						assign STATUS_ACTION 3
-					end
-				end
-
-			otherwise
-				#
-				# Cyclic jump
-				#
-				when STATUS_TURNED_AROUND is true
-					assign STATUS_TURNED_AROUND false
-					assign STATUS_JUMP_SKIPPED 0
-					when STATUS_JUMPING_UP is true
-						assign STATUS_ACTION 2
-					otherwise
-						assign STATUS_ACTION 3
-					end
-				end
-			end
-		end
-		assign STATUS_JUMP_SKIPPED computing STATUS_JUMP_SKIPPED add 1
-
-		import [PLAYER] SPECIAL_ACTION
-
-		when STATUS_ACTION is equal to 1
-			import [PLAYER] ATTACK
-
-			when STATUS_POSX_UNKNOWN is true
-				when STATUS_MOVING_RIGHT is true
-					assign BOT_POS.x computing BOT_POS.x add DEFAULT_ATTACK_WIDTH
-				otherwise
-					assign BOT_POS.x computing BOT_POS.x sub DEFAULT_ATTACK_WIDTH
-				end
-			end
-		end
-
-		when STATUS_ACTION is equal to 2
-			import [PLAYER] SOAR
-
-			when STATUS_POSY_UNKNOWN is true
-				assign BOT_POS.y computing BOT_POS.y sub DEFAULT_JUMP_HEIGHT
-			end
-		end
-
-		when STATUS_ACTION is equal to 3
-			import [PLAYER] FALL
-
-			when STATUS_POSY_UNKNOWN is true
-				assign BOT_POS.y computing BOT_POS.y add DEFAULT_JUMP_HEIGHT
-			end
-		end
-
+		delay for DELAY_MONITOR
 	end
-
+		
 with
-	# =========================================================
-	# Elapse timer
-	# =========================================================
-	sub
-		register _DURATION
-		when TIMER_1.dur is greater than 0
-			assign _DURATION computing TIMER_1.dur mul 1000
-			iterate forever
-				delay for _DURATION
-				assign TIMER_1.on true
-			end
-		end
-	end
-
-with
-	sub
-		register _DURATION
-		when TIMER_2.dur is greater than 0
-			assign _DURATION computing TIMER_2.dur mul 1000
-			iterate forever
-				delay for _DURATION
-				assign TIMER_2.on true
-			end
-		end
-	end
-
-with
-	sub
-		register _DURATION
-		when TIMER_3.dur is greater than 0
-			assign _DURATION computing TIMER_3.dur mul 1000
-			iterate forever
-				delay for _DURATION
-				assign TIMER_3.on true
-			end
-		end
-	end
-	# =========================================================
-
-with
-	# =========================================================
-	# Drink potion
-	# =========================================================
 	iterate forever
 		import bot_settings.txt CHECK_POTION
 		when POTION_TEST is true
@@ -426,117 +210,7 @@ with
 		end
 	end
 
-with
-	# =========================================================
-	# Click buttons
-	# =========================================================
-	iterate forever
-		#import button_settings.txt CLICK_OKAY
-		import button_settings.txt CLICK_YES
-		import button_settings.txt CLICK_REWARD
-		delay for 1000
-	end
-
-with
-	# =========================================================
-	# Check screen
-	# =========================================================
-	iterate forever
-		import bot_settings.txt CHECK_MAPOUT
-		when MAPOUT_TEST is true
-			finish sync
-		end
-		delay for 250
-	end
-
-with
-	iterate forever
-		import bot_settings.txt CHECK_STONE
-		when STONE_TEST is true
-			iterate 2 times
-				sound alert
-				iterate 10 times
-					key left for 100
-					key right for 100
-				end
-			end
-		otherwise
-			delay for 1000
-		end
-	end
-
-with
-	iterate forever
-		import bot_settings.txt CHECK_CURSE
-		when CURSE_TEST is true
-			sound buzz
-			delay for 500
-		end
-		delay for 1000
-	end
-
-with
-	iterate forever
-		import bot_settings.txt LOCATE_RIVAL
-		when RIVAL_POS.x is greater than 0
-			sound bump
-			delay for 500
-		end
-		delay for 1000
-	end
-
-with
-	iterate forever
-		import bot_settings.txt CHECK_ELITEBOSS
-		when ELITEBOSS_TEST is true
-			sound dingdong
-			delay for 500
-		end
-		delay for 1000
-	end
-
-with
-	register _SCREEN_COUNT
-	iterate forever
-		import bot_settings.txt CHECK_SCREEN
-		when SCREEN_TEST is true
-			increase _SCREEN_COUNT
-			when _SCREEN_COUNT is greater than 2
-				when _SCREEN_COUNT is greater than 7
-					# Serious notification
-					sound alert
-				otherwise
-					# Minor notification
-					sound plus
-				end
-				delay for 500
-			end
-		otherwise
-			assign _SCREEN_COUNT 0
-		end
-		delay for 1000
-	end
-
-with
-	register _MVPEXP_COUNT
-	iterate forever
-		when MVPEXP_CHECK is false
-			finish iterate
-		end
-		import bot_settings.txt CHECK_MVPEXP
-		when MVPEXP_TEST is true
-			when _MVPEXP_COUNT is less than 5
-				increase _MVPEXP_COUNT
-				sound coin
-				delay for 500
-			end
-		otherwise
-			assign _MVPEXP_COUNT 0
-		end
-		delay for 1000
-	end
-	# =========================================================
 end
 
-#sound alert
-sound cool
+# Script finished
+sound alert
