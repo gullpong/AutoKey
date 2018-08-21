@@ -406,16 +406,18 @@ with
 
 	iterate forever
 	
-		when CHECK_CREST is false
+		when CHECK_CREST is true
 			import bot_settings.txt CHECK_CREST
-			when CREST_TEST is false			
+			when CREST_TEST is false
 				increase _CREST_COUNT
 				when _CREST_COUNT is greater than 2
 					assign QUIT true
 				end		
 			otherwise
 				assign _CREST_COUNT 0			
-			end			
+			end
+		otherwise
+			assign _CREST_COUNT 0
 		end
 	
 		# =========================================================
@@ -450,6 +452,8 @@ with
 			otherwise
 				assign _MVPEXP_COUNT 0
 			end
+		otherwise
+			assign _MVPEXP_COUNT 0
 		end
 		
 		import bot_settings.txt CHECK_SCREEN
