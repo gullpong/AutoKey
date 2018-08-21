@@ -160,7 +160,7 @@ break
 key g for 500
 delay for 1000
 
-assign CAST_GENESIS_TIME timer later 48 sec
+assign CAST_GENESIS_TIME time later 48 sec
 
 break
 
@@ -207,7 +207,7 @@ break
 ##################################################
 > CHECK
 
-when GENESIS_CAST_TIME is unequal to 0
+when CAST_GENESIS_TIME is unequal to 0
 	when _NOW is greater than CAST_GENESIS_TIME
 		assign CAST_GENESIS_TIME 0
 		assign SKILL_1.on true
