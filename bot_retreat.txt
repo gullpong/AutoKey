@@ -61,15 +61,12 @@ sync
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is less than 0
 						iterate forever
-							import bot_settings.txt CHECK_CREST
-							when CREST_TEST is true
-							#import bot_settings.txt CHECK_MAPOUT
-							#when MAPOUT_TEST is true
+							import bot_settings.txt CHECK_MAPNAME
+							when MAPNAME_TEST is true
 								finish iterate
 							end			
 							delay for DELAY_MONITOR
 						end
-						#delay for 2 sec
 						delay for 1 sec
 						
 						assign DO_HUNT false
@@ -90,23 +87,35 @@ with
 
 		assign _NOW time
 
-		when RETREAT_TIMER.off is unequal to 0
-			when _NOW is greater than RETREAT_TIMER.off
-				assign RETREAT_TIMER.off computing RETREAT_TIMER.off add RETREAT_CYCLE
+		when RETREAT_TIMER.out is unequal to 0
+			when _NOW is greater than RETREAT_TIMER.out
+				assign RETREAT_TIMER.out 0				
 				assign DO_HUNT true
 			end
 		end
 
-		delay for DELAY_CHECK		
+		delay for DELAY_CHECK
 	end
 
 with
+	register _VIOLETTA_COUNT
+	register _TEMP
+	
 	iterate forever
 
 		import bot_settings.txt CHECK_VIOLETTA
 		when VIOLETTA_TEST is true
+			increase _VIOLETTA_COUNT
+			when _VIOLETTA_COUNT is equal to 1
+				assign RETREAT_TIMER.in time later RETREAT_CYCLE.period
+				assign RETREAT_TIMER.in computing RETREAT_TIMER.in sub RETREAT_CYCLE.enter
+				
+				assign RETREAT_TIMER.out time later 45 sec
+			end
 			sound boing
 			delay for 500
+		otherwise
+			assign _VIOLETTA_COUNT 0
 		end
 		
 		delay for DELAY_CHECK

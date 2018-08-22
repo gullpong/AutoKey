@@ -24,9 +24,11 @@ register DELAY_CHECK
 assign DELAY_MONITOR 100
 assign DELAY_CHECK duration 1 sec
 
-register RETREAT_TIMER with on off
-register RETREAT_CYCLE
-assign RETREAT_CYCLE duration 20 min
+register RETREAT_TIMER with at in out
+register RETREAT_CYCLE with period enter exit
+assign RETREAT_CYCLE.period duration 20 min
+assign RETREAT_CYCLE.enter duration 4 min
+assign RETREAT_CYCLE.exit duration 20 sec
 
 register TIMER_1 with dur ts on
 register TIMER_2 with dur ts on
@@ -55,14 +57,12 @@ register DEFAULT_JUMP_HEIGHT
 assign DEFAULT_ATTACK_WIDTH 25
 assign DEFAULT_JUMP_HEIGHT 30
 
-register CHECK_CREST
-#register CHECK_MAPOUT
+register CHECK_MAPNAME
 register CHECK_FLAMEWOLF
 register CHECK_RESCUE
 register CHECK_ELITEBOSS
 register CHECK_MVPEXP
-assign CHECK_CREST true
-#assign CHECK_MAPOUT true
+assign CHECK_MAPNAME true
 assign CHECK_FLAMEWOLF true
 assign CHECK_RESCUE false
 assign CHECK_ELITEBOSS false
@@ -100,7 +100,7 @@ register _RANDOM
 register _NOW
 
 
-import bot_settings.txt INIT_CREST
+import bot_settings.txt INIT_MAPNAME
 
 import bot_settings.txt INIT_SCREEN
 when SCREEN_ENABLED is true
@@ -122,10 +122,6 @@ sync
 	# Execute routine
 	# =========================================================
 	iterate forever
-		when QUIT is true
-			finish sync
-		end
-	
 		when ROUTINE is equal to 0
 			import bot_hunt.txt
 		end
@@ -139,9 +135,13 @@ with
 	register _PREV with x y
 
 	iterate forever
+		when QUIT is true
+			finish sync
+		end
+
 		# Global screen snapshot
 		snapshot
-
+		
 		# =========================================================
 		# Monitor bot position
 		# =========================================================

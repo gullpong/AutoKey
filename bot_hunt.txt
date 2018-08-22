@@ -227,8 +227,7 @@ sync
 				when BUTTON_PRESSED is false
 					finish sub
 				end
-				#assign CHECK_MAPOUT false
-				assign CHECK_CREST false
+				assign CHECK_MAPNAME false
 				iterate 10 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is greater than 0
@@ -237,8 +236,7 @@ sync
 					delay for 1000
 				end
 				when _SPR.x is less than 0
-					#assign CHECK_MAPOUT true
-					assign CHECK_CREST true
+					assign CHECK_MAPNAME true
 					finish sub
 				end
 				
@@ -387,9 +385,13 @@ with
 			end
 		end
 		
-		when RETREAT_TIMER.on is unequal to 0
-			when _NOW is greater than RETREAT_TIMER.on
-				assign RETREAT_TIMER.on computing RETREAT_TIMER.on add RETREAT_CYCLE
+		when RETREAT_TIMER.in is unequal to 0
+			when _NOW is greater than RETREAT_TIMER.in
+				assign RETREAT_TIMER.out computing RETREAT_TIMER.in add RETREAT_CYCLE.enter
+				assign RETREAT_TIMER.out computing RETREAT_TIMER.out add RETREAT_CYCLE.exit
+
+				assign RETREAT_TIMER.in computing RETREAT_TIMER.in add RETREAT_CYCLE.period
+				
 				assign DO_RETREAT true
 			end
 		end
@@ -399,25 +401,26 @@ with
 	
 with 
 	register _NOTIFY
-	register _CREST_COUNT
+	register _MAPNAME_COUNT
 	register _SCREEN_COUNT
+	register _VIOLETTA_COUNT
 	register _MVPEXP_COUNT
 	register _TEMP
 
 	iterate forever
 	
-		when CHECK_CREST is true
-			import bot_settings.txt CHECK_CREST
-			when CREST_TEST is false
-				increase _CREST_COUNT
-				when _CREST_COUNT is greater than 2
+		when CHECK_MAPNAME is true
+			import bot_settings.txt CHECK_MAPNAME
+			when MAPNAME_TEST is false
+				increase _MAPNAME_COUNT
+				when _MAPNAME_COUNT is greater than 2
 					assign QUIT true
 				end		
 			otherwise
-				assign _CREST_COUNT 0			
+				assign _MAPNAME_COUNT 0
 			end
 		otherwise
-			assign _CREST_COUNT 0
+			assign _MAPNAME_COUNT 0
 		end
 	
 		# =========================================================
@@ -458,28 +461,28 @@ with
 		
 		import bot_settings.txt CHECK_SCREEN
 		when SCREEN_TEST is true
-			import bot_settings.txt CHECK_VIOLETTA
-			when VIOLETTA_TEST is true
-				assign _TEMP duration 3 min
-				assign RETREAT_TIMER.on time later RETREAT_CYCLE
-				assign RETREAT_TIMER.on computing RETREAT_TIMER.on sub _TEMP
-				assign _TEMP duration 20 sec
-				assign RETREAT_TIMER.off time later RETREAT_CYCLE
-				assign RETREAT_TIMER.off computing RETREAT_TIMER.off add _TEMP
-				
-				assign _NOTIFY 6
-			otherwise
-				increase _SCREEN_COUNT
-				when _SCREEN_COUNT is greater than 2
-					when _SCREEN_COUNT is greater than 7
-						assign _NOTIFY 9
-					otherwise
-						assign _NOTIFY 3
-					end
+			increase _SCREEN_COUNT
+			when _SCREEN_COUNT is greater than 2
+				when _SCREEN_COUNT is greater than 7
+					assign _NOTIFY 9
+				otherwise
+					assign _NOTIFY 3
 				end
 			end
 		otherwise
 			assign _SCREEN_COUNT 0
+		end
+
+		import bot_settings.txt CHECK_VIOLETTA
+		when VIOLETTA_TEST is true
+			increase _VIOLETTA_COUNT
+			when _VIOLETTA_COUNT is equal to 1
+				assign RETREAT_TIMER.in time later RETREAT_CYCLE.period
+				assign RETREAT_TIMER.in computing RETREAT_TIMER.in sub RETREAT_CYCLE.enter					
+			end
+			assign _NOTIFY 6
+		otherwise
+			assign _VIOLETTA_COUNT 0
 		end
 		
 		when _NOTIFY is unequal to 0
@@ -509,17 +512,6 @@ with
 		
 		delay for DELAY_CHECK
 	end
-
-#with
-#	iterate forever
-#		when CHECK_MAPOUT is true
-#			import bot_settings.txt CHECK_MAPOUT
-#			when MAPOUT_TEST is true
-#				assign QUIT true
-#			end
-#		end	
-#		delay for DELAY_MONITOR
-#	end
 	
 with
 	iterate forever
