@@ -27,37 +27,6 @@ sync
 		end
 
 		# =========================================================
-		# Use active skill
-		# =========================================================
-		when SKILL_1.on is true
-			import [PLAYER] SKILL_1
-			assign SKILL_1.on false
-		end
-
-		when SKILL_2.on is true
-			import [PLAYER] SKILL_2
-			assign SKILL_2.on false
-		end
-
-		when SKILL_3.on is true
-			import [PLAYER] SKILL_3
-			assign SKILL_3.on false
-		end
-
-		when SKILL_4.on is true
-			import [PLAYER] SKILL_4
-			assign SKILL_4.on false
-		end
-
-		when SKILL_5.on is true
-			import [PLAYER] SKILL_5
-			assign SKILL_5.on false
-		end
-
-		# Custom action routine
-		import [PLAYER] ACTION
-
-		# =========================================================
 		# Do special action
 		# =========================================================
 		when DO_HUNT is true
@@ -135,84 +104,6 @@ sync
 	
 with
 	iterate forever
-		# =========================================================
-		# Check skill activeness
-		# =========================================================
-		when SKILL_1.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_1.row sub 1
-			assign SKILL_INDEX.col computing SKILL_1.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_1.thold is greater than 1
-					assign SKILL_1.on true
-					assign SKILL_1.thold 0
-				end
-				increase SKILL_1.thold
-			otherwise
-				assign SKILL_1.thold 0
-			end
-		end
-
-		when SKILL_2.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_2.row sub 1
-			assign SKILL_INDEX.col computing SKILL_2.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_2.thold is greater than 1
-					assign SKILL_2.on true
-					assign SKILL_2.thold 0
-				end
-				increase SKILL_2.thold
-			otherwise
-				assign SKILL_2.thold 0
-			end
-		end
-
-		when SKILL_3.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_3.row sub 1
-			assign SKILL_INDEX.col computing SKILL_3.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_3.thold is greater than 1
-					assign SKILL_3.on true
-					assign SKILL_3.thold 0
-				end
-				increase SKILL_3.thold
-			otherwise
-				assign SKILL_3.thold 0
-			end
-		end
-
-		when SKILL_4.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_4.row sub 1
-			assign SKILL_INDEX.col computing SKILL_4.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_4.thold is greater than 1
-					assign SKILL_4.on true
-					assign SKILL_4.thold 0
-				end
-				increase SKILL_4.thold
-			otherwise
-				assign SKILL_4.thold 0
-			end
-		end
-
-		when SKILL_5.row is greater than 0
-			assign SKILL_INDEX.row computing SKILL_5.row sub 1
-			assign SKILL_INDEX.col computing SKILL_5.col sub 1
-			import bot_settings.txt CHECK_SKILL
-			when SKILL_TEST is true
-				when SKILL_5.thold is greater than 1
-					assign SKILL_5.on true
-					assign SKILL_5.thold 0
-				end
-				increase SKILL_5.thold
-			otherwise
-				assign SKILL_5.thold 0
-			end
-		end
-		
 		# =========================================================
 		# Check timer
 		# =========================================================
