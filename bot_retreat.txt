@@ -8,7 +8,58 @@ sync
 	register _DIST
 	
 	iterate forever
-	
+			# =========================================================
+		# Perform timer action
+		# =========================================================
+		when TIMER_1.on is true
+			import [PLAYER] TIMER_1
+			assign TIMER_1.on false
+		end
+
+		when TIMER_2.on is true
+			import [PLAYER] TIMER_2
+			assign TIMER_2.on false
+		end
+
+		when TIMER_3.on is true
+			import [PLAYER] TIMER_3
+			assign TIMER_3.on false
+		end
+
+		# =========================================================
+		# Use active skill
+		# =========================================================
+		when SKILL_1.on is true
+			import [PLAYER] SKILL_1
+			assign SKILL_1.on false
+		end
+
+		when SKILL_2.on is true
+			import [PLAYER] SKILL_2
+			assign SKILL_2.on false
+		end
+
+		when SKILL_3.on is true
+			import [PLAYER] SKILL_3
+			assign SKILL_3.on false
+		end
+
+		when SKILL_4.on is true
+			import [PLAYER] SKILL_4
+			assign SKILL_4.on false
+		end
+
+		when SKILL_5.on is true
+			import [PLAYER] SKILL_5
+			assign SKILL_5.on false
+		end
+
+		# Custom action routine
+		import [PLAYER] ACTION
+
+		# =========================================================
+		# Do special action
+		# =========================================================
 		when DO_HUNT is true
 			when BOT_X_UNKNOWN is false
 				when BOT_POS.x is greater than 40
@@ -84,9 +135,122 @@ sync
 	
 with
 	iterate forever
+		# =========================================================
+		# Check skill activeness
+		# =========================================================
+		when SKILL_1.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_1.row sub 1
+			assign SKILL_INDEX.col computing SKILL_1.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_1.thold is greater than 1
+					assign SKILL_1.on true
+					assign SKILL_1.thold 0
+				end
+				increase SKILL_1.thold
+			otherwise
+				assign SKILL_1.thold 0
+			end
+		end
 
+		when SKILL_2.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_2.row sub 1
+			assign SKILL_INDEX.col computing SKILL_2.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_2.thold is greater than 1
+					assign SKILL_2.on true
+					assign SKILL_2.thold 0
+				end
+				increase SKILL_2.thold
+			otherwise
+				assign SKILL_2.thold 0
+			end
+		end
+
+		when SKILL_3.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_3.row sub 1
+			assign SKILL_INDEX.col computing SKILL_3.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_3.thold is greater than 1
+					assign SKILL_3.on true
+					assign SKILL_3.thold 0
+				end
+				increase SKILL_3.thold
+			otherwise
+				assign SKILL_3.thold 0
+			end
+		end
+
+		when SKILL_4.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_4.row sub 1
+			assign SKILL_INDEX.col computing SKILL_4.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_4.thold is greater than 1
+					assign SKILL_4.on true
+					assign SKILL_4.thold 0
+				end
+				increase SKILL_4.thold
+			otherwise
+				assign SKILL_4.thold 0
+			end
+		end
+
+		when SKILL_5.row is greater than 0
+			assign SKILL_INDEX.row computing SKILL_5.row sub 1
+			assign SKILL_INDEX.col computing SKILL_5.col sub 1
+			import bot_settings.txt CHECK_SKILL
+			when SKILL_TEST is true
+				when SKILL_5.thold is greater than 1
+					assign SKILL_5.on true
+					assign SKILL_5.thold 0
+				end
+				increase SKILL_5.thold
+			otherwise
+				assign SKILL_5.thold 0
+			end
+		end
+		
+		# =========================================================
+		# Check timer
+		# =========================================================
 		assign _NOW time
 
+		when TIMER_1.dur is greater than 0
+			when TIMER_1.ts is equal to 0
+				assign TIMER_1.ts time later TIMER_1.dur
+			end
+			when _NOW is greater than TIMER_1.ts
+				assign TIMER_1.on true
+				assign TIMER_1.ts time later TIMER_1.dur
+			end
+		end
+
+		when TIMER_2.dur is greater than 0
+			when TIMER_2.ts is equal to 0
+				assign TIMER_2.ts time later TIMER_2.dur
+			end
+			when _NOW is greater than TIMER_2.ts
+				assign TIMER_2.on true
+				assign TIMER_2.ts time later TIMER_2.dur
+			end
+		end
+		
+		when TIMER_3.dur is greater than 0
+			when TIMER_3.ts is equal to 0
+				assign TIMER_3.ts time later TIMER_3.dur
+			end
+			when _NOW is greater than TIMER_3.ts
+				assign TIMER_3.on true
+				assign TIMER_3.ts time later TIMER_3.dur
+			end
+		end
+
+		# =========================================================
+		# Check special action
+		# =========================================================
 		when RETREAT_TIMER.out is unequal to 0
 			when _NOW is greater than RETREAT_TIMER.out
 				assign RETREAT_TIMER.out 0				
@@ -98,11 +262,28 @@ with
 	end
 
 with
+	register _NOTIFY
+	register _MAP_COUNT	
 	register _VIOLETTA_COUNT
 	register _TEMP
 	
 	iterate forever
+		# =========================================================
+		# Check map
+		# =========================================================
+		sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
+		when _SPR.x is less than 0
+			increase _MAP_COUNT
+			when _MAP_COUNT is greater than 2
+				assign QUIT true
+			end		
+		otherwise
+			assign _MAP_COUNT 0
+		end
 
+		# =========================================================
+		# Notify game status
+		# =========================================================
 		import bot_settings.txt CHECK_VIOLETTA
 		when VIOLETTA_TEST is true
 			increase _VIOLETTA_COUNT
@@ -112,10 +293,34 @@ with
 				
 				assign RETREAT_TIMER.out time later 45 sec
 			end
-			sound boing
-			delay for 500
+			assign _NOTIFY 6
 		otherwise
 			assign _VIOLETTA_COUNT 0
+		end
+
+		when _NOTIFY is unequal to 0
+			when _NOTIFY is equal to 1
+				sound buzz
+			end
+			when _NOTIFY is equal to 2
+				sound bump
+			end
+			when _NOTIFY is equal to 3
+				sound plus
+			end
+			when _NOTIFY is equal to 4
+				sound dingdong
+			end
+			when _NOTIFY is equal to 5
+				sound coin
+			end
+			when _NOTIFY is equal to 6
+				sound boing
+			end			
+			when _NOTIFY is equal to 9
+				sound alert
+			end
+			delay for 500
 		end
 		
 		delay for DELAY_CHECK

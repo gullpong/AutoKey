@@ -401,26 +401,28 @@ with
 	
 with 
 	register _NOTIFY
-	register _MAPNAME_COUNT
+	register _MAP_COUNT
 	register _SCREEN_COUNT
 	register _VIOLETTA_COUNT
 	register _MVPEXP_COUNT
 	register _TEMP
 
 	iterate forever
-	
+		# =========================================================
+		# Check map
+		# =========================================================
 		when CHECK_MAPNAME is true
 			import bot_settings.txt CHECK_MAPNAME
 			when MAPNAME_TEST is false
-				increase _MAPNAME_COUNT
-				when _MAPNAME_COUNT is greater than 2
+				increase _MAP_COUNT
+				when _MAP_COUNT is greater than 2
 					assign QUIT true
 				end		
 			otherwise
-				assign _MAPNAME_COUNT 0
+				assign _MAP_COUNT 0
 			end
 		otherwise
-			assign _MAPNAME_COUNT 0
+			assign _MAP_COUNT 0
 		end
 	
 		# =========================================================
