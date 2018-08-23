@@ -1,6 +1,8 @@
 
 register DO_HUNT
 
+assign CHECK_MAP true
+
 sync
 	register _MOVE_LEFT
 	register _MOVE_RIGHT
@@ -76,6 +78,8 @@ sync
 					otherwise
 						key right for 100
 					end
+					
+					assign CHECK_MAP false
 					key up for 200
 					
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
@@ -162,12 +166,16 @@ with
 		# =========================================================
 		# Check map
 		# =========================================================
-		sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
-		when _SPR.x is less than 0
-			increase _MAP_COUNT
-			when _MAP_COUNT is greater than 2
-				assign QUIT true
-			end		
+		when CHECK_MAP is true
+			sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
+			when _SPR.x is less than 0
+				increase _MAP_COUNT
+				when _MAP_COUNT is greater than 2
+					assign QUIT true
+				end		
+			otherwise
+				assign _MAP_COUNT 0
+			end
 		otherwise
 			assign _MAP_COUNT 0
 		end

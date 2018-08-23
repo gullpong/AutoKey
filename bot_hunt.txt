@@ -10,6 +10,12 @@ register DO_FLAMEWOLF
 register DO_RESCUE
 register DO_RETREAT
 
+assign CHECK_MAP true
+assign CHECK_FLAMEWOLF true
+assign CHECK_RESCUE false
+assign CHECK_ELITEBOSS false
+assign CHECK_MVPEXP false
+
 sync
 	register _ACTION
 	register _JUMP_SKIPPED
@@ -227,7 +233,7 @@ sync
 				when BUTTON_PRESSED is false
 					finish sub
 				end
-				assign CHECK_MAPNAME false
+				assign CHECK_MAP false
 				iterate 10 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is greater than 0
@@ -236,7 +242,7 @@ sync
 					delay for 1000
 				end
 				when _SPR.x is less than 0
-					assign CHECK_MAPNAME true
+					assign CHECK_MAP true
 					finish sub
 				end
 				
@@ -411,7 +417,7 @@ with
 		# =========================================================
 		# Check map
 		# =========================================================
-		when CHECK_MAPNAME is true
+		when CHECK_MAP is true
 			import bot_settings.txt CHECK_MAPNAME
 			when MAPNAME_TEST is false
 				increase _MAP_COUNT
