@@ -52,18 +52,16 @@ break
 #########################################################
 > CLICK_REWARD
 
-assign BUTTON_ID 2
-import self CLICK_BUTTON
-when BUTTON_PRESSED is false
-	assign BUTTON_ID 3
-	import self CLICK_BUTTON
-	when BUTTON_PRESSED is false
-		assign BUTTON_ID 16
+sub
+	register _ITR
+	assign _ITR 2
+	iterate 5 times
+		assign BUTTON_ID _ITR
 		import self CLICK_BUTTON
-		when BUTTON_PRESSED is false
-			assign BUTTON_ID 17
-			import self CLICK_BUTTON
+		when BUTTON_PRESSED is true
+			finish iterate
 		end
+		increase _ITR
 	end
 end
 break
@@ -71,10 +69,10 @@ break
 #########################################################
 > CLICK_NEXT
 
-assign BUTTON_ID 4
+assign BUTTON_ID 7
 import self CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 5
+	assign BUTTON_ID 8
 	import self CLICK_BUTTON
 end
 break
@@ -82,10 +80,10 @@ break
 #########################################################
 > CLICK_YES
 
-assign BUTTON_ID 6
+assign BUTTON_ID 9
 import self CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 7
+	assign BUTTON_ID 10
 	import self CLICK_BUTTON
 end
 break
@@ -93,10 +91,10 @@ break
 #########################################################
 > CLICK_NO
 
-assign BUTTON_ID 8
+assign BUTTON_ID 11
 import self CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 9
+	assign BUTTON_ID 12
 	import self CLICK_BUTTON
 end
 break
@@ -104,10 +102,10 @@ break
 #########################################################
 > CLICK_ACCEPT
 
-assign BUTTON_ID 10
+assign BUTTON_ID 13
 import self CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 11
+	assign BUTTON_ID 14
 	import self CLICK_BUTTON
 end
 break
@@ -115,10 +113,10 @@ break
 #########################################################
 > CLICK_DECLINE
 
-assign BUTTON_ID 12
+assign BUTTON_ID 15
 import self CLICK_BUTTON
 when BUTTON_PRESSED is false
-	assign BUTTON_ID 13
+	assign BUTTON_ID 16
 	import self CLICK_BUTTON
 end
 break
@@ -126,27 +124,27 @@ break
 #########################################################
 > CLICK_USE
 
-assign BUTTON_ID 14
+assign BUTTON_ID 17
 import self CLICK_BUTTON
 break
 
 #########################################################
 > CLICK_BOSSNEXT
 
-assign BUTTON_ID 18
+assign BUTTON_ID 19
 import self CLICK_BUTTON
 break
 
 #########################################################
 > CLICK_BOSSGO
 
-assign BUTTON_ID 19
+assign BUTTON_ID 20
 import self CLICK_BUTTON
 break
 
 #########################################################
 > CLICK_SIGNUS
 
-assign BUTTON_ID 20
+assign BUTTON_ID 21
 import self CLICK_BUTTON
 break
