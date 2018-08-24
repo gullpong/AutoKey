@@ -183,6 +183,8 @@ with
 		# =========================================================
 		# Notify game status
 		# =========================================================
+		assign _NOTIFY 0
+		
 		import bot_settings.txt CHECK_VIOLETTA
 		when VIOLETTA_TEST is true
 			increase _VIOLETTA_COUNT
