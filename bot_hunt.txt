@@ -19,7 +19,7 @@ assign CHECK_MVPEXP false
 sync
 	register _ACTION
 	register _JUMP_SKIPPED
-	
+
 	iterate forever
 		# =========================================================
 		# Perform timer action
@@ -67,7 +67,6 @@ sync
 			assign SKILL_5.on false
 		end
 
-
 		# =========================================================
 		# Control player movement
 		# =========================================================
@@ -93,7 +92,7 @@ sync
 		when BOT_AT_TOP is true
 			assign STATUS_JUMPING_UP false
 		end
-		
+
 		assign _ACTION 1
 		assign _RANDOM random over 100
 		when _RANDOM is less than TURN_AROUND_PERCENTAGE
@@ -199,10 +198,10 @@ sync
 			import button_settings.txt CLICK_YES
 			assign DO_RESCUE false
 		end
-		
+
 		when DO_RETREAT is true
 			sub
-				key l for 100				
+				key l for 100
 				delay for 500
 				sprite find _SPR for 12 using GWI_BOT over 200 0 1200 500
 				when _SPR.x is less than 0
@@ -246,15 +245,15 @@ sync
 					assign CHECK_MAP true
 					finish sub
 				end
-				
+
 				assign DO_RETREAT false
-				
+
 				# Change routine
 				assign ROUTINE 1
 				finish sync
 			end
 		end
-		
+
 	end
 
 with
@@ -283,7 +282,7 @@ with
 				assign TIMER_2.ts time later TIMER_2.dur
 			end
 		end
-		
+
 		when TIMER_3.dur is greater than 0
 			when TIMER_3.ts is equal to 0
 				assign TIMER_3.ts time later TIMER_3.dur
@@ -371,10 +370,10 @@ with
 				assign SKILL_5.thold 0
 			end
 		end
-		
+
 		# Custom check routine
 		import [PLAYER] CHECK
-		
+
 		# =========================================================
 		# Check special action
 		# =========================================================
@@ -384,29 +383,29 @@ with
 				assign DO_FLAMEWOLF true
 			end
 		end
-		
+
 		when CHECK_RESCUE is true
 			import bot_settings.txt CHECK_RESCUE
 			when RESCUE_TEST is false
 				assign DO_RESCUE true
 			end
 		end
-		
+
 		when RETREAT_TIMER.in is unequal to 0
 			when _NOW is greater than RETREAT_TIMER.in
 				assign RETREAT_TIMER.out computing RETREAT_TIMER.in add RETREAT_CYCLE.enter
 				assign RETREAT_TIMER.out computing RETREAT_TIMER.out add RETREAT_CYCLE.exit
 
 				assign RETREAT_TIMER.in computing RETREAT_TIMER.in add RETREAT_CYCLE.period
-				
+
 				assign DO_RETREAT true
 			end
 		end
 
 		delay for DELAY_CHECK
 	end
-	
-with 
+
+with
 	register _NOTIFY
 	register _MAP_COUNT
 	register _SCREEN_COUNT
@@ -424,19 +423,19 @@ with
 				increase _MAP_COUNT
 				when _MAP_COUNT is greater than 2
 					assign QUIT true
-				end		
+				end
 			otherwise
 				assign _MAP_COUNT 0
 			end
 		otherwise
 			assign _MAP_COUNT 0
 		end
-	
+
 		# =========================================================
 		# Notify game status
 		# =========================================================
 		assign _NOTIFY 0
-		
+
 		import bot_settings.txt CHECK_CURSE
 		when CURSE_TEST is true
 			assign _NOTIFY 1
@@ -453,7 +452,7 @@ with
 				assign _NOTIFY 4
 			end
 		end
-		
+
 		when CHECK_MVPEXP is true
 			import bot_settings.txt CHECK_MVPEXP
 			when MVPEXP_TEST is true
@@ -467,7 +466,7 @@ with
 		otherwise
 			assign _MVPEXP_COUNT 0
 		end
-		
+
 		import bot_settings.txt CHECK_SCREEN
 		when SCREEN_TEST is true
 			increase _SCREEN_COUNT
@@ -487,13 +486,13 @@ with
 			increase _VIOLETTA_COUNT
 			when _VIOLETTA_COUNT is equal to 1
 				assign RETREAT_TIMER.in time later RETREAT_CYCLE.period
-				assign RETREAT_TIMER.in computing RETREAT_TIMER.in sub RETREAT_CYCLE.enter					
+				assign RETREAT_TIMER.in computing RETREAT_TIMER.in sub RETREAT_CYCLE.enter
 			end
 			assign _NOTIFY 6
 		otherwise
 			assign _VIOLETTA_COUNT 0
 		end
-		
+
 		when _NOTIFY is unequal to 0
 			when _NOTIFY is equal to 1
 				sound buzz
@@ -512,16 +511,16 @@ with
 			end
 			when _NOTIFY is equal to 6
 				sound boing
-			end			
+			end
 			when _NOTIFY is equal to 9
 				sound alert
 			end
 			delay for 500
 		end
-		
+
 		delay for DELAY_CHECK
 	end
-	
+
 with
 	iterate forever
 		import bot_settings.txt CHECK_STONE
@@ -543,7 +542,7 @@ with
 		#import button_settings.txt CLICK_OKAY
 		import button_settings.txt CLICK_YES
 		import button_settings.txt CLICK_REWARD
-		
+
 		delay for DELAY_CHECK
 	end
 end

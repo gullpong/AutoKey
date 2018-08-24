@@ -4,44 +4,62 @@ register DO_HUNT
 assign CHECK_MAP true
 
 sync
+	register _DELAY
+
 	iterate forever
+		assign _DELAY 500
+
 		# =========================================================
 		# Do special action
 		# =========================================================
 		when DO_HUNT is true
-			when BOT_X_UNKNOWN is false
+			sub
+				when BOT_X_UNKNOWN is true
+					finish sub
+				end
+				assign _DELAY 0
+
 				assign MOVE_HORZ_TAR.left 37
 				assign MOVE_HORZ_TAR.right 40
 				assign MOVE_HORZ_POS BOT_POS.x
 				import bot_settings.txt MOVE_HORZ
-				when MOVE_TEST is true
-					assign CHECK_MAP false
-					key up for 200
-					
+				when MOVE_TEST is false
+					finish sub
+				end
+				assign CHECK_MAP false
+				key up for 200
+				iterate 2 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is less than 0
-						iterate forever
-							import bot_settings.txt CHECK_MAPNAME
-							when MAPNAME_TEST is true
-								finish iterate
-							end			
-							delay for DELAY_MONITOR
-						end
-						delay for 1 sec
-						
-						assign DO_HUNT false
-						
-						# Change routine
-						assign ROUTINE 0
-						finish sync
+						finish iterate
 					end
+					delay for 500
 				end
+				when _SPR.x is greater than 0
+					assign CHECK_MAP true
+					finish sub
+				end
+
+				assign DO_HUNT false
+
+				iterate forever
+					import bot_settings.txt CHECK_MAPNAME
+					when MAPNAME_TEST is true
+						finish iterate
+					end
+					delay for DELAY_MONITOR
+				end
+				delay for 1 sec
+
+				# Change routine
+				assign ROUTINE 0
+				finish sync
 			end
-		otherwise			
-			delay for 500
 		end
+
+		delay for _DELAY
 	end
-	
+
 with
 	iterate forever
 		# =========================================================
@@ -49,7 +67,7 @@ with
 		# =========================================================
 		when RETREAT_TIMER.out is unequal to 0
 			when _NOW is greater than RETREAT_TIMER.out
-				assign RETREAT_TIMER.out 0				
+				assign RETREAT_TIMER.out 0
 				assign DO_HUNT true
 			end
 		end
@@ -59,9 +77,9 @@ with
 
 with
 	register _NOTIFY
-	register _MAP_COUNT	
+	register _MAP_COUNT
 	register _VIOLETTA_COUNT
-	
+
 	iterate forever
 		# =========================================================
 		# Check map
@@ -72,7 +90,7 @@ with
 				increase _MAP_COUNT
 				when _MAP_COUNT is greater than 2
 					assign QUIT true
-				end		
+				end
 			otherwise
 				assign _MAP_COUNT 0
 			end
@@ -84,14 +102,14 @@ with
 		# Notify game status
 		# =========================================================
 		assign _NOTIFY 0
-		
+
 		import bot_settings.txt CHECK_VIOLETTA
 		when VIOLETTA_TEST is true
 			increase _VIOLETTA_COUNT
 			when _VIOLETTA_COUNT is equal to 1
 				assign RETREAT_TIMER.in time later RETREAT_CYCLE.period
 				assign RETREAT_TIMER.in computing RETREAT_TIMER.in sub RETREAT_CYCLE.enter
-				
+
 				assign RETREAT_TIMER.out time later 45 sec
 			end
 			assign _NOTIFY 6
@@ -117,13 +135,13 @@ with
 			end
 			when _NOTIFY is equal to 6
 				sound boing
-			end			
+			end
 			when _NOTIFY is equal to 9
 				sound alert
 			end
 			delay for 500
 		end
-		
+
 		delay for DELAY_CHECK
 	end
 end
