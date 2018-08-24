@@ -67,8 +67,6 @@ sync
 			assign SKILL_5.on false
 		end
 
-		# Custom action routine
-		import [PLAYER] ACTION
 
 		# =========================================================
 		# Control player movement
@@ -169,8 +167,11 @@ sync
 			end
 		end
 
+		# Custom action routine
+		import [PLAYER] ACTION
+
 		# =========================================================
-		# Do special action
+		# Perform special action
 		# =========================================================
 		when DO_FLAMEWOLF is true
 			iterate 10 times
@@ -213,7 +214,7 @@ sync
 					when _SPR.x is greater than 0
 						finish iterate
 					end
-					delay for 100
+					delay for 200
 				end
 				when _SPR.x is less than 0
 					finish sub
@@ -224,7 +225,7 @@ sync
 					when _SPR.x is greater than 0
 						finish iterate
 					end
-					delay for 100
+					delay for 200
 				end
 				when _SPR.x is less than 0
 					finish sub
@@ -234,12 +235,12 @@ sync
 					finish sub
 				end
 				assign CHECK_MAP false
-				iterate 10 times
+				iterate 5 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is greater than 0
 						finish iterate
 					end
-					delay for 1000
+					delay for 1 sec
 				end
 				when _SPR.x is less than 0
 					assign CHECK_MAP true
@@ -258,6 +259,41 @@ sync
 
 with
 	iterate forever
+		# =========================================================
+		# Check timer
+		# =========================================================
+		assign _NOW time
+
+		when TIMER_1.dur is greater than 0
+			when TIMER_1.ts is equal to 0
+				assign TIMER_1.ts time later TIMER_1.dur
+			end
+			when _NOW is greater than TIMER_1.ts
+				assign TIMER_1.on true
+				assign TIMER_1.ts time later TIMER_1.dur
+			end
+		end
+
+		when TIMER_2.dur is greater than 0
+			when TIMER_2.ts is equal to 0
+				assign TIMER_2.ts time later TIMER_2.dur
+			end
+			when _NOW is greater than TIMER_2.ts
+				assign TIMER_2.on true
+				assign TIMER_2.ts time later TIMER_2.dur
+			end
+		end
+		
+		when TIMER_3.dur is greater than 0
+			when TIMER_3.ts is equal to 0
+				assign TIMER_3.ts time later TIMER_3.dur
+			end
+			when _NOW is greater than TIMER_3.ts
+				assign TIMER_3.on true
+				assign TIMER_3.ts time later TIMER_3.dur
+			end
+		end
+
 		# =========================================================
 		# Check skill activeness
 		# =========================================================
@@ -333,41 +369,6 @@ with
 				increase SKILL_5.thold
 			otherwise
 				assign SKILL_5.thold 0
-			end
-		end
-		
-		# =========================================================
-		# Check timer
-		# =========================================================
-		assign _NOW time
-
-		when TIMER_1.dur is greater than 0
-			when TIMER_1.ts is equal to 0
-				assign TIMER_1.ts time later TIMER_1.dur
-			end
-			when _NOW is greater than TIMER_1.ts
-				assign TIMER_1.on true
-				assign TIMER_1.ts time later TIMER_1.dur
-			end
-		end
-
-		when TIMER_2.dur is greater than 0
-			when TIMER_2.ts is equal to 0
-				assign TIMER_2.ts time later TIMER_2.dur
-			end
-			when _NOW is greater than TIMER_2.ts
-				assign TIMER_2.on true
-				assign TIMER_2.ts time later TIMER_2.dur
-			end
-		end
-		
-		when TIMER_3.dur is greater than 0
-			when TIMER_3.ts is equal to 0
-				assign TIMER_3.ts time later TIMER_3.dur
-			end
-			when _NOW is greater than TIMER_3.ts
-				assign TIMER_3.on true
-				assign TIMER_3.ts time later TIMER_3.dur
 			end
 		end
 		
