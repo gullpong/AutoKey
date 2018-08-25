@@ -19,6 +19,7 @@ assign CHECK_MVPEXP false
 sync
 	register _ACTION
 	register _JUMP_SKIPPED
+	register _GO_RETREAT
 
 	iterate forever
 		# =========================================================
@@ -229,17 +230,16 @@ sync
 				when _SPR.x is less than 0
 					finish sub
 				end
-				register _GO
-				assign _GO false
+				assign _GO_RETREAT false
 				iterate 5 times
 					import button_settings.txt CLICK_BOSSGO
 					when BUTTON_PRESSED is false
-						assign _GO true
+						assign _GO_RETREAT true
 						finish iterate
 					end
 					delay for 300
 				end
-				when _GO is false
+				when _GO_RETREAT is false
 					finish sub
 				end
 				
