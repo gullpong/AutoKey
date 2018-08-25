@@ -229,8 +229,17 @@ sync
 				when _SPR.x is less than 0
 					finish sub
 				end
-				import button_settings.txt CLICK_BOSSGO
-				when BUTTON_PRESSED is false
+				register _GO
+				assign _GO false
+				iterate 5 times
+					import button_settings.txt CLICK_BOSSGO
+					when BUTTON_PRESSED is false
+						assign _GO true
+						finish iterate
+					end
+					delay for 300
+				end
+				when _GO is false
 					finish sub
 				end
 				
