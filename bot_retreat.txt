@@ -26,9 +26,11 @@ sync
 				when MOVE_TEST is false
 					finish sub
 				end
+				
+				sound beep
 				assign CHECK_MAP false
 				key up for 200
-				iterate 2 times
+				iterate 5 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is less than 0
 						finish iterate
@@ -40,6 +42,7 @@ sync
 					finish sub
 				end
 
+				sound buzz
 				assign DO_HUNT false
 
 				iterate forever
@@ -62,6 +65,8 @@ sync
 
 with
 	iterate forever
+		assign _NOW time
+		
 		# =========================================================
 		# Check special action
 		# =========================================================
@@ -79,14 +84,15 @@ with
 	register _NOTIFY
 	register _MAP_COUNT
 	register _VIOLETTA_COUNT
+	register _SPR2 with x y
 
 	iterate forever
 		# =========================================================
 		# Check map
 		# =========================================================
 		when CHECK_MAP is true
-			sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
-			when _SPR.x is less than 0
+			sprite find _SPR2 for 15 using GWI_BOT over 0 0 50 60
+			when _SPR2.x is less than 0
 				increase _MAP_COUNT
 				when _MAP_COUNT is greater than 2
 					assign QUIT true

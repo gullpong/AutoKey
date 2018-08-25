@@ -233,6 +233,8 @@ sync
 				when BUTTON_PRESSED is false
 					finish sub
 				end
+				
+				sound beep
 				assign CHECK_MAP false
 				iterate 5 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
@@ -246,6 +248,7 @@ sync
 					finish sub
 				end
 
+				sound buzz
 				assign DO_RETREAT false
 
 				# Change routine
