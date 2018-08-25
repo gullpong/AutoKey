@@ -28,8 +28,8 @@ sync
 				end
 				
 				assign CHECK_MAP false
-				key up for 200
-				iterate 2 times
+				key up for 200				
+				iterate 4 times
 					sprite find _SPR for 15 using GWI_BOT over 0 0 50 60
 					when _SPR.x is less than 0
 						finish iterate
@@ -41,7 +41,6 @@ sync
 					finish sub
 				end
 				
-				sound buzz
 				assign DO_HUNT false
 
 				iterate forever
@@ -53,8 +52,6 @@ sync
 				end
 				delay for 1 sec
 				
-				sound boing
-
 				# Change routine
 				assign ROUTINE 0
 				finish sync
