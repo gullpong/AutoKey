@@ -49,7 +49,7 @@ register MOVE_TEST
 register MOVE_HORZ_TAR with left right
 register MOVE_HORZ_POS
 register MOVE_HORZ_PROX
-assign MOVE_HORZ_PROX 5
+assign MOVE_HORZ_PROX 7
 
 break
 
@@ -292,11 +292,13 @@ break
 
 assign FLAMEWOLF_TEST false
 
-sprite find _SPR for 3 using GWI_BOT over 200 0 1200 500
-when _SPR.x is greater than 0
-	assign FLAMEWOLF_TEST true
+sub
+	register _SPR with x y
+	sprite find _SPR for 3 using GWI_BOT over 200 0 1200 500
+	when _SPR.x is greater than 0
+		assign FLAMEWOLF_TEST true
+	end
 end
-
 break
 
 
@@ -305,11 +307,13 @@ break
 
 assign VIOLETTA_TEST false
 
-sprite find _SPR for 11 using GWI_BOT over 910 610 960 650
-when _SPR.x is greater than 0
-	assign VIOLETTA_TEST true
+sub
+	register _SPR with x y
+	sprite find _SPR for 11 using GWI_BOT over 910 610 960 650
+	when _SPR.x is greater than 0
+		assign VIOLETTA_TEST true
+	end
 end
-
 break
 
 

@@ -30,11 +30,6 @@ assign RETREAT_CYCLE.period duration 20 min
 assign RETREAT_CYCLE.enter duration 4 min
 assign RETREAT_CYCLE.exit duration 20 sec
 
-assign RETREAT_CYCLE.period duration 1 min
-assign RETREAT_CYCLE.enter duration 20 sec
-assign RETREAT_CYCLE.exit duration 10 sec
-assign RETREAT_TIMER.in time later 30 sec
-
 register TIMER_1 with dur ts on
 register TIMER_2 with dur ts on
 register TIMER_3 with dur ts on
@@ -99,6 +94,13 @@ register _IN with id stat x y
 register _RANDOM
 register _NOW
 
+
+# TEST
+assign RETREAT_CYCLE.period duration 1 min
+assign RETREAT_CYCLE.enter duration 20 sec
+assign RETREAT_CYCLE.exit duration 10 sec
+assign RETREAT_TIMER.in time later 30 sec
+assign RETREAT_TIMER.out time later 5 sec
 
 import bot_settings.txt INIT_MAPNAME
 
