@@ -208,9 +208,9 @@ sync
 				when _SPR.x is less than 0
 					finish sub
 				end
-				iterate 10 times
+				iterate 5 times
 					import button_settings.txt CLICK_BOSSNEXT
-					delay for 300
+					delay for 400
 					sprite find _SPR for 13 using GWI_BOT over 200 0 1200 500
 					when _SPR.x is greater than 0
 						finish iterate
@@ -221,7 +221,7 @@ sync
 				end
 				iterate 5 times
 					import button_settings.txt CLICK_SIGNUS
-					delay for 300
+					delay for 400
 					sprite find _SPR for 14 using GWI_BOT over 200 0 1200 500
 					when _SPR.x is greater than 0
 						finish iterate
@@ -237,7 +237,7 @@ sync
 						assign _GO_RETREAT true
 						finish iterate
 					end
-					delay for 300
+					delay for 400
 				end
 				when _GO_RETREAT is false
 					finish sub

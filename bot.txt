@@ -95,13 +95,6 @@ register _RANDOM
 register _NOW
 
 
-# TEST
-assign RETREAT_CYCLE.period duration 1 min
-assign RETREAT_CYCLE.enter duration 20 sec
-assign RETREAT_CYCLE.exit duration 10 sec
-assign RETREAT_TIMER.in time later 30 sec
-assign RETREAT_TIMER.out time later 5 sec
-
 import bot_settings.txt INIT_MAPNAME
 
 import bot_settings.txt INIT_SCREEN
