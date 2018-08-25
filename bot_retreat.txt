@@ -40,7 +40,8 @@ sync
 					assign CHECK_MAP true
 					finish sub
 				end
-
+				
+				sound buzz
 				assign DO_HUNT false
 
 				iterate forever
@@ -51,6 +52,8 @@ sync
 					delay for DELAY_MONITOR
 				end
 				delay for 1 sec
+				
+				sound boing
 
 				# Change routine
 				assign ROUTINE 0

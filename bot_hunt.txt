@@ -247,6 +247,7 @@ sync
 					finish sub
 				end
 
+				sound buzz
 				assign DO_RETREAT false
 
 				# Change routine
