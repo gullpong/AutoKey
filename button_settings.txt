@@ -129,6 +129,13 @@ import self CLICK_BUTTON
 break
 
 #########################################################
+> CLICK_PASSWORDOK
+
+assign BUTTON_ID 18
+import self CLICK_BUTTON
+break
+
+#########################################################
 > CLICK_BOSSNEXT
 
 assign BUTTON_ID 19
