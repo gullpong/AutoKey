@@ -213,7 +213,7 @@ sync
 					when _SPR.x is greater than 0
 						finish iterate
 					end
-					delay for 200
+					delay for 400
 				end
 				when _SPR.x is less than 0
 					finish sub
@@ -224,7 +224,7 @@ sync
 					when _SPR.x is greater than 0
 						finish iterate
 					end
-					delay for 200
+					delay for 400
 				end
 				when _SPR.x is less than 0
 					finish sub
