@@ -8,8 +8,7 @@ assign POTION_HP_THOLD 40
 assign TIMER_1.dur duration 160 sec
 assign TIMER_1.on true
 assign TIMER_2.dur duration 300 sec
-#assign TIMER_3.dur duration 100 sec
-#assign TIMER_3.on true
+#assign TIMER_3.dur duration 180 sec
 
 #assign SKILL_1.row 2
 #assign SKILL_1.col 2
@@ -54,9 +53,6 @@ break
 
 delay for 500
 
-key b for 500
-delay for 1500
-
 key 9 for 500
 
 break
@@ -72,7 +68,9 @@ break
 ##################################################
 > TIMER_3
 
-key pgdn for 1000
+delay for 500
+key b for 500
+delay for 1500
 
 break
 

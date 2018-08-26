@@ -27,8 +27,8 @@ assign DELAY_CHECK duration 1 sec
 register RETREAT_TIMER with in out
 register RETREAT_CYCLE with period enter exit
 assign RETREAT_CYCLE.period duration 20 min
-assign RETREAT_CYCLE.enter duration 4 min
-assign RETREAT_CYCLE.exit duration 20 sec
+assign RETREAT_CYCLE.enter duration 1 min
+assign RETREAT_CYCLE.exit duration 10 sec
 
 register TIMER_1 with dur ts on
 register TIMER_2 with dur ts on

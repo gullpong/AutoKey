@@ -8,8 +8,8 @@ assign POTION_MP_THOLD 10
 assign TIMER_1.dur duration 280 sec
 assign TIMER_1.on true
 #assign TIMER_2.dur duration 300 sec
-assign TIMER_3.dur duration 200 sec
-assign TIMER_3.on true
+#assign TIMER_3.dur duration 200 sec
+#assign TIMER_3.on true
 
 assign SKILL_1.row 2
 assign SKILL_1.col 7
@@ -250,7 +250,7 @@ end
 when SUMMON_EVOLVE_TIME is unequal to 0
 	when _NOW is greater than SUMMON_EVOLVE_TIME
 		assign SUMMON_EVOLVE_TIME 0
-		assign SUMMON_EVOLVE true
+		#assign SUMMON_EVOLVE true
 	end
 end
 
