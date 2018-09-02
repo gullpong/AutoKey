@@ -112,6 +112,7 @@ with
 			increase _VIOLETTA_COUNT
 			when _VIOLETTA_COUNT is equal to 1
 				assign RETREAT_TIMER.in time later RETREAT_CYCLE.period
+				
 				assign RETREAT_TIMER.in computing RETREAT_TIMER.in sub RETREAT_CYCLE.enter
 
 				assign RETREAT_TIMER.out time later 45 sec

@@ -48,8 +48,10 @@ register SCREEN_CHECK_C with en lt tp rt bm
 register MOVE_TEST
 register MOVE_HORZ_TAR with left right
 register MOVE_HORZ_POS
-register MOVE_HORZ_PROX
-assign MOVE_HORZ_PROX 7
+register MOVE_HORZ_NEAR
+register MOVE_HORZ_FAR
+assign MOVE_HORZ_NEAR 5
+assign MOVE_HORZ_FAR 10
 
 break
 
@@ -690,9 +692,9 @@ assign MOVE_TEST false
 sub
 	register _LEFT
 	register _RIGHT
-	register _LITTLE
 	register _DIST
 	register _RAND
+	register _DUR
 	
 	when MOVE_HORZ_POS is less than 0
 		finish sub
@@ -711,27 +713,21 @@ sub
 	otherwise
 		assign _RIGHT false
 	end
-
-	when _DIST is less than MOVE_HORZ_PROX
-		assign _LITTLE true
-	otherwise
-		assign _LITTLE false
+	
+	assign _DUR 400
+	when _DIST is less than MOVE_HORZ_NEAR
+		assign _DUR 100
+	end
+	when _DIST is greater than MOVE_HORZ_FAR
+		assign _DUR 1000
 	end
 	
 	when _LEFT is true
-		when _LITTLE is true
-			key left for 200
-		otherwise
-			key left for 600
-		end
+		key left for _DUR
 		finish sub
 	end
 	when _RIGHT is true
-		when _LITTLE is true
-			key right for 200
-		otherwise
-			key right for 600
-		end
+		key right for _DUR
 		finish sub
 	end
 	
