@@ -13,7 +13,7 @@ register DO_RETREAT
 assign CHECK_MAP true
 assign CHECK_FLAMEWOLF true
 assign CHECK_RESCUE false
-assign CHECK_ELITEBOSS false
+assign CHECK_ELITEBOSS true
 assign CHECK_MVPEXP false
 
 sync
