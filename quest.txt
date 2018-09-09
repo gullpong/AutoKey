@@ -4,11 +4,20 @@ snapshot
 
 import button_settings.txt INITIALIZE
 
-iterate forever
-	snapshot
-	import button_settings.txt CLICK_DIALOGNEXT
-	import button_settings.txt CLICK_DIALOGACCEPT
-	import button_settings.txt CLICK_DIALOGSTART
-
-	key space for 200
+sync
+	iterate forever
+		snapshot
+		import button_settings.txt CLICK_DIALOGNEXT
+		import button_settings.txt CLICK_DIALOGACCEPT
+		import button_settings.txt CLICK_DIALOGSTART
+	end
+with
+	iterate forever
+		key space for 100
+	end
+with
+	iterate forever
+		key left for 100
+		key right for 100
+	end
 end
