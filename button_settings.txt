@@ -136,22 +136,43 @@ import self CLICK_BUTTON
 break
 
 #########################################################
-> CLICK_BOSSNEXT
+> CLICK_DIALOGSTART
 
 assign BUTTON_ID 19
 import self CLICK_BUTTON
 break
 
 #########################################################
-> CLICK_BOSSGO
+> CLICK_DIALOGACCEPT
 
 assign BUTTON_ID 20
 import self CLICK_BUTTON
 break
 
 #########################################################
-> CLICK_SIGNUS
+> CLICK_DIALOGNEXT
 
 assign BUTTON_ID 21
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_BOSSNEXT
+
+assign BUTTON_ID 22
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_BOSSGO
+
+assign BUTTON_ID 23
+import self CLICK_BUTTON
+break
+
+#########################################################
+> CLICK_SIGNUS
+
+assign BUTTON_ID 24
 import self CLICK_BUTTON
 break

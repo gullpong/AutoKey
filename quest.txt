@@ -1,0 +1,14 @@
+exclusive
+snapshot
+snapshot
+
+import button_settings.txt INITIALIZE
+
+iterate forever
+	snapshot
+	import button_settings.txt CLICK_DIALOGNEXT
+	import button_settings.txt CLICK_DIALOGACCEPT
+	import button_settings.txt CLICK_DIALOGSTART
+
+	key space for 200
+end
