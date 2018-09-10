@@ -30,8 +30,10 @@ assign DEFAULT_JUMP_HEIGHT 30
 
 register SOAR_DELAY
 register FALL_DELAY
+register ROPE_ENABLE
 assign SOAR_DELAY 900
 assign FALL_DELAY 1200
+assign ROPE_ENABLE false
 
 register ARROW_QUIET_PERIOD
 assign ARROW_QUIET_PERIOD time
@@ -39,7 +41,7 @@ assign ARROW_QUIET_PERIOD time
 register SUMMON_EVOLVE
 register SUMMON_EVOLVE_TIME
 
-alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_LOWER_FORK_CAVERN" "ARCANA_FORK_CROSS_CAVERN"
+alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_LOWER_FORK_CAVERN" "ARCANA_FORK_CROSS_CAVERN" "ESFERA_LIGHT_TEMPLE_4"
 import self [MAP]
 
 break
@@ -116,6 +118,12 @@ break
 ##################################################
 > SOAR
 
+when ROPE_ENABLE is true
+	assign _RANDOM random over 100
+otherwise
+	assign _RANDOM 100
+end
+
 delay for 100
 sync
 	when STATUS_MOVING_RIGHT is true
@@ -124,9 +132,15 @@ sync
 		key left for 200
 	end
 with
-	key x for 200
-	key up for 50
-	key up for 50
+	when _RANDOM is less than 60
+		delay for 200
+		key shift for 200
+		delay for 800
+	otherwise
+		key x for 200
+		key up for 50
+		key up for 50	
+	end
 end
 when STATUS_MOVING_RIGHT is true
 	key right for SOAR_DELAY
@@ -307,3 +321,11 @@ assign SOAR_DELAY 1000
 
 break
 
+##################################################
+> ESFERA_LIGHT_TEMPLE_4
+
+import bot_maps.txt [MAP]
+assign SOAR_DELAY 600
+assign ROPE_ENABLE true
+
+break
