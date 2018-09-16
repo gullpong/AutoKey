@@ -238,7 +238,7 @@ delay for 500
 
 when TIMER_3.dur is greater than 0
 	when SUMMON_EVOLVE_TIME is equal to 0
-		assign SUMMON_EVOLVE_TIME time later 50 sec
+		assign SUMMON_EVOLVE_TIME time later 60 sec
 	end
 end
 
