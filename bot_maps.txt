@@ -418,6 +418,25 @@ break
 
 
 ##################################################
+> ESFERA_MIRROR_SEA_2
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 175
+assign MINIMAP.bm 145
+
+assign LAYOUT.lt 50
+assign LAYOUT.rt 135
+assign LAYOUT.tf 90
+assign LAYOUT.bc 115
+
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
 > ESFERA_LIGHT_TEMPLE_4
 
 assign MINIMAP.lt 10
@@ -425,12 +444,32 @@ assign MINIMAP.tp 60
 assign MINIMAP.rt 212
 assign MINIMAP.bm 145
 
-assign LAYOUT.lt 30
-assign LAYOUT.rt 190
+assign LAYOUT.lt 40
+assign LAYOUT.rt 180
 assign LAYOUT.tf 85
 assign LAYOUT.bc 125
 
-assign JUMP_DISABLE_COUNT 2
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 1
+
+break
+
+
+##################################################
+> MOONBRIDGE_VOID_TIDE_3
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 175
+assign MINIMAP.bm 135
+
+assign LAYOUT.lt 50
+assign LAYOUT.rt 135
+assign LAYOUT.tf 85
+assign LAYOUT.bc 110
+
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 1
 
 break
 

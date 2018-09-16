@@ -8,8 +8,8 @@ assign POTION_MP_THOLD 10
 assign TIMER_1.dur duration 280 sec
 assign TIMER_1.on true
 #assign TIMER_2.dur duration 300 sec
-#assign TIMER_3.dur duration 200 sec
-#assign TIMER_3.on true
+assign TIMER_3.dur duration 200 sec
+assign TIMER_3.on true
 
 assign SKILL_1.row 2
 assign SKILL_1.col 7
@@ -30,10 +30,12 @@ assign DEFAULT_JUMP_HEIGHT 30
 
 register SOAR_DELAY
 register FALL_DELAY
-register ROPE_ENABLE
+register ROPE_PERCENT
+register HOOK_PERCENT
 assign SOAR_DELAY 900
 assign FALL_DELAY 1200
-assign ROPE_ENABLE false
+assign ROPE_PERCENT 0
+assign HOOK_PERCENT 0
 
 register ARROW_QUIET_PERIOD
 assign ARROW_QUIET_PERIOD time
@@ -41,7 +43,7 @@ assign ARROW_QUIET_PERIOD time
 register SUMMON_EVOLVE
 register SUMMON_EVOLVE_TIME
 
-alias [MAP] among "LACHELN_CHICKEN_RUN_2" "ARCANA_LOWER_CAVERN" "ARCANA_FORK_CAVERN" "ARCANA_LOWER_FORK_CAVERN" "ARCANA_FORK_CROSS_CAVERN" "ESFERA_LIGHT_TEMPLE_4"
+alias [MAP] among "ARCANA_FORK_CROSS_CAVERN" "ESFERA_MIRROR_SEA_2" "ESFERA_LIGHT_TEMPLE_4" "MOONBRIDGE_VOID_TIDE_3"
 import self [MAP]
 
 break
@@ -106,10 +108,17 @@ sync
 		key left for 700
 	end
 with
-	#delay for 50
-	#key d for 50
-	key d for 300
-	delay for 400
+	assign _RANDOM random over 100
+	when _RANDOM is less than HOOK_PERCENT
+		delay for 400
+		key f for 300
+		delay for 300
+		key d for 400
+		delay for 500
+	otherwise
+		key d for 300
+		delay for 400
+	end
 end
 
 break
@@ -117,12 +126,6 @@ break
 
 ##################################################
 > SOAR
-
-when ROPE_ENABLE is true
-	assign _RANDOM random over 100
-otherwise
-	assign _RANDOM 100
-end
 
 delay for 100
 sync
@@ -132,10 +135,11 @@ sync
 		key left for 200
 	end
 with
-	when _RANDOM is less than 60
+	assign _RANDOM random over 100
+	when _RANDOM is less than ROPE_PERCENT
 		delay for 200
 		key shift for 200
-		delay for 800
+		delay for SOAR_DELAY
 	otherwise
 		key x for 200
 		key up for 50
@@ -232,8 +236,10 @@ break
 key g for 500
 delay for 500
 
-when SUMMON_EVOLVE_TIME is equal to 0
-	assign SUMMON_EVOLVE_TIME time later 50 sec
+when TIMER_3.dur is greater than 0
+	when SUMMON_EVOLVE_TIME is equal to 0
+		assign SUMMON_EVOLVE_TIME time later 50 sec
+	end
 end
 
 break
@@ -264,7 +270,7 @@ end
 when SUMMON_EVOLVE_TIME is unequal to 0
 	when _NOW is greater than SUMMON_EVOLVE_TIME
 		assign SUMMON_EVOLVE_TIME 0
-		#assign SUMMON_EVOLVE true
+		assign SUMMON_EVOLVE true
 	end
 end
 
@@ -326,6 +332,20 @@ break
 
 import bot_maps.txt [MAP]
 assign SOAR_DELAY 600
-assign ROPE_ENABLE true
+assign ROPE_PERCENT 60
+assign HOOK_PERCENT 30
 
 break
+
+
+##################################################
+> ESFERA_MIRROR_SEA_2
+> MOONBRIDGE_VOID_TIDE_3
+
+import bot_maps.txt [MAP]
+assign SOAR_DELAY 600
+assign ROPE_PERCENT 30
+assign HOOK_PERCENT 15
+
+break
+
