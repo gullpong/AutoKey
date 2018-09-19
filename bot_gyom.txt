@@ -29,10 +29,12 @@ assign DEFAULT_ATTACK_WIDTH 25
 assign DEFAULT_JUMP_HEIGHT 30
 
 register SOAR_DELAY
+register ROPE_DELAY
 register FALL_DELAY
 register ROPE_PERCENT
 register HOOK_PERCENT
 assign SOAR_DELAY 900
+assign ROPE_DELAY 900
 assign FALL_DELAY 1200
 assign ROPE_PERCENT 0
 assign HOOK_PERCENT 0
@@ -43,7 +45,7 @@ assign ARROW_QUIET_PERIOD time
 register SUMMON_EVOLVE
 register SUMMON_EVOLVE_TIME
 
-alias [MAP] among "ARCANA_FORK_CROSS_CAVERN" "ESFERA_MIRROR_SEA_2" "ESFERA_LIGHT_TEMPLE_4" "MOONBRIDGE_VOID_TIDE_3"
+alias [MAP] among "ARCANA_FORK_CROSS_CAVERN" "ESFERA_MIRROR_SEA_2" "ESFERA_LIGHT_TEMPLE_4" "MOONBRIDGE_VOID_TIDE_3" "TENEBRIS_LABYRINTH_CORE_1"
 import self [MAP]
 
 break
@@ -139,17 +141,26 @@ with
 	when _RANDOM is less than ROPE_PERCENT
 		delay for 200
 		key shift for 200
-		delay for SOAR_DELAY
 	otherwise
 		key x for 200
 		key up for 50
 		key up for 50	
 	end
 end
-when STATUS_MOVING_RIGHT is true
-	key right for SOAR_DELAY
+when _RANDOM is less than ROPE_PERCENT
+	when STATUS_MOVING_RIGHT is true
+		key right for ROPE_DELAY
+	otherwise
+		key left for ROPE_DELAY
+	end
+	key d for 300
+	delay for 500
 otherwise
-	key left for SOAR_DELAY
+	when STATUS_MOVING_RIGHT is true
+		key right for SOAR_DELAY
+	otherwise
+		key left for SOAR_DELAY
+	end
 end
 
 break
@@ -332,6 +343,7 @@ break
 
 import bot_maps.txt [MAP]
 assign SOAR_DELAY 600
+assign ROPE_DELAY 600
 assign ROPE_PERCENT 60
 assign HOOK_PERCENT 30
 
@@ -341,11 +353,11 @@ break
 ##################################################
 > ESFERA_MIRROR_SEA_2
 > MOONBRIDGE_VOID_TIDE_3
+> TENEBRIS_LABYRINTH_CORE_1
 
 import bot_maps.txt [MAP]
-assign SOAR_DELAY 600
-assign ROPE_PERCENT 30
-assign HOOK_PERCENT 15
+assign SOAR_DELAY 500
+assign ROPE_DELAY 500
+assign ROPE_PERCENT 60
 
 break
-

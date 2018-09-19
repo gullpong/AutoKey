@@ -473,3 +473,21 @@ assign JUMP_DISABLE_COUNT 1
 
 break
 
+
+##################################################
+> TENEBRIS_LABYRINTH_CORE_1
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 175
+assign MINIMAP.bm 145
+
+assign LAYOUT.lt 40
+assign LAYOUT.rt 145
+assign LAYOUT.tf 85
+assign LAYOUT.bc 120
+
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 1
+
+break
