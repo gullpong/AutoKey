@@ -60,7 +60,7 @@ assign DEFAULT_JUMP_HEIGHT 30
 
 register CHECK_MAP
 register CHECK_FLAMEWOLF
-register CHECK_RESCUE
+register CHECK_COLLECT
 register CHECK_ELITEBOSS
 register CHECK_MVPEXP
 

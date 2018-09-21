@@ -29,7 +29,7 @@ register MAPOUT_TEST
 register STONE_TEST
 register CURSE_TEST
 register ELITEBOSS_TEST
-register RESCUE_TEST
+register COLLECT_TEST
 register MVPEXP_TEST
 register FLAMEWOLF_TEST
 register VIOLETTA_TEST
@@ -263,26 +263,30 @@ break
 
 
 #########################################################
-> CHECK_RESCUE
+> CHECK_COLLECT
 
-assign RESCUE_TEST false
+assign COLLECT_TEST false
 
 sub
 	register _SPR with x y
-	register _BLOB with x y width height num lt tp rt bm
-	sprite find _SPR for 2 using GWI_BOT over 413 41 423 51
+	#register _BLOB with x y width height num lt tp rt bm
+	#sprite find _SPR for 2 using GWI_BOT over 413 41 423 51
+	#when _SPR.x is greater than 0
+	#	blob _BLOB for 255 204 0 over 423 63 466 75
+	#	when _BLOB.num is greater than 10
+	#		assign COLLECT_TEST true
+	#	end
+	#end
+	#sprite find _SPR for 2 using GWI_BOT over 583 41 593 51
+	#when _SPR.x is greater than 0
+	#	blob _BLOB for 255 204 0 over 593 63 636 75
+	#	when _BLOB.num is greater than 10
+	#		assign COLLECT_TEST true
+	#	end
+	#end
+	sprite find _SPR for 16 using GWI_BOT over 413 91 447 111
 	when _SPR.x is greater than 0
-		blob _BLOB for 255 204 0 over 423 63 466 75
-		when _BLOB.num is greater than 10
-			assign RESCUE_TEST true
-		end
-	end
-	sprite find _SPR for 2 using GWI_BOT over 583 41 593 51
-	when _SPR.x is greater than 0
-		blob _BLOB for 255 204 0 over 593 63 636 75
-		when _BLOB.num is greater than 10
-			assign RESCUE_TEST true
-		end
+		assign COLLECT_TEST true
 	end
 end
 

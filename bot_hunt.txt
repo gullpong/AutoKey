@@ -7,14 +7,17 @@ assign STATUS_JUMPING_UP true
 assign STATUS_TURNED_AROUND false
 
 register DO_FLAMEWOLF
-register DO_RESCUE
+register DO_COLLECT
 register DO_RETREAT
 
 assign CHECK_MAP true
 assign CHECK_FLAMEWOLF true
-assign CHECK_RESCUE false
+assign CHECK_COLLECT false
 assign CHECK_ELITEBOSS true
 assign CHECK_MVPEXP false
+
+alias [COLLECT_CHOICE] among "COLLECT_ON" "COLLECT_OFF"
+import self [COLLECT_CHOICE]
 
 sync
 	register _ACTION
@@ -193,11 +196,11 @@ sync
 			assign DO_FLAMEWOLF false
 		end
 
-		when DO_RESCUE is true
+		when DO_COLLECT is true
 			key pgdn for 500
 			delay for 500
 			import button_settings.txt CLICK_YES
-			assign DO_RESCUE false
+			assign DO_COLLECT false
 		end
 
 		when DO_RETREAT is true
@@ -403,10 +406,10 @@ with
 			end
 		end
 
-		when CHECK_RESCUE is true
-			import bot_settings.txt CHECK_RESCUE
-			when RESCUE_TEST is false
-				assign DO_RESCUE true
+		when CHECK_COLLECT is true
+			import bot_settings.txt CHECK_COLLECT
+			when COLLECT_TEST is false
+				assign DO_COLLECT true
 			end
 		end
 
@@ -565,3 +568,16 @@ with
 		delay for DELAY_CHECK
 	end
 end
+
+break
+
+
+################################################################
+> COLLECT_ON
+
+assign CHECK_COLLECT true
+break
+
+################################################################
+> COLLECT_OFF
+break
