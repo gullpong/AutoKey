@@ -16,8 +16,8 @@ assign CHECK_COLLECT false
 assign CHECK_ELITEBOSS true
 assign CHECK_MVPEXP false
 
-alias [COLLECT_CHOICE] among "COLLECT_ON" "COLLECT_OFF"
-import self [COLLECT_CHOICE]
+alias [EVENT_ACTION] among "EVENT_OFF" "EVENT_COLLECT" "EVENT_SKILL"
+import self [EVENT_ACTION]
 
 sync
 	register _ACTION
@@ -41,6 +41,11 @@ sync
 		when TIMER_3.on is true
 			import [PLAYER] TIMER_3
 			assign TIMER_3.on false
+		end
+		
+		when TIMER_EVENT.on is true
+			key pgdn for 500
+			assign TIMER_EVENT.on false
 		end
 
 		# =========================================================
@@ -314,6 +319,16 @@ with
 				assign TIMER_3.ts time later TIMER_3.dur
 			end
 		end
+		
+		when TIMER_EVENT.dur is greater than 0
+			when TIMER_EVENT.ts is equal to 0
+				assign TIMER_EVENT.ts time later TIMER_EVENT.dur
+			end
+			when _NOW is greater than TIMER_EVENT.ts
+				assign TIMER_EVENT.on true
+				assign TIMER_EVENT.ts time later TIMER_EVENT.dur
+			end
+		end		
 
 		# =========================================================
 		# Check skill activeness
@@ -573,11 +588,19 @@ break
 
 
 ################################################################
-> COLLECT_ON
+> EVENT_OFF
+break
+
+
+################################################################
+> EVENT_COLLECT
 
 assign CHECK_COLLECT true
 break
 
+
 ################################################################
-> COLLECT_OFF
+> EVENT_SKILL
+
+assign TIMER_EVENT.dur duration 60 sec
 break

@@ -34,6 +34,7 @@ assign RETREAT_CYCLE.exit duration 20 sec
 register TIMER_1 with dur ts on
 register TIMER_2 with dur ts on
 register TIMER_3 with dur ts on
+register TIMER_EVENT with dur ts on
 
 register SKILL_1 with row col thold on
 register SKILL_2 with row col thold on
