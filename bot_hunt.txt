@@ -2,9 +2,11 @@
 register STATUS_MOVING_RIGHT
 register STATUS_JUMPING_UP
 register STATUS_TURNED_AROUND
+register STATUS_FLIPPED_OVER
 assign STATUS_MOVING_RIGHT true
 assign STATUS_JUMPING_UP true
 assign STATUS_TURNED_AROUND false
+assign STATUS_FLIPPED_OVER false
 
 register DO_FLAMEWOLF
 register DO_COLLECT
@@ -23,6 +25,7 @@ sync
 	register _ACTION
 	register _JUMP_SKIPPED
 	register _GO_RETREAT
+	register _KEEP_JUMPING
 
 	iterate forever
 		# =========================================================
@@ -96,10 +99,20 @@ sync
 			end
 		end
 		when BOT_AT_BOTTOM is true
-			assign STATUS_JUMPING_UP true
+			when STATUS_JUMPING_UP is false
+				assign STATUS_FLIPPED_OVER true
+				assign STATUS_JUMPING_UP true				
+			otherwise
+				assign STATUS_FLIPPED_OVER false				
+			end
 		end
 		when BOT_AT_TOP is true
-			assign STATUS_JUMPING_UP false
+			when STATUS_JUMPING_UP is true
+				assign STATUS_FLIPPED_OVER true
+				assign STATUS_JUMPING_UP false
+			otherwise
+				assign STATUS_FLIPPED_OVER false				
+			end
 		end
 
 		assign _ACTION 1
@@ -129,10 +142,32 @@ sync
 						assign _ACTION 3
 					end
 				end
-
-			otherwise
+			end
+			when JUMP_STYLE is equal to 1
 				#
 				# Cyclic jump
+				#
+				when STATUS_TURNED_AROUND is true
+					assign STATUS_TURNED_AROUND false
+					assign STATUS_FLIPPED_OVER false
+					assign _KEEP_JUMPING true
+					assign _JUMP_SKIPPED 0
+				end
+				when _KEEP_JUMPING is true
+					when STATUS_FLIPPED_OVER is true
+						assign _KEEP_JUMPING false
+					otherwise
+						when STATUS_JUMPING_UP is true
+							assign _ACTION 2
+						otherwise
+							assign _ACTION 3
+						end
+					end
+				end
+			end
+			when JUMP_STYLE is equal to 2
+				#
+				# Zig-zag jump
 				#
 				when STATUS_TURNED_AROUND is true
 					assign STATUS_TURNED_AROUND false

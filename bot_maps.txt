@@ -391,7 +391,7 @@ assign LAYOUT.tf 10000
 assign LAYOUT.bc 99999
 
 assign JUMP_STYLE 1
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_DISABLE_COUNT 0
 
 break
 
@@ -411,8 +411,8 @@ assign LAYOUT.rt 145
 assign LAYOUT.tf 10000
 assign LAYOUT.bc 99999
 
-assign JUMP_STYLE 1
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_STYLE 2
+assign JUMP_DISABLE_COUNT 0
 
 break
 
@@ -425,13 +425,13 @@ assign MINIMAP.tp 60
 assign MINIMAP.rt 175
 assign MINIMAP.bm 145
 
-assign LAYOUT.lt 50
-assign LAYOUT.rt 135
+assign LAYOUT.lt 55
+assign LAYOUT.rt 130
 assign LAYOUT.tf 90
 assign LAYOUT.bc 115
 
 assign JUMP_STYLE 1
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_DISABLE_COUNT 0
 
 break
 
@@ -450,7 +450,7 @@ assign LAYOUT.tf 85
 assign LAYOUT.bc 125
 
 assign JUMP_STYLE 1
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_DISABLE_COUNT 0
 
 break
 
@@ -469,7 +469,7 @@ assign LAYOUT.tf 85
 assign LAYOUT.bc 110
 
 assign JUMP_STYLE 1
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_DISABLE_COUNT 0
 
 break
 
@@ -488,6 +488,6 @@ assign LAYOUT.tf 85
 assign LAYOUT.bc 120
 
 assign JUMP_STYLE 1
-assign JUMP_DISABLE_COUNT 1
+assign JUMP_DISABLE_COUNT 0
 
 break

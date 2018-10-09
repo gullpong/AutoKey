@@ -161,6 +161,8 @@ otherwise
 	otherwise
 		key left for SOAR_DELAY
 	end
+	key d for 300
+	delay for 500
 end
 
 break
@@ -342,10 +344,10 @@ break
 > ESFERA_LIGHT_TEMPLE_4
 
 import bot_maps.txt [MAP]
-assign SOAR_DELAY 600
-assign ROPE_DELAY 600
-assign ROPE_PERCENT 60
-assign HOOK_PERCENT 30
+assign SOAR_DELAY 300
+assign ROPE_DELAY 1400
+assign ROPE_PERCENT 20
+assign HOOK_PERCENT 20
 
 break
 
@@ -356,8 +358,6 @@ break
 > TENEBRIS_LABYRINTH_CORE_1
 
 import bot_maps.txt [MAP]
-assign SOAR_DELAY 500
-assign ROPE_DELAY 500
-assign ROPE_PERCENT 60
+assign SOAR_DELAY 200
 
 break
