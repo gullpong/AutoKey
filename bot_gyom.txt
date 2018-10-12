@@ -58,8 +58,8 @@ delay for 500
 
 key 0 for 500
 
-#key 6 for 500
-#delay for 700
+key 6 for 500
+delay for 700
 
 #key 7 for 500
 #delay for 700
@@ -67,7 +67,7 @@ key 0 for 500
 #key 8 for 500
 #delay for 700
 
-key 9 for 500
+#key 9 for 500
 
 break
 
