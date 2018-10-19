@@ -49,23 +49,33 @@ break
 
 delay for 1000
 
-key 7 for 500
+key 7 down
+delay for 500
+key 7 up
 delay for 700
 
-key 8 for 500
+key 8 down
+delay for 500
+key 8 up
 delay for 700
 
-key h for 500
+key h down
+delay for 500
+key h up
 delay for 700
 
-key 9 for 500
+key 9 down
+delay for 500
+key 9 up
 
 break
 
 ##################################################
 > TIMER_2
 
-key = for 500
+key = down
+delay for 500
+key = up
 
 break
 
@@ -73,7 +83,9 @@ break
 > TIMER_3
 
 delay for 500
-key w for 500
+key w down
+delay for 500
+key w up
 delay for 700
 
 break
@@ -91,26 +103,44 @@ end
 when ATTACK_STYLE is equal to 0
 	sync
 		when STATUS_MOVING_RIGHT is true
-			key right for 1000
+			key right down
+delay for 1000
+key right up
 		otherwise
-			key left for 1000
+			key left down
+delay for 1000
+key left up
 		end
 	with
-		key x for 300
-		key v for 300
-		key s for 300
+		key x down
+delay for 300
+key x up
+		key v down
+delay for 300
+key v up
+		key s down
+delay for 300
+key s up
 	end
 otherwise
 	sync
 		when STATUS_MOVING_RIGHT is true
-			key right for 1000
+			key right down
+delay for 1000
+key right up
 		otherwise
-			key left for 1000
+			key left down
+delay for 1000
+key left up
 		end
 	with
 		delay for 300
-		key v for 300
-		key s for 300
+		key v down
+delay for 300
+key v up
+		key s down
+delay for 300
+key s up
 	end
 end
 
@@ -122,17 +152,29 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 1100
+		key right down
+delay for 1100
+key right up
 	otherwise
-		key left for 1100
+		key left down
+delay for 1100
+key left up
 	end
 with
-	key x for 100
-	key v for 300
+	key x down
+delay for 100
+key x up
+	key v down
+delay for 300
+key v up
 	sync
-		key up for 300
+		key up down
+delay for 300
+key up up
 	with
-		key s for 300
+		key s down
+delay for 300
+key s up
 	end
 end
 
@@ -143,15 +185,25 @@ break
 > FALL
 
 sync
-	key down for FALL_DELAY
+	key down down
+delay for FALL_DELAY
+key down up
 with
 	when STATUS_MOVING_RIGHT is true
-		key right for 400
+		key right down
+delay for 400
+key right up
 	otherwise
-		key left for 400
+		key left down
+delay for 400
+key left up
 	end
-	key x for 100
-	key v for 300
+	key x down
+delay for 100
+key x up
+	key v down
+delay for 300
+key v up
 end
 
 break
@@ -160,7 +212,9 @@ break
 ##################################################
 > SKILL_1
 
-key g for 500
+key g down
+delay for 500
+key g up
 delay for 1000
 
 assign CAST_GENESIS_TIME time later 48 sec
@@ -170,7 +224,9 @@ break
 ##################################################
 > SKILL_2
 
-key 0 for 500
+key 0 down
+delay for 500
+key 0 up
 delay for 1000
 
 break
@@ -180,13 +236,19 @@ break
 
 delay for 1000
 
-key 1 for 500
+key 1 down
+delay for 500
+key 1 up
 delay for 700
 
-key 3 for 500
+key 3 down
+delay for 500
+key 3 up
 delay for 1000
 
-key 4 for 500
+key 4 down
+delay for 500
+key 4 up
 delay for 700
 
 break
@@ -194,10 +256,14 @@ break
 ##################################################
 > SKILL_4
 
-key ins for 500
+key ins down
+delay for 500
+key ins up
 delay for 500
 
-key y for 200
+key y down
+delay for 200
+key y up
 
 break
 

@@ -56,18 +56,28 @@ break
 
 delay for 500
 
-key 0 for 500
+key 0 down
+delay for 500
+key 0 up
 
-key 6 for 500
+key 6 down
+delay for 500
+key 6 up
 delay for 700
 
-#key 7 for 500
+#key 7 down
+#delay for 500
+#key 7 up
 #delay for 700
 
-#key 8 for 500
+#key 8 down
+#delay for 500
+#key 8 up
 #delay for 700
 
-#key 9 for 500
+#key 9 down
+#delay for 500
+#key 9 up
 
 break
 
@@ -75,7 +85,9 @@ break
 ##################################################
 > TIMER_2
 
-key = for 500
+key = down
+delay for 500
+key = up
 
 break
 
@@ -84,7 +96,9 @@ break
 > TIMER_3
 
 delay for 500
-key w for 500
+key w down
+delay for 500
+key w up
 delay for 700
 
 break
@@ -95,30 +109,48 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 100
+		key right down
+delay for 100
+key right up
 	otherwise
-		key left for 100
+		key left down
+delay for 100
+key left up
 	end
 with
-	key x for 100
-	key x for 100
+	key x down
+delay for 100
+key x up
+	key x down
+delay for 100
+key x up
 end
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 700
+		key right down
+delay for 700
+key right up
 	otherwise
-		key left for 700
+		key left down
+delay for 700
+key left up
 	end
 with
 	assign _RANDOM random over 100
 	when _RANDOM is less than HOOK_PERCENT
 		delay for 400
-		key f for 300
+		key f down
+delay for 300
+key f up
 		delay for 300
-		key d for 400
+		key d down
+delay for 400
+key d up
 		delay for 500
 	otherwise
-		key d for 300
+		key d down
+delay for 300
+key d up
 		delay for 400
 	end
 end
@@ -132,36 +164,60 @@ break
 delay for 100
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
+		key right down
+delay for 200
+key right up
 	otherwise
-		key left for 200
+		key left down
+delay for 200
+key left up
 	end
 with
 	assign _RANDOM random over 100
 	when _RANDOM is less than ROPE_PERCENT
 		delay for 200
-		key shift for 200
+		key shift down
+delay for 200
+key shift up
 	otherwise
-		key x for 200
-		key up for 50
-		key up for 50	
+		key x down
+delay for 200
+key x up
+		key up down
+delay for 50
+key up up
+		key up down
+delay for 50
+key up up
 	end
 end
 when _RANDOM is less than ROPE_PERCENT
 	when STATUS_MOVING_RIGHT is true
-		key right for ROPE_DELAY
+		key right down
+delay for ROPE_DELAY
+key right up
 	otherwise
-		key left for ROPE_DELAY
+		key left down
+delay for ROPE_DELAY
+key left up
 	end
-	key d for 300
+	key d down
+delay for 300
+key d up
 	delay for 500
 otherwise
 	when STATUS_MOVING_RIGHT is true
-		key right for SOAR_DELAY
+		key right down
+delay for SOAR_DELAY
+key right up
 	otherwise
-		key left for SOAR_DELAY
+		key left down
+delay for SOAR_DELAY
+key left up
 	end
-	key d for 300
+	key d down
+delay for 300
+key d up
 	delay for 500
 end
 
@@ -172,16 +228,26 @@ break
 > FALL
 
 sync
-	key down for FALL_DELAY
+	key down down
+delay for FALL_DELAY
+key down up
 with
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
+		key right down
+delay for 200
+key right up
 	otherwise
-		key left for 200
+		key left down
+delay for 200
+key left up
 	end
-	key x for 100
+	key x down
+delay for 100
+key x up
 	delay for 100
-	key d for 300
+	key d down
+delay for 300
+key d up
 end
 
 break
@@ -192,23 +258,37 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
+		key right down
+delay for 200
+key right up
 	otherwise
-		key left for 200
+		key left down
+delay for 200
+key left up
 	end
 with
-	key x for 100
-	key x for 100
+	key x down
+delay for 100
+key x up
+	key x down
+delay for 100
+key x up
 end
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 800
+		key right down
+delay for 800
+key right up
 	otherwise
-		key left for 800
+		key left down
+delay for 800
+key left up
 	end
 with
 	delay for 100
-	key s for 100
+	key s down
+delay for 100
+key s up
 	delay for 600
 end
 
@@ -228,16 +308,24 @@ break
 
 delay for 1000
 
-key 2 for 500
+key 2 down
+delay for 500
+key 2 up
 delay for 700
 
-key 3 for 500
+key 3 down
+delay for 500
+key 3 up
 delay for 1000
 
-key 4 for 500
+key 4 down
+delay for 500
+key 4 up
 delay for 700
 
-key 5 for 500
+key 5 down
+delay for 500
+key 5 up
 delay for 700
 
 break
@@ -246,7 +334,9 @@ break
 ##################################################
 > SKILL_3
 
-key g for 500
+key g down
+delay for 500
+key g up
 delay for 500
 
 when TIMER_3.dur is greater than 0
@@ -295,7 +385,9 @@ break
 
 when SUMMON_EVOLVE is true
 	delay for 500
-	key q for 500
+	key q down
+delay for 500
+key q up
 	delay for 700
 	assign SUMMON_EVOLVE false
 end
