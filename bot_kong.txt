@@ -68,6 +68,8 @@ key 9 down
 delay for 500
 key 9 up
 
+delay for 700
+
 break
 
 ##################################################
@@ -104,16 +106,16 @@ when ATTACK_STYLE is equal to 0
 	sync
 		when STATUS_MOVING_RIGHT is true
 			key right down
-delay for 1000
+delay for 1100
 key right up
 		otherwise
 			key left down
-delay for 1000
+delay for 1100
 key left up
 		end
 	with
 		key x down
-delay for 300
+delay for 400
 key x up
 		key v down
 delay for 300
@@ -126,15 +128,15 @@ otherwise
 	sync
 		when STATUS_MOVING_RIGHT is true
 			key right down
-delay for 1000
+delay for 1100
 key right up
 		otherwise
 			key left down
-delay for 1000
+delay for 1100
 key left up
 		end
 	with
-		delay for 300
+		delay for 400
 		key v down
 delay for 300
 key v up
@@ -212,6 +214,7 @@ break
 ##################################################
 > SKILL_1
 
+delay for 500
 key g down
 delay for 500
 key g up
@@ -224,6 +227,7 @@ break
 ##################################################
 > SKILL_2
 
+delay for 500
 key 0 down
 delay for 500
 key 0 up
