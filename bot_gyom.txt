@@ -59,6 +59,7 @@ delay for 500
 key 0 down
 delay for 500
 key 0 up
+delay for 700
 
 key 6 down
 delay for 500
