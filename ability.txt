@@ -30,6 +30,18 @@ iterate forever
 		delay for 200
 	end
 
+	delay for 500
+	key enter
+	delay for 500
+	key enter
+
+	
+	delay for 500
+
+end
+
+sound dingdong
+
 	iterate 2 times
 		iterate 10 times
 			snapshot		
@@ -39,13 +51,9 @@ iterate forever
 			end
 			delay for 200
 		end
+		delay for 500
 	end
-	
-	delay for 500
 
-end
-
-sound dingdong
 
 break
 
