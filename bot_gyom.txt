@@ -45,7 +45,7 @@ assign ARROW_QUIET_PERIOD time
 register SUMMON_EVOLVE
 register SUMMON_EVOLVE_TIME
 
-alias [MAP] among "ARCANA_FORK_CROSS_CAVERN" "ESFERA_MIRROR_SEA_2" "ESFERA_LIGHT_TEMPLE_4" "MOONBRIDGE_VOID_TIDE_3" "TENEBRIS_LABYRINTH_CORE_1"
+alias [MAP] among "ARCANA_FORK_CROSS_CAVERN" "ESFERA_MIRROR_SEA_2" "ESFERA_LIGHT_TEMPLE_4" "MOONBRIDGE_VOID_TIDE_3" "TENEBRIS_LABYRINTH_CORE_1" "LIMEN_WORLDS_TEAR_LOWER_3"
 import self [MAP]
 
 break
@@ -452,5 +452,16 @@ break
 
 import bot_maps.txt [MAP]
 assign SOAR_DELAY 200
+
+break
+
+
+##################################################
+> LIMEN_WORLDS_TEAR_LOWER_3
+
+import bot_maps.txt [MAP]
+#assign ROPE_DELAY 1300
+#assign ROPE_PERCENT 100
+assign SOAR_DELAY 400
 
 break
