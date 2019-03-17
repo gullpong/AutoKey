@@ -288,7 +288,7 @@ sync
 				
 				assign CHECK_MAP false
 				iterate 4 times
-					blob _BLOB for 255 255 255 over 47 33 179 46
+					blob _BLOB for 255 255 255 over 47 33 127 46
 					when MAPNAME_CHECK is unequal to _BLOB.num
 						finish iterate
 					end
