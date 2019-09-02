@@ -38,23 +38,33 @@ break
 
 delay for 1000
 
-key 6 for 500
+key 6 down
+delay for 500
+key 6 up
 delay for 700
 
-key 7 for 500
+key 7 down
+delay for 500
+key 7 up
 delay for 700
 
-key 8 for 500
+key 8 down
+delay for 500
+key 8 up
 delay for 700
 
-key 9 for 500
+key 9 down
+delay for 500
+key 9 up
 
 break
 
 ##################################################
 > TIMER_2
 
-key = for 500
+key = down
+delay for 500
+key = up
 
 break
 
@@ -62,7 +72,9 @@ break
 > TIMER_3
 
 delay for 500
-key w for 500
+key w down
+delay for 500
+key w up
 delay for 700
 
 break
@@ -72,15 +84,25 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 900
-	otherwise 
-		key left for 900
+		key right down
+delay for 900
+key right up
+	otherwise
+		key left down
+delay for 900
+key left up
 	end
 with
-	key x for 100
-	delay for 200	
-	key d for 300
-	key v for 300
+	key x down
+delay for 100
+key x up
+	delay for 200
+	key d down
+delay for 300
+key d up
+	key v down
+delay for 300
+key v up
 end
 delay for 200
 
@@ -92,18 +114,30 @@ break
 
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 300
-	otherwise 
-		key left for 300
+		key right down
+delay for 300
+key right up
+	otherwise
+		key left down
+delay for 300
+key left up
 	end
 with
-	key x for 100
-	key d for 300
+	key x down
+delay for 100
+key x up
+	key d down
+delay for 300
+key d up
 	#delay for 250
 	sync
-		key up for 300
+		key up down
+delay for 300
+key up up
 	with
-		key v for 300
+		key v down
+delay for 300
+key v up
 	end
 end
 delay for 200
@@ -115,15 +149,25 @@ break
 > FALL
 
 sync
-	key down for 1200
+	key down down
+delay for 1200
+key down up
 with
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
-	otherwise 
-		key left for 200
+		key right down
+delay for 200
+key right up
+	otherwise
+		key left down
+delay for 200
+key left up
 	end
-	key x for 100
-	key d for 300
+	key x down
+delay for 100
+key x up
+	key d down
+delay for 300
+key d up
 end
 
 break
@@ -132,7 +176,9 @@ break
 ##################################################
 > SKILL_1
 
-key g for 500
+key g down
+delay for 500
+key g up
 delay for 1000
 
 assign CAST_GENESIS_TIME time later 48 sec
@@ -142,7 +188,9 @@ break
 ##################################################
 > SKILL_2
 
-key h for 500
+key h down
+delay for 500
+key h up
 delay for 1000
 
 break
@@ -150,7 +198,9 @@ break
 ##################################################
 > SKILL_3
 
-key r for 500
+key r down
+delay for 500
+key r up
 delay for 500
 
 break

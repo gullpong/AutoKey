@@ -12,8 +12,8 @@ assign TIMER_2.dur duration 300 sec
 
 #assign SKILL_1.row 2
 #assign SKILL_1.col 2
-assign SKILL_2.row 1
-assign SKILL_2.col 7
+#assign SKILL_2.row 1
+#assign SKILL_2.col 7
 
 assign TURN_AROUND_PERCENTAGE 0
 
@@ -53,7 +53,9 @@ break
 
 delay for 500
 
-key 9 for 500
+key 9 down
+delay for 500
+key 9 up
 
 break
 
@@ -61,7 +63,9 @@ break
 ##################################################
 > TIMER_2
 
-key = for 500
+key = down
+delay for 500
+key = up
 
 break
 
@@ -69,7 +73,9 @@ break
 > TIMER_3
 
 delay for 500
-key b for 500
+key b down
+delay for 500
+key b up
 delay for 1500
 
 break
@@ -80,36 +86,56 @@ break
 when ATTACK_CYCLE is equal to 0
 	sync
 		when STATUS_MOVING_RIGHT is true
-			key right for 1000
-		otherwise 
-			key left for 1000
+			key right down
+			delay for 1000
+			key right up
+		otherwise
+			key left down
+			delay for 1000
+			key left up
 		end
 	with
-		key x for 200
-		key a for 800
+		key x down
+		delay for 200
+		key x up
+		key a down
+		delay for 800
+		key a up
 	end
 	sync
 		when STATUS_MOVING_RIGHT is true
-			key right for 1000
-		otherwise 
-			key left for 1000
+			key right down
+			delay for 1000
+			key right up
+		otherwise
+			key left down
+			delay for 1000
+			key left up
 		end
 	with
-		key s for 500
+		key s down
+		delay for 500
+		key s up
 		delay for 500
 	end
 end
 
 when ATTACK_CYCLE is equal to 1
-	iterate 3 times
+	iterate 2 times
 		sync
 			when STATUS_MOVING_RIGHT is true
-				key right for 600
-			otherwise 
-				key left for 600
+				key right down
+				delay for 600
+				key right up
+			otherwise
+				key left down
+				delay for 600
+				key left up
 			end
 		with
-			key e for 600
+			key e down
+			delay for 600
+			key e up
 		end
 	end
 	delay for 300
@@ -118,13 +144,21 @@ end
 when ATTACK_CYCLE is equal to 2
 	sync
 		when STATUS_MOVING_RIGHT is true
-			key right for 1700
-		otherwise 
-			key left for 1700
+			key right down
+delay for 1700
+key right up
+		otherwise
+			key left down
+delay for 1700
+key left up
 		end
 	with
-		key x for 200
-		key w for 1500
+		key x down
+delay for 200
+key x up
+		key w down
+delay for 1500
+key w up
 	end
 	delay for 500
 end
@@ -143,17 +177,27 @@ break
 delay for 100
 sync
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
-	otherwise 
-		key left for 200
+		key right down
+delay for 200
+key right up
+	otherwise
+		key left down
+delay for 200
+key left up
 	end
 with
-	key x for 200
+	key x down
+delay for 200
+key x up
 end
 sync
-	key up for 200
+	key up down
+delay for 200
+key up up
 with
-	key v for 200
+	key v down
+delay for 200
+key v up
 end
 delay for 300
 
@@ -164,15 +208,25 @@ break
 > FALL
 
 sync
-	key down for 1200
+	key down down
+delay for 1200
+key down up
 with
 	when STATUS_MOVING_RIGHT is true
-		key right for 200
-	otherwise 
-		key left for 200
+		key right down
+delay for 200
+key right up
+	otherwise
+		key left down
+delay for 200
+key left up
 	end
-	key x for 100
-	key a for 100
+	key x down
+delay for 100
+key x up
+	key a down
+delay for 100
+key a up
 end
 #delay for 400
 
@@ -182,7 +236,9 @@ break
 ##################################################
 > SKILL_1
 
-key h for 500
+key h down
+delay for 500
+key h up
 delay for 4000
 
 break
@@ -190,7 +246,9 @@ break
 ##################################################
 > SKILL_2
 
-key 3 for 500
+key 3 down
+delay for 500
+key 3 up
 delay for 500
 
 break
