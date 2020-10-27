@@ -12,11 +12,13 @@ assign TIMER_3.dur duration 200 sec
 assign TIMER_3.on true
 
 assign SKILL_1.row 2
-assign SKILL_1.col 7
+assign SKILL_1.col 6
 assign SKILL_2.row 1
 assign SKILL_2.col 6
 assign SKILL_3.row 2
 assign SKILL_3.col 8
+assign SKILL_4.row 2
+assign SKILL_4.col 5
 
 assign TURN_AROUND_PERCENTAGE 0
 
@@ -45,7 +47,7 @@ assign ARROW_QUIET_PERIOD time
 register SUMMON_EVOLVE
 register SUMMON_EVOLVE_TIME
 
-alias [MAP] among "ARCANA_FORK_CROSS_CAVERN" "ESFERA_MIRROR_SEA_2" "ESFERA_LIGHT_TEMPLE_4" "MOONBRIDGE_VOID_TIDE_3" "TENEBRIS_LABYRINTH_CORE_1" "LIMEN_WORLDS_TEAR_LOWER_3"
+alias [MAP] among "ARCANA_FORK_CROSS_CAVERN" "ESFERA_MIRROR_SEA_2" "ESFERA_LIGHT_TEMPLE_4" "MOONBRIDGE_VOID_TIDE_3" "TENEBRIS_LABYRINTH_CORE_1"  "TENEBRIS_LABYRINTH_CORE_5" "LIMEN_WORLDS_TEAR_LOWER_3"
 import self [MAP]
 
 break
@@ -351,6 +353,11 @@ break
 ##################################################
 > SKILL_4
 
+key y down
+delay for 500
+key y up
+delay for 500
+
 break
 
 ##################################################
@@ -457,6 +464,7 @@ break
 
 
 ##################################################
+> TENEBRIS_LABYRINTH_CORE_5
 > LIMEN_WORLDS_TEAR_LOWER_3
 
 import bot_maps.txt [MAP]

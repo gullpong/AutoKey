@@ -494,6 +494,25 @@ break
 
 
 ##################################################
+> TENEBRIS_LABYRINTH_CORE_5
+
+assign MINIMAP.lt 10
+assign MINIMAP.tp 60
+assign MINIMAP.rt 175
+assign MINIMAP.bm 135
+
+assign LAYOUT.lt 35
+assign LAYOUT.rt 135
+assign LAYOUT.tf 95
+assign LAYOUT.bc 100
+
+assign JUMP_STYLE 1
+assign JUMP_DISABLE_COUNT 0
+
+break
+
+
+##################################################
 > LIMEN_WORLDS_TEAR_LOWER_3
 
 assign MINIMAP.lt 10

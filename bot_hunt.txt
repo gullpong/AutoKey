@@ -470,7 +470,8 @@ with
 
 				assign RETREAT_TIMER.in computing RETREAT_TIMER.in add RETREAT_CYCLE.period
 
-				assign DO_RETREAT true
+				# Temporarily turn off retreat feature.
+				# assign DO_RETREAT true
 			end
 		end
 
