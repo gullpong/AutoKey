@@ -142,18 +142,18 @@ with
 	assign _RANDOM random over 100
 	when _RANDOM is less than HOOK_PERCENT
 		delay for 400
-		key f down
-delay for 300
-key f up
+		key ctrl down
+		delay for 300
+		key ctrl up
 		delay for 300
 		key d down
-delay for 400
-key d up
+		delay for 400
+		key d up
 		delay for 500
 	otherwise
 		key d down
-delay for 300
-key d up
+		delay for 300
+		key d up
 		delay for 400
 	end
 end
@@ -471,5 +471,6 @@ import bot_maps.txt [MAP]
 #assign ROPE_DELAY 1300
 #assign ROPE_PERCENT 100
 assign SOAR_DELAY 400
+assign HOOK_PERCENT 20
 
 break
